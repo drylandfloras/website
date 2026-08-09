@@ -4,72 +4,14 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "figures/",
-  out.width = "100%"
-)
-```
-
 # Dryland Floras Network <img src="figures/DFN_logo.png" align="right" width="120" />
 
-The Dryland Floras Network aims to serve as a global platform connecting botanists, ecologists and other researchers working to understand the diversity, evolution and conservation of dryland floras worldwide, bringing together expertise from across arid deserts and semi-arid steppes, grasslands, savannas and woodlands.
-The network’s goals are to:
-Foster communication, collaboration, knowledge exchange and new research opportunities among scientists studying dryland floras across regions and disciplines.
-Facilitate the sharing and integration of knowledge across the world’s diverse dryland systems.
-Maintain a dynamic directory connecting researchers, institutions and expertise in dryland floras across continents.
-Support outreach and collaborative initiatives that advance the study, understanding and conservation of dryland floras.
+The Dryland Floras Network connects botanists, ecologists and other researchers dedicated to understanding and conserving plant diversity across drylands worldwide.
 
-#### _1. `reflora_summary`: Summarizing REFLORA collections_
+## Website status
 
-The following code can be used to extract a summary of all REFLORA-associated collections, including herbarium acronym, curator's email contact, number of records and a direct link to the original REFLORA Integrated Publishing Toolkit ([IPT](https://ipt.jbrj.gov.br/reflora)).\
-```r
-library(refloraR)
+The website is currently being reorganized around the Dryland Floras Network.
 
-summary_df <- reflora_summary(verbose = TRUE,
-                              save = TRUE,
-                              dir = "reflora_summary")
-```
-\
-By specifying a vector of herbarium acronyms, the user can extract a summary for just the specific herbarium collection.\
-
-```r
-summary_some_df <- reflora_summary(herbarium = c("ALCB", "RB", "HUEFS", "US", "K"),
-                                   verbose = TRUE,
-                                   save = TRUE,
-                                   dir = "reflora_summary")
-```
-\
-\
-
-#### _2. `reflora_download`: Downloading REFLORA specimen records_
-
-The following code can be used to download original specimen records in DwC-A format and associated metada for all REFLORA collections.\
-
-```r
-library(refloraR)
-
-reflora_download(verbose = TRUE,
-                 dir = "reflora_download")
-```
-\
-By specifying a vector of herbarium acronyms, the user can download specimens records for just the specific herbarium collection.\
-
-```r
-reflora_download(herbarium = c("ALCB", "HUEFS", "RB", "US", "K"),
-                 verbose = TRUE,
-                 dir = "reflora_download")
-```
-\
-\
-
-## Documentation
-Full function documentation and articles are available at the `refloraR` [website](https://dboslab.github.io/refloraR-website/).\
-\
-
-## Citation
-Cardoso, D. & Calderón, C. 2025. _refloraR_: An R Package for Exploring Plant 
-Specimen Collections from REFLORA Virtual Herbarium. https://github.com/dboslab/refloraR
-
+- Updates: Under construction.
+- Join: Under construction.
+- Network counter (affiliated scientists and countries): Under construction.
