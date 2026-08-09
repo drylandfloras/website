@@ -15,30 +15,30 @@ project:
     - test_data/**
 
 website:
-  title: "Tsiino Hiwiida"
+  title: "Dryland Floras Network"
   page-navigation: true
   reader-mode: false
   search: false
-  favicon: "figures/tsiino_hex_sticker.png"
+  favicon: "figures/DFN_logo.png"
   navbar:
     search: false
     background: light
     collapse-below: lg
     type: light
-    logo: "figures/tsiino_hex_sticker.png"
+    logo: "figures/DFN_logo.png"
     href: index.qmd
     left:
-      - text: "Sobre"
+      - text: "About"
         href: index.qmd
-      - text: "Expedições"
+      - text: "Expeditions"
         href: expedicoes/index.qmd
-      - text: "Acesso aos dados"
+      - text: "Data access"
         href: acesso/index.qmd
-      - text: "Ferramentas"
+      - text: "Tools"
         menu:
-          - text: "Validador de planilha de herbário"
+          - text: "Herbarium spreadsheet validator"
             href: ferramentas/validador-herbario/index.qmd
-      - text: "Equipe"
+      - text: "Team"
         href: team/index.qmd
 
 format:
