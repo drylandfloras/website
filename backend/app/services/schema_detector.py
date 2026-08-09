@@ -116,12 +116,12 @@ def detect_header(ws: Worksheet, max_scan_rows: int = 12) -> HeaderDetection:
         raise ValueError('Não foi possível detectar a linha de cabeçalho da planilha.')
     return best
 
-# TSIINO_SCHEMA_DETECTOR_V34
+# DRYLANDFLORAS_SCHEMA_DETECTOR_V34
 # Detector conservador de planilha padrão INPA/BRAHMS.
 # Regra: só considera padrão quando encontra uma linha com campos técnicos canônicos exatos
 # (accession, collector, number, family, genus, ...). Cabeçalhos descritivos continuam indo
 # para o mapeador pré-validação.
-def _tsiino_norm_header_v34(value):
+def _drylandfloras_norm_header_v34(value):
     try:
         import unicodedata, re
         if value is None:
@@ -136,7 +136,7 @@ def _tsiino_norm_header_v34(value):
         return str(value or '').strip().lower()
 
 _CANONICAL_SET_V34 = set(CANONICAL_COLUMNS)
-_CANONICAL_NORM_TO_CANONICAL_V34 = {_tsiino_norm_header_v34(c): c for c in CANONICAL_COLUMNS}
+_CANONICAL_NORM_TO_CANONICAL_V34 = {_drylandfloras_norm_header_v34(c): c for c in CANONICAL_COLUMNS}
 _EXTRA_ALIASES_V34 = {
     'familia': 'family', 'genero': 'genus', 'especie': 'sp1', 'epiteto_especifico': 'sp1',
     'pais': 'country', 'estado': 'majorarea', 'municipio': 'minorarea',
@@ -147,7 +147,7 @@ try:
 except Exception:
     pass
 
-def _tsiino_map_header_v34(raw, allow_alias=True):
+def _drylandfloras_map_header_v34(raw, allow_alias=True):
     if raw is None:
         return None
     s = str(raw).strip().replace('\ufeff', '')
@@ -155,14 +155,14 @@ def _tsiino_map_header_v34(raw, allow_alias=True):
         return None
     if s in _CANONICAL_SET_V34:
         return s
-    key = _tsiino_norm_header_v34(s)
+    key = _drylandfloras_norm_header_v34(s)
     if key in _CANONICAL_NORM_TO_CANONICAL_V34:
         return _CANONICAL_NORM_TO_CANONICAL_V34[key]
     if allow_alias:
         return COLUMN_ALIASES.get(key)
     return None
 
-def _tsiino_detect_header_from_values_v34(rows, max_scan_rows=20):
+def _drylandfloras_detect_header_from_values_v34(rows, max_scan_rows=20):
     best = None
     best_score = -1
     best_exact = -1
@@ -178,14 +178,14 @@ def _tsiino_detect_header_from_values_v34(rows, max_scan_rows=20):
             raw_headers.append(raw)
             if not raw:
                 continue
-            canonical_exact = _tsiino_map_header_v34(raw, allow_alias=False)
-            canonical_alias = canonical_exact or _tsiino_map_header_v34(raw, allow_alias=True)
+            canonical_exact = _drylandfloras_map_header_v34(raw, allow_alias=False)
+            canonical_alias = canonical_exact or _drylandfloras_map_header_v34(raw, allow_alias=True)
             if canonical_exact:
                 exact_count += 1
             if canonical_alias:
                 mapped.setdefault(raw, canonical_alias)
             else:
-                if _tsiino_norm_header_v34(raw) not in {'nome_do_campo_no_brahms', 'nome_do_campo_no_brahms_'}:
+                if _drylandfloras_norm_header_v34(raw) not in {'nome_do_campo_no_brahms', 'nome_do_campo_no_brahms_'}:
                     unknown.append(raw)
         mapped_values = set(mapped.values())
         score = len(mapped_values & required) * 5 + len(mapped_values & canonical_set) + exact_count * 3
@@ -206,20 +206,20 @@ def detect_header(ws, max_scan_rows: int = 20):
     rows = []
     for row in ws.iter_rows(min_row=1, max_row=min(getattr(ws, 'max_row', max_scan_rows), max_scan_rows), values_only=True):
         rows.append(list(row))
-    return _tsiino_detect_header_from_values_v34(rows, max_scan_rows=max_scan_rows)
+    return _drylandfloras_detect_header_from_values_v34(rows, max_scan_rows=max_scan_rows)
 
 def is_strict_inpa_header_detection(detection) -> bool:
     vals = set(getattr(detection, 'mapping', {}).values())
     raws = getattr(detection, 'raw_headers', []) or []
-    exact = sum(1 for raw in raws if _tsiino_map_header_v34(raw, allow_alias=False))
+    exact = sum(1 for raw in raws if _drylandfloras_map_header_v34(raw, allow_alias=False))
     return exact >= 12 and len(vals & set(REQUIRED_MINIMUM)) >= 6
 
-# TSIINO_STANDARD_HEADER_DETECTOR_V36
+# DRYLANDFLORAS_STANDARD_HEADER_DETECTOR_V36
 # Detector robusto para a planilha padrão INPA/BRAHMS.
 # Objetivo: uma linha com nomes técnicos reais (accession, collector, number, family, genus, ...)
 # deve ser reconhecida como padrão mesmo se a primeira célula contiver texto auxiliar como
 # "Nome do campo no Brahms ->". Cabeçalhos descritivos/português continuam indo para o mapeador.
-def _tsiino_v36_norm(value):
+def _drylandfloras_v36_norm(value):
     import re as _re
     import unicodedata as _unicodedata
     if value is None:
@@ -231,27 +231,27 @@ def _tsiino_v36_norm(value):
     s = _re.sub(r'[^a-z0-9]+', '_', s).strip('_')
     return s
 
-_TSIINO_V36_CANONICAL = list(CANONICAL_COLUMNS)
-_TSIINO_V36_CANONICAL_SET = set(_TSIINO_V36_CANONICAL)
-_TSIINO_V36_CANONICAL_BY_NORM = {_tsiino_v36_norm(c): c for c in _TSIINO_V36_CANONICAL}
-_TSIINO_V36_REQUIRED_SET = set(REQUIRED_MINIMUM)
-_TSIINO_V36_HELPER_HEADERS = {
+_DRYLANDFLORAS_V36_CANONICAL = list(CANONICAL_COLUMNS)
+_DRYLANDFLORAS_V36_CANONICAL_SET = set(_DRYLANDFLORAS_V36_CANONICAL)
+_DRYLANDFLORAS_V36_CANONICAL_BY_NORM = {_drylandfloras_v36_norm(c): c for c in _DRYLANDFLORAS_V36_CANONICAL}
+_DRYLANDFLORAS_V36_REQUIRED_SET = set(REQUIRED_MINIMUM)
+_DRYLANDFLORAS_V36_HELPER_HEADERS = {
     'nome_do_campo_no_brahms', 'nome_do_campo_no_brahms_', 'nome_do_campo_brahms',
     'recomendacao', 'recomendacoes', 'observacao', 'observacoes'
 }
 
 
-def _tsiino_v36_map_technical_header(raw, allow_alias=False):
+def _drylandfloras_v36_map_technical_header(raw, allow_alias=False):
     if raw is None:
         return None
     text = str(raw).replace('\ufeff', '').strip()
     if not text:
         return None
-    if text in _TSIINO_V36_CANONICAL_SET:
+    if text in _DRYLANDFLORAS_V36_CANONICAL_SET:
         return text
-    key = _tsiino_v36_norm(text)
-    if key in _TSIINO_V36_CANONICAL_BY_NORM:
-        return _TSIINO_V36_CANONICAL_BY_NORM[key]
+    key = _drylandfloras_v36_norm(text)
+    if key in _DRYLANDFLORAS_V36_CANONICAL_BY_NORM:
+        return _DRYLANDFLORAS_V36_CANONICAL_BY_NORM[key]
     if allow_alias:
         try:
             return COLUMN_ALIASES.get(key)
@@ -260,7 +260,7 @@ def _tsiino_v36_map_technical_header(raw, allow_alias=False):
     return None
 
 
-def _tsiino_v36_detect_header_from_values(rows, max_scan_rows=25):
+def _drylandfloras_v36_detect_header_from_values(rows, max_scan_rows=25):
     best = None
     best_score = -1
     best_exact = -1
@@ -279,19 +279,19 @@ def _tsiino_v36_detect_header_from_values(rows, max_scan_rows=25):
             raw_headers.append(raw)
             if not raw:
                 continue
-            key = _tsiino_v36_norm(raw)
-            exact = _tsiino_v36_map_technical_header(raw, allow_alias=False)
+            key = _drylandfloras_v36_norm(raw)
+            exact = _drylandfloras_v36_map_technical_header(raw, allow_alias=False)
             # Para decidir se uma planilha e padrão, a evidência principal precisa ser exata.
             # Aliases só são usados como informação auxiliar para não quebrar compatibilidade interna.
-            mapped = exact or _tsiino_v36_map_technical_header(raw, allow_alias=True)
+            mapped = exact or _drylandfloras_v36_map_technical_header(raw, allow_alias=True)
             if exact:
                 exact_count += 1
                 canonical_hits.add(exact)
-                if exact in _TSIINO_V36_REQUIRED_SET:
+                if exact in _DRYLANDFLORAS_V36_REQUIRED_SET:
                     required_hits.add(exact)
             if mapped:
                 mapping.setdefault(raw, mapped)
-            elif key not in _TSIINO_V36_HELPER_HEADERS:
+            elif key not in _DRYLANDFLORAS_V36_HELPER_HEADERS:
                 unknown.append(raw)
 
         # Peso alto para nomes técnicos exatos. Isso impede que planilhas descritivas virem padrão.
@@ -320,12 +320,12 @@ def detect_header(ws, max_scan_rows: int = 25):
     max_row = min(getattr(ws, 'max_row', max_scan_rows) or max_scan_rows, max_scan_rows)
     for row in ws.iter_rows(min_row=1, max_row=max_row, values_only=True):
         rows.append(list(row))
-    return _tsiino_v36_detect_header_from_values(rows, max_scan_rows=max_scan_rows)
+    return _drylandfloras_v36_detect_header_from_values(rows, max_scan_rows=max_scan_rows)
 
 
 def is_strict_inpa_header_detection(detection) -> bool:
     vals = set(getattr(detection, 'mapping', {}).values() or [])
     raws = getattr(detection, 'raw_headers', []) or []
-    exact = sum(1 for raw in raws if _tsiino_v36_map_technical_header(raw, allow_alias=False))
+    exact = sum(1 for raw in raws if _drylandfloras_v36_map_technical_header(raw, allow_alias=False))
     return exact >= 8 and len(vals & set(REQUIRED_MINIMUM)) >= 5
 

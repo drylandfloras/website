@@ -1,7 +1,7 @@
 
-// TSIINO_MAPPER_RESULT_FLOW_V34
+// DRYLANDFLORAS_MAPPER_RESULT_FLOW_V34
 (function () {
-  const MARK = 'TSIINO_MAPPER_RESULT_FLOW_V34';
+  const MARK = 'DRYLANDFLORAS_MAPPER_RESULT_FLOW_V34';
   function text(el) { return (el && el.textContent || '').replace(/\s+/g, ' ').trim(); }
   function isVisible(el) {
     if (!el || el.hidden || el.getAttribute('aria-hidden') === 'true') return false;
@@ -36,7 +36,7 @@
       root.hidden = true;
       root.setAttribute('aria-hidden', 'true');
       root.style.display = 'none';
-      root.dataset.tsiinoMapperHiddenAfterValidation = '1';
+      root.dataset.drylandflorasMapperHiddenAfterValidation = '1';
     });
   }
   function moveDownloadButton() {
@@ -62,5 +62,5 @@
   document.addEventListener('DOMContentLoaded', () => { tick(); setTimeout(tick, 800); });
   window.addEventListener('load', () => { tick(); setTimeout(tick, 1200); });
   new MutationObserver(() => tick()).observe(document.documentElement, {childList: true, subtree: true, attributes: true});
-  window.TsiinoMapperResultFlowV34 = { ready: true, hideMapperAfterValidation, moveDownloadButton, marker: MARK };
+  window.DrylandFlorasMapperResultFlowV34 = { ready: true, hideMapperAfterValidation, moveDownloadButton, marker: MARK };
 })();

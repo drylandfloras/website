@@ -1,18 +1,18 @@
 services:
   db:
     image: postgis/postgis:16-3.4
-    container_name: tsiino_validator_db
+    container_name: drylandfloras_validator_db
     environment:
-      POSTGRES_DB: tsiino_validator
-      POSTGRES_USER: tsiino
-      POSTGRES_PASSWORD: tsiino_dev_password
+      POSTGRES_DB: drylandfloras_validator
+      POSTGRES_USER: drylandfloras
+      POSTGRES_PASSWORD: drylandfloras_dev_password
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./sql:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U tsiino -d tsiino_validator"]
+      test: ["CMD-SHELL", "pg_isready -U drylandfloras -d drylandfloras_validator"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -20,11 +20,11 @@ services:
   api:
     build:
       context: ./backend
-    container_name: tsiino_validator_api
+    container_name: drylandfloras_validator_api
     env_file:
       - ./backend/.env
     environment:
-      DATABASE_URL: postgresql+psycopg://tsiino:tsiino_dev_password@db:5432/tsiino_validator
+      DATABASE_URL: postgresql+psycopg://drylandfloras:drylandfloras_dev_password@db:5432/drylandfloras_validator
     ports:
       - "8000:8000"
     depends_on:

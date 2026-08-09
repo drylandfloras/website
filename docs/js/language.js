@@ -1,4 +1,4 @@
-/* Tsiino Hiiwiida language switcher — full-site runtime v2
+/* Dryland Floras language switcher — full-site runtime v2
  * Source language: Portuguese (pt-BR). Target: English.
  * Designed for Quarto static pages, R-generated HTML widgets, Leaflet popups,
  * Plotly/SVG labels, and dynamically inserted content.
@@ -6,11 +6,11 @@
 (function () {
   "use strict";
 
-  window.TSIINO_TRANSLATION_RUNTIME_VERSION = "full-site-v2-2026-06-25";
-  if (window.TSIINO_TRANSLATION_RUNTIME_ACTIVE) return;
-  window.TSIINO_TRANSLATION_RUNTIME_ACTIVE = true;
+  window.DRYLANDFLORAS_TRANSLATION_RUNTIME_VERSION = "full-site-v2-2026-06-25";
+  if (window.DRYLANDFLORAS_TRANSLATION_RUNTIME_ACTIVE) return;
+  window.DRYLANDFLORAS_TRANSLATION_RUNTIME_ACTIVE = true;
 
-  const config = window.TsiinoTranslations || {};
+  const config = window.DrylandFlorasTranslations || {};
   const strings = config.strings || {};
   const phrases = config.phrases || {};
   const prefixes = config.prefixes || {};
@@ -18,11 +18,11 @@
   const labels = config.labels || { pt: "Português", en: "English" };
   const available = config.availableLanguages || ["pt", "en"];
   const defaultLanguage = config.defaultLanguage || "pt";
-  const storageKey = config.storageKey || "tsiino-language";
+  const storageKey = config.storageKey || "drylandfloras-language";
 
   const excludedSelector = [
     "script", "style", "code", "pre", "kbd", "samp", "textarea", "noscript",
-    "template", ".tsiino-language-control", ".MathJax", ".sourceCode"
+    "template", ".drylandfloras-language-control", ".MathJax", ".sourceCode"
   ].join(",");
 
   const attrsToTranslate = ["placeholder", "title", "aria-label", "alt", "data-label", "value"];
@@ -309,7 +309,7 @@
       localStorage.setItem(storageKey, language);
     } catch (error) {}
 
-    document.documentElement.setAttribute("data-tsiino-language", language);
+    document.documentElement.setAttribute("data-drylandfloras-language", language);
     updateDocumentLanguage(language);
     translateElementTree(document.body || document.documentElement, language);
     updateSwitcher(language);
@@ -359,7 +359,7 @@
   function makeButton(language) {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "tsiino-language-button";
+    button.className = "drylandfloras-language-button";
     button.dataset.language = language;
     button.textContent = labels[language] || language.toUpperCase();
     button.addEventListener("click", function () { applyLanguage(language); });
@@ -367,11 +367,11 @@
   }
 
   function installSwitcherStyles() {
-    if (document.getElementById("tsiino-language-style")) return;
+    if (document.getElementById("drylandfloras-language-style")) return;
     const style = document.createElement("style");
-    style.id = "tsiino-language-style";
+    style.id = "drylandfloras-language-style";
     style.textContent = `
-      .tsiino-language-control{
+      .drylandfloras-language-control{
         position: fixed;
         right: clamp(0.75rem, 1.6vw, 1.25rem);
         bottom: calc(clamp(0.75rem, 1.6vw, 1.25rem) + 2cm);
@@ -388,7 +388,7 @@
         -webkit-backdrop-filter: blur(8px);
         font-family: Montserrat, Arial, sans-serif;
       }
-      .tsiino-language-button{
+      .drylandfloras-language-button{
         border: 0;
         border-radius: 999px;
         background: transparent;
@@ -400,28 +400,28 @@
         padding: 0.52rem 0.72rem;
         cursor: pointer;
       }
-      .tsiino-language-button:hover{ background: rgba(215,221,197,0.65); }
-      .tsiino-language-button.is-active{ background: #626A38; color: #FFFDF7; }
+      .drylandfloras-language-button:hover{ background: rgba(215,221,197,0.65); }
+      .drylandfloras-language-button.is-active{ background: #626A38; color: #FFFDF7; }
       @media (max-width: 640px){
-        .tsiino-language-control{ right: 0.55rem; bottom: 0.55rem; }
-        .tsiino-language-button{ font-size: 0.7rem; padding: 0.48rem 0.58rem; }
+        .drylandfloras-language-control{ right: 0.55rem; bottom: 0.55rem; }
+        .drylandfloras-language-button{ font-size: 0.7rem; padding: 0.48rem 0.58rem; }
       }
     `;
     document.head.appendChild(style);
   }
 
   function createSwitcher() {
-    if (document.querySelector(".tsiino-language-control")) return;
+    if (document.querySelector(".drylandfloras-language-control")) return;
     installSwitcherStyles();
     const control = document.createElement("div");
-    control.className = "tsiino-language-control";
+    control.className = "drylandfloras-language-control";
     control.setAttribute("aria-label", "Idioma");
     available.forEach(function (language) { control.appendChild(makeButton(language)); });
     document.body.appendChild(control);
   }
 
   function updateSwitcher(language) {
-    document.querySelectorAll(".tsiino-language-button").forEach(function (button) {
+    document.querySelectorAll(".drylandfloras-language-button").forEach(function (button) {
       const active = button.dataset.language === language;
       button.classList.toggle("is-active", active);
       button.setAttribute("aria-pressed", active ? "true" : "false");
@@ -439,7 +439,7 @@
       setTimeout(scheduleApply, 1000);
       setTimeout(scheduleApply, 2500);
     });
-    window.TsiinoSetLanguage = applyLanguage;
+    window.DrylandFlorasSetLanguage = applyLanguage;
   }
 
   if (document.readyState === "loading") {

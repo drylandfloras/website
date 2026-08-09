@@ -6,7 +6,7 @@
 *.Rproj
 _freeze
 
-### tsiino Quarto/RStudio ###
+### drylandfloras Quarto/RStudio ###
 
 # Historico e sessao do R
 .Rhistory
@@ -59,6 +59,6 @@ __pycache__/
 backend/.venv/
 *.egg-info/
 *.pyc
-.tsiino-validator-backups/
+.drylandfloras-validator-backups/
 RELATORIO_ARQUIVOS_PROJETO.txt
 backend/.env

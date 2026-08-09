@@ -63,7 +63,7 @@ async def convert_converter(
     except Exception as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
-# TSIINO_PREVIEW_ROWS_V17
+# DRYLANDFLORAS_PREVIEW_ROWS_V17
 # Endpoint auxiliar para o mapeador: devolve as linhas reais da planilha enviada,
 # sem depender da heuristica do preview principal.
 import tempfile as _tempfile_v17
@@ -72,15 +72,15 @@ from fastapi import UploadFile as _UploadFileV17, File as _FileV17, Form as _For
 from openpyxl import load_workbook as _load_workbook_v17
 
 
-def _tsiino_v17_cell_text(value):
+def _drylandfloras_v17_cell_text(value):
     if value is None:
         return ""
     text = str(value).strip()
     return text
 
 
-def _tsiino_v17_header_score(values):
-    texts = [_tsiino_v17_cell_text(v) for v in values]
+def _drylandfloras_v17_header_score(values):
+    texts = [_drylandfloras_v17_cell_text(v) for v in values]
     nonempty = [t for t in texts if t]
     if not nonempty:
         return -1
@@ -94,14 +94,14 @@ def _tsiino_v17_header_score(values):
     return len(nonempty) * 3 + keyword_bonus - long_penalty * 2
 
 
-def _tsiino_v17_detect_header_row(ws, max_scan_rows=20):
+def _drylandfloras_v17_detect_header_row(ws, max_scan_rows=20):
     best_idx = 1
     best_score = -1
     max_row = min(ws.max_row or 1, max_scan_rows)
     max_col = ws.max_column or 1
     for idx in range(1, max_row + 1):
         values = [ws.cell(idx, col).value for col in range(1, max_col + 1)]
-        score = _tsiino_v17_header_score(values)
+        score = _drylandfloras_v17_header_score(values)
         if score > best_score:
             best_score = score
             best_idx = idx
@@ -110,7 +110,7 @@ def _tsiino_v17_detect_header_row(ws, max_scan_rows=20):
 
 @router.post("/preview_rows")
 async def preview_rows(file: UploadFile = File(...), sheet_name: str | None = Form(None), max_rows: int = Form(80)):
-    """TSIINO_MAPPER_ROWS_HELP_V20
+    """DRYLANDFLORAS_MAPPER_ROWS_HELP_V20
 
     Devolve colunas, linhas reais e recomendações do padrão INPA/BRAHMS para o mapeador.
     O contrato do frontend é deliberadamente redundante: source_columns é lista de strings,
@@ -383,22 +383,22 @@ async def preview_rows(file: UploadFile = File(...), sheet_name: str | None = Fo
         except Exception:
             pass
 
-# TSIINO_CONVERT_TOLERANT_V24
+# DRYLANDFLORAS_CONVERT_TOLERANT_V24
 # Endpoint alternativo tolerante para validar planilhas mapeadas.
 # Ele nunca deve rejeitar a conversao por campo obrigatorio ausente: campos faltantes
 # viram celulas em branco e a validacao normal aponta os erros depois.
 try:
-    from fastapi import File as _TsiinoFile, UploadFile as _TsiinoUploadFile, Request as _TsiinoRequest, HTTPException as _TsiinoHTTPException
-    from fastapi.responses import StreamingResponse as _TsiinoStreamingResponse
-    from openpyxl import load_workbook as _tsiino_load_workbook, Workbook as _TsiinoWorkbook
-    from io import BytesIO as _TsiinoBytesIO
-    import json as _tsiino_json
-    import re as _tsiino_re
-    import unicodedata as _tsiino_unicodedata
-except Exception as _tsiino_import_error:  # pragma: no cover
-    _tsiino_import_error_v24 = _tsiino_import_error
+    from fastapi import File as _DrylandFlorasFile, UploadFile as _DrylandFlorasUploadFile, Request as _DrylandFlorasRequest, HTTPException as _DrylandFlorasHTTPException
+    from fastapi.responses import StreamingResponse as _DrylandFlorasStreamingResponse
+    from openpyxl import load_workbook as _drylandfloras_load_workbook, Workbook as _DrylandFlorasWorkbook
+    from io import BytesIO as _DrylandFlorasBytesIO
+    import json as _drylandfloras_json
+    import re as _drylandfloras_re
+    import unicodedata as _drylandfloras_unicodedata
+except Exception as _drylandfloras_import_error:  # pragma: no cover
+    _drylandfloras_import_error_v24 = _drylandfloras_import_error
 
-_TSIINO_CANONICAL_V24 = [
+_DRYLANDFLORAS_CANONICAL_V24 = [
     'accession', 'collector', 'prefix', 'number', 'suffix', 'addcoll',
     'colldd', 'collmm', 'collyy', 'initial', 'family', 'genus', 'detstatus',
     'sp1', 'rank1', 'sp2', 'detby', 'detdd', 'detmm', 'detyy', 'country',
@@ -407,19 +407,19 @@ _TSIINO_CANONICAL_V24 = [
     'dups', 'project', 'genbank'
 ]
 
-_TSIINO_REQUIRED_HINTS_V24 = {'collector', 'number', 'colldd', 'collmm', 'collyy', 'family', 'genus', 'country', 'majorarea', 'minorarea', 'lat', 'long', 'plantdesc'}
+_DRYLANDFLORAS_REQUIRED_HINTS_V24 = {'collector', 'number', 'colldd', 'collmm', 'collyy', 'family', 'genus', 'country', 'majorarea', 'minorarea', 'lat', 'long', 'plantdesc'}
 
-def _tsiino_norm_v24(value):
+def _drylandfloras_norm_v24(value):
     if value is None:
         return ''
     text = str(value).strip()
-    text = _tsiino_unicodedata.normalize('NFKD', text)
-    text = ''.join(ch for ch in text if not _tsiino_unicodedata.combining(ch))
+    text = _drylandfloras_unicodedata.normalize('NFKD', text)
+    text = ''.join(ch for ch in text if not _drylandfloras_unicodedata.combining(ch))
     text = text.lower()
-    text = _tsiino_re.sub(r'[^a-z0-9]+', '', text)
+    text = _drylandfloras_re.sub(r'[^a-z0-9]+', '', text)
     return text
 
-_TSIINO_ALIAS_PATTERNS_V24 = [
+_DRYLANDFLORAS_ALIAS_PATTERNS_V24 = [
     ('accession', ['accession', 'tombo', 'registroinpa', 'numeroderegistronoherbario', 'campobranco']),
     ('collector', ['collector', 'coletorprincipal', 'nomedocoletorprincipal', 'coletor', 'recordedby']),
     ('prefix', ['prefix', 'prefixo', 'serie', 'seriesdiferentes', 'naocolocaseusiniciais']),
@@ -460,24 +460,24 @@ _TSIINO_ALIAS_PATTERNS_V24 = [
     ('genbank', ['genbank']),
 ]
 
-_TSIINO_BAD_SOURCE_HINTS_V24 = ['notasparavoceseguir', 'useisso', 'consultelista', 'solteumacolunaaqui']
+_DRYLANDFLORAS_BAD_SOURCE_HINTS_V24 = ['notasparavoceseguir', 'useisso', 'consultelista', 'solteumacolunaaqui']
 
-def _tsiino_guess_canonical_v24(header):
-    n = _tsiino_norm_v24(header)
+def _drylandfloras_guess_canonical_v24(header):
+    n = _drylandfloras_norm_v24(header)
     if not n:
         return None
-    for col in _TSIINO_CANONICAL_V24:
-        if n == _tsiino_norm_v24(col):
+    for col in _DRYLANDFLORAS_CANONICAL_V24:
+        if n == _drylandfloras_norm_v24(col):
             return col
-    if any(bad in n for bad in _TSIINO_BAD_SOURCE_HINTS_V24):
+    if any(bad in n for bad in _DRYLANDFLORAS_BAD_SOURCE_HINTS_V24):
         # algumas instrucoes ainda podem ser cabecalhos uteis; nao bloqueia se bater padrao especifico abaixo
         pass
-    for canon, pats in _TSIINO_ALIAS_PATTERNS_V24:
+    for canon, pats in _DRYLANDFLORAS_ALIAS_PATTERNS_V24:
         if any(p in n for p in pats):
             return canon
     return None
 
-def _tsiino_cell_text_v24(v):
+def _drylandfloras_cell_text_v24(v):
     if v is None:
         return ''
     if hasattr(v, 'isoformat'):
@@ -487,7 +487,7 @@ def _tsiino_cell_text_v24(v):
             pass
     return str(v).strip()
 
-def _tsiino_parse_mapping_v24(form):
+def _drylandfloras_parse_mapping_v24(form):
     raw = None
     for key in ('mapping', 'mappings', 'column_mapping', 'columns'):
         if key in form:
@@ -498,7 +498,7 @@ def _tsiino_parse_mapping_v24(form):
     if not isinstance(raw, str):
         raw = str(raw)
     try:
-        obj = _tsiino_json.loads(raw)
+        obj = _drylandfloras_json.loads(raw)
     except Exception:
         return {}
     out = {}
@@ -513,12 +513,12 @@ def _tsiino_parse_mapping_v24(form):
             if vv is None:
                 continue
             vv = str(vv).strip()
-            if kk in _TSIINO_CANONICAL_V24:
+            if kk in _DRYLANDFLORAS_CANONICAL_V24:
                 out[kk] = vv
             else:
-                guessed = _tsiino_guess_canonical_v24(vv) or _tsiino_guess_canonical_v24(kk)
+                guessed = _drylandfloras_guess_canonical_v24(vv) or _drylandfloras_guess_canonical_v24(kk)
                 if guessed:
-                    if _tsiino_guess_canonical_v24(vv) == guessed and kk not in _TSIINO_CANONICAL_V24:
+                    if _drylandfloras_guess_canonical_v24(vv) == guessed and kk not in _DRYLANDFLORAS_CANONICAL_V24:
                         out[guessed] = kk
                     else:
                         out[guessed] = vv
@@ -528,29 +528,29 @@ def _tsiino_parse_mapping_v24(form):
                 continue
             canon = item.get('canonical') or item.get('target') or item.get('field') or item.get('inpa')
             source = item.get('source') or item.get('header') or item.get('name') or item.get('label') or item.get('column')
-            if canon and source and str(canon) in _TSIINO_CANONICAL_V24:
+            if canon and source and str(canon) in _DRYLANDFLORAS_CANONICAL_V24:
                 out[str(canon)] = str(source)
     return out
 
-def _tsiino_header_score_v24(values):
-    guessed = [_tsiino_guess_canonical_v24(v) for v in values if _tsiino_cell_text_v24(v)]
+def _drylandfloras_header_score_v24(values):
+    guessed = [_drylandfloras_guess_canonical_v24(v) for v in values if _drylandfloras_cell_text_v24(v)]
     unique = set(g for g in guessed if g)
-    return len(unique) + len(unique & _TSIINO_REQUIRED_HINTS_V24) * 2
+    return len(unique) + len(unique & _DRYLANDFLORAS_REQUIRED_HINTS_V24) * 2
 
-def _tsiino_detect_header_row_v24(ws):
+def _drylandfloras_detect_header_row_v24(ws):
     best_idx = 1
     best_score = -1
     max_row = min(ws.max_row or 1, 40)
     for idx in range(1, max_row + 1):
         values = [cell.value for cell in ws[idx]]
-        score = _tsiino_header_score_v24(values)
+        score = _drylandfloras_header_score_v24(values)
         if score > best_score:
             best_idx = idx
             best_score = score
     return best_idx
 
-def _tsiino_build_source_tables_v24(ws, header_row):
-    raw_headers = [_tsiino_cell_text_v24(cell.value) or f'COL_{i+1}' for i, cell in enumerate(ws[header_row])]
+def _drylandfloras_build_source_tables_v24(ws, header_row):
+    raw_headers = [_drylandfloras_cell_text_v24(cell.value) or f'COL_{i+1}' for i, cell in enumerate(ws[header_row])]
     # Garante unicidade de cabecalhos iguais/vazios
     seen = {}
     headers = []
@@ -565,97 +565,97 @@ def _tsiino_build_source_tables_v24(ws, header_row):
         headers.append(key)
     rows = []
     for ridx in range(header_row + 1, (ws.max_row or header_row) + 1):
-        values = [_tsiino_cell_text_v24(cell.value) for cell in ws[ridx][:len(headers)]]
+        values = [_drylandfloras_cell_text_v24(cell.value) for cell in ws[ridx][:len(headers)]]
         if not any(values):
             continue
         rows.append({headers[i]: values[i] if i < len(values) else '' for i in range(len(headers))})
     return headers, rows
 
-def _tsiino_auto_mapping_v24(headers):
+def _drylandfloras_auto_mapping_v24(headers):
     out = {}
     for h in headers:
-        canon = _tsiino_guess_canonical_v24(h)
+        canon = _drylandfloras_guess_canonical_v24(h)
         if canon and canon not in out:
             out[canon] = h
     return out
 
-def _tsiino_resolve_source_v24(source_name, headers):
+def _drylandfloras_resolve_source_v24(source_name, headers):
     if not source_name:
         return None
     if source_name in headers:
         return source_name
-    ns = _tsiino_norm_v24(source_name)
+    ns = _drylandfloras_norm_v24(source_name)
     if not ns:
         return None
     for h in headers:
-        if _tsiino_norm_v24(h) == ns:
+        if _drylandfloras_norm_v24(h) == ns:
             return h
     # Labels truncados no frontend: usa inclusao normalizada curta com cuidado
     for h in headers:
-        nh = _tsiino_norm_v24(h)
+        nh = _drylandfloras_norm_v24(h)
         if ns and (ns in nh or nh in ns):
             return h
     return None
 
 @router.post('/convert_tolerant')
-async def tsiino_convert_tolerant_v24(request: _TsiinoRequest, file: _TsiinoUploadFile = _TsiinoFile(...)):
+async def drylandfloras_convert_tolerant_v24(request: _DrylandFlorasRequest, file: _DrylandFlorasUploadFile = _DrylandFlorasFile(...)):
     try:
         form = await request.form()
         content = await file.read()
         if not content:
-            raise _TsiinoHTTPException(status_code=400, detail='Arquivo vazio.')
-        wb = _tsiino_load_workbook(_TsiinoBytesIO(content), data_only=True)
+            raise _DrylandFlorasHTTPException(status_code=400, detail='Arquivo vazio.')
+        wb = _drylandfloras_load_workbook(_DrylandFlorasBytesIO(content), data_only=True)
         sheet_name = form.get('sheet') or form.get('sheet_name') or None
         ws = wb[sheet_name] if sheet_name and sheet_name in wb.sheetnames else wb[wb.sheetnames[0]]
-        header_row = _tsiino_detect_header_row_v24(ws)
-        headers, source_rows = _tsiino_build_source_tables_v24(ws, header_row)
-        submitted_mapping = _tsiino_parse_mapping_v24(form)
-        auto_mapping = _tsiino_auto_mapping_v24(headers)
+        header_row = _drylandfloras_detect_header_row_v24(ws)
+        headers, source_rows = _drylandfloras_build_source_tables_v24(ws, header_row)
+        submitted_mapping = _drylandfloras_parse_mapping_v24(form)
+        auto_mapping = _drylandfloras_auto_mapping_v24(headers)
         final_mapping = dict(auto_mapping)
         # O mapeamento manual tem prioridade, mas so se conseguimos resolver a coluna fonte.
         for canon, src in submitted_mapping.items():
-            resolved = _tsiino_resolve_source_v24(src, headers)
+            resolved = _drylandfloras_resolve_source_v24(src, headers)
             if resolved:
                 final_mapping[canon] = resolved
-        out_wb = _TsiinoWorkbook()
+        out_wb = _DrylandFlorasWorkbook()
         out_ws = out_wb.active
         out_ws.title = 'Espécimes'
-        for cidx, canon in enumerate(_TSIINO_CANONICAL_V24, start=1):
+        for cidx, canon in enumerate(_DRYLANDFLORAS_CANONICAL_V24, start=1):
             out_ws.cell(row=1, column=cidx, value=canon)
         for ridx, row in enumerate(source_rows, start=2):
-            for cidx, canon in enumerate(_TSIINO_CANONICAL_V24, start=1):
+            for cidx, canon in enumerate(_DRYLANDFLORAS_CANONICAL_V24, start=1):
                 src = final_mapping.get(canon)
                 value = row.get(src, '') if src else ''
                 out_ws.cell(row=ridx, column=cidx, value=value)
-        buf = _TsiinoBytesIO()
+        buf = _DrylandFlorasBytesIO()
         out_wb.save(buf)
         buf.seek(0)
         out_name = (file.filename or 'planilha').rsplit('.', 1)[0] + '_convertida_INPA.xlsx'
-        return _TsiinoStreamingResponse(
+        return _DrylandFlorasStreamingResponse(
             buf,
             media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             headers={'Content-Disposition': f'attachment; filename="{out_name}"'}
         )
-    except _TsiinoHTTPException:
+    except _DrylandFlorasHTTPException:
         raise
     except Exception as exc:
-        raise _TsiinoHTTPException(status_code=400, detail=f'Não foi possível converter: {exc}')
+        raise _DrylandFlorasHTTPException(status_code=400, detail=f'Não foi possível converter: {exc}')
 
-# TSIINO_CONVERT_TOLERANT_V28
+# DRYLANDFLORAS_CONVERT_TOLERANT_V28
 # Conversao tolerante e previsivel para o fluxo pos-mapeamento.
 # Nao rejeita campo ausente; campos sem mapeamento ficam vazios e a validacao normal decide os erros.
 try:
-    from fastapi import File as _TsiinoFileV28, UploadFile as _TsiinoUploadFileV28, Request as _TsiinoRequestV28, HTTPException as _TsiinoHTTPExceptionV28
-    from fastapi.responses import StreamingResponse as _TsiinoStreamingResponseV28
-    from openpyxl import load_workbook as _tsiino_load_workbook_v28, Workbook as _TsiinoWorkbookV28
-    from io import BytesIO as _TsiinoBytesIOV28
-    import json as _tsiino_json_v28
-    import re as _tsiino_re_v28
-    import unicodedata as _tsiino_unicodedata_v28
-except Exception as _tsiino_v28_import_error:  # pragma: no cover
-    _tsiino_v28_import_error_saved = _tsiino_v28_import_error
+    from fastapi import File as _DrylandFlorasFileV28, UploadFile as _DrylandFlorasUploadFileV28, Request as _DrylandFlorasRequestV28, HTTPException as _DrylandFlorasHTTPExceptionV28
+    from fastapi.responses import StreamingResponse as _DrylandFlorasStreamingResponseV28
+    from openpyxl import load_workbook as _drylandfloras_load_workbook_v28, Workbook as _DrylandFlorasWorkbookV28
+    from io import BytesIO as _DrylandFlorasBytesIOV28
+    import json as _drylandfloras_json_v28
+    import re as _drylandfloras_re_v28
+    import unicodedata as _drylandfloras_unicodedata_v28
+except Exception as _drylandfloras_v28_import_error:  # pragma: no cover
+    _drylandfloras_v28_import_error_saved = _drylandfloras_v28_import_error
 
-_TSIINO_CANONICAL_V28 = [
+_DRYLANDFLORAS_CANONICAL_V28 = [
     'accession', 'collector', 'prefix', 'number', 'suffix', 'addcoll',
     'colldd', 'collmm', 'collyy', 'initial', 'family', 'genus', 'detstatus',
     'sp1', 'rank1', 'sp2', 'detby', 'detdd', 'detmm', 'detyy', 'country',
@@ -664,7 +664,7 @@ _TSIINO_CANONICAL_V28 = [
     'dups', 'project', 'genbank'
 ]
 
-_TSIINO_ALIASES_V28 = [
+_DRYLANDFLORAS_ALIASES_V28 = [
     ('accession', ['accession', 'registroinpa', 'tombo', 'numero de registro', 'deixa este campo em branco']),
     ('collector', ['collector', 'coletor principal', 'nome do coletor principal', 'coletor', 'recordedby']),
     ('prefix', ['prefix', 'prefixo', 'serie', 'series diferentes']),
@@ -705,19 +705,19 @@ _TSIINO_ALIASES_V28 = [
     ('genbank', ['genbank']),
 ]
 
-_TSIINO_BAD_HEADER_HINTS_V28 = ['notasparavoceseguir', 'consultelista', 'useisso', 'solteumacolunaaqui']
+_DRYLANDFLORAS_BAD_HEADER_HINTS_V28 = ['notasparavoceseguir', 'consultelista', 'useisso', 'solteumacolunaaqui']
 
-def _tsiino_norm_v28(value):
+def _drylandfloras_norm_v28(value):
     if value is None:
         return ''
     text = str(value).strip()
-    text = _tsiino_unicodedata_v28.normalize('NFKD', text)
-    text = ''.join(ch for ch in text if not _tsiino_unicodedata_v28.combining(ch))
+    text = _drylandfloras_unicodedata_v28.normalize('NFKD', text)
+    text = ''.join(ch for ch in text if not _drylandfloras_unicodedata_v28.combining(ch))
     text = text.lower()
-    text = _tsiino_re_v28.sub(r'[^a-z0-9]+', '', text)
+    text = _drylandfloras_re_v28.sub(r'[^a-z0-9]+', '', text)
     return text
 
-def _tsiino_text_v28(value):
+def _drylandfloras_text_v28(value):
     if value is None:
         return ''
     if hasattr(value, 'isoformat'):
@@ -727,40 +727,40 @@ def _tsiino_text_v28(value):
             pass
     return str(value).strip()
 
-def _tsiino_guess_v28(header):
-    n = _tsiino_norm_v28(header)
+def _drylandfloras_guess_v28(header):
+    n = _drylandfloras_norm_v28(header)
     if not n:
         return None
-    for c in _TSIINO_CANONICAL_V28:
-        if n == _tsiino_norm_v28(c):
+    for c in _DRYLANDFLORAS_CANONICAL_V28:
+        if n == _drylandfloras_norm_v28(c):
             return c
     # Nao usa celulas de recomendacao como origem, exceto se houver match tecnico direto acima.
-    if any(x in n for x in _TSIINO_BAD_HEADER_HINTS_V28):
+    if any(x in n for x in _DRYLANDFLORAS_BAD_HEADER_HINTS_V28):
         return None
-    for canon, words in _TSIINO_ALIASES_V28:
+    for canon, words in _DRYLANDFLORAS_ALIASES_V28:
         for w in words:
-            nw = _tsiino_norm_v28(w)
+            nw = _drylandfloras_norm_v28(w)
             if nw and (nw in n or n in nw):
                 return canon
     return None
 
-def _tsiino_header_score_v28(values):
-    guessed = [_tsiino_guess_v28(v) for v in values if _tsiino_text_v28(v)]
+def _drylandfloras_header_score_v28(values):
+    guessed = [_drylandfloras_guess_v28(v) for v in values if _drylandfloras_text_v28(v)]
     unique = {g for g in guessed if g}
     required = {'collector', 'number', 'family', 'genus', 'country', 'majorarea', 'minorarea'}
     return len(unique) + 2 * len(unique & required)
 
-def _tsiino_detect_header_row_v28(ws):
+def _drylandfloras_detect_header_row_v28(ws):
     best_row, best_score = 1, -1
     for idx in range(1, min(ws.max_row or 1, 50) + 1):
         vals = [c.value for c in ws[idx]]
-        score = _tsiino_header_score_v28(vals)
+        score = _drylandfloras_header_score_v28(vals)
         if score > best_score:
             best_row, best_score = idx, score
     return best_row
 
-def _tsiino_headers_rows_v28(ws, header_row):
-    raw_headers = [_tsiino_text_v28(c.value) or f'COL_{i+1}' for i, c in enumerate(ws[header_row])]
+def _drylandfloras_headers_rows_v28(ws, header_row):
+    raw_headers = [_drylandfloras_text_v28(c.value) or f'COL_{i+1}' for i, c in enumerate(ws[header_row])]
     seen = {}
     headers = []
     for h in raw_headers:
@@ -773,12 +773,12 @@ def _tsiino_headers_rows_v28(ws, header_row):
         headers.append(key)
     rows = []
     for ridx in range(header_row + 1, (ws.max_row or header_row) + 1):
-        vals = [_tsiino_text_v28(c.value) for c in ws[ridx][:len(headers)]]
+        vals = [_drylandfloras_text_v28(c.value) for c in ws[ridx][:len(headers)]]
         if any(vals):
             rows.append({headers[i]: vals[i] if i < len(vals) else '' for i in range(len(headers))})
     return headers, rows
 
-def _tsiino_parse_mapping_v28(form):
+def _drylandfloras_parse_mapping_v28(form):
     raw = None
     for key in ('mapping', 'mapping_json', 'mappings', 'column_mapping', 'columns'):
         if key in form:
@@ -787,7 +787,7 @@ def _tsiino_parse_mapping_v28(form):
     if raw is None:
         return {}
     try:
-        obj = _tsiino_json_v28.loads(str(raw))
+        obj = _drylandfloras_json_v28.loads(str(raw))
     except Exception:
         return {}
     out = {}
@@ -797,10 +797,10 @@ def _tsiino_parse_mapping_v28(form):
             source = v
             if isinstance(v, dict):
                 source = v.get('source') or v.get('header') or v.get('name') or v.get('label') or v.get('column') or v.get('value')
-            if canon in _TSIINO_CANONICAL_V28 and source:
+            if canon in _DRYLANDFLORAS_CANONICAL_V28 and source:
                 out[canon] = str(source).strip()
             else:
-                guessed = _tsiino_guess_v28(canon)
+                guessed = _drylandfloras_guess_v28(canon)
                 if guessed and source:
                     out[guessed] = str(source).strip()
     elif isinstance(obj, list):
@@ -808,73 +808,73 @@ def _tsiino_parse_mapping_v28(form):
             if isinstance(item, dict):
                 canon = item.get('canonical') or item.get('target') or item.get('field') or item.get('inpa')
                 source = item.get('source') or item.get('header') or item.get('name') or item.get('label') or item.get('column')
-                if canon in _TSIINO_CANONICAL_V28 and source:
+                if canon in _DRYLANDFLORAS_CANONICAL_V28 and source:
                     out[str(canon)] = str(source).strip()
     return out
 
-def _tsiino_resolve_source_v28(name, headers):
+def _drylandfloras_resolve_source_v28(name, headers):
     if not name:
         return None
     if name in headers:
         return name
-    n = _tsiino_norm_v28(name)
+    n = _drylandfloras_norm_v28(name)
     for h in headers:
-        if _tsiino_norm_v28(h) == n:
+        if _drylandfloras_norm_v28(h) == n:
             return h
     for h in headers:
-        nh = _tsiino_norm_v28(h)
+        nh = _drylandfloras_norm_v28(h)
         if n and len(n) >= 4 and (n in nh or nh in n):
             return h
     return None
 
-def _tsiino_auto_mapping_v28(headers):
+def _drylandfloras_auto_mapping_v28(headers):
     out = {}
     for h in headers:
-        canon = _tsiino_guess_v28(h)
+        canon = _drylandfloras_guess_v28(h)
         if canon and canon not in out:
             out[canon] = h
     return out
 
 @router.post('/convert_tolerant_v28')
-async def tsiino_convert_tolerant_v28(request: _TsiinoRequestV28, file: _TsiinoUploadFileV28 = _TsiinoFileV28(...)):
+async def drylandfloras_convert_tolerant_v28(request: _DrylandFlorasRequestV28, file: _DrylandFlorasUploadFileV28 = _DrylandFlorasFileV28(...)):
     content = await file.read()
     if not content:
-        raise _TsiinoHTTPExceptionV28(status_code=400, detail='Arquivo vazio.')
+        raise _DrylandFlorasHTTPExceptionV28(status_code=400, detail='Arquivo vazio.')
     try:
-        wb = _tsiino_load_workbook_v28(_TsiinoBytesIOV28(content), data_only=True)
+        wb = _drylandfloras_load_workbook_v28(_DrylandFlorasBytesIOV28(content), data_only=True)
     except Exception as exc:
-        raise _TsiinoHTTPExceptionV28(status_code=400, detail=f'Nao foi possivel abrir a planilha: {exc}')
+        raise _DrylandFlorasHTTPExceptionV28(status_code=400, detail=f'Nao foi possivel abrir a planilha: {exc}')
     form = await request.form()
     sheet_name = form.get('sheet_name') or form.get('sheet')
     if sheet_name and str(sheet_name) in wb.sheetnames:
         ws = wb[str(sheet_name)]
     else:
         ws = wb[wb.sheetnames[0]]
-    header_row = _tsiino_detect_header_row_v28(ws)
-    headers, rows = _tsiino_headers_rows_v28(ws, header_row)
-    manual = _tsiino_parse_mapping_v28(form)
-    auto = _tsiino_auto_mapping_v28(headers)
+    header_row = _drylandfloras_detect_header_row_v28(ws)
+    headers, rows = _drylandfloras_headers_rows_v28(ws, header_row)
+    manual = _drylandfloras_parse_mapping_v28(form)
+    auto = _drylandfloras_auto_mapping_v28(headers)
     mapping = {**auto, **manual}
-    resolved = {canon: _tsiino_resolve_source_v28(src, headers) for canon, src in mapping.items() if canon in _TSIINO_CANONICAL_V28}
+    resolved = {canon: _drylandfloras_resolve_source_v28(src, headers) for canon, src in mapping.items() if canon in _DRYLANDFLORAS_CANONICAL_V28}
 
-    out_wb = _TsiinoWorkbookV28()
+    out_wb = _DrylandFlorasWorkbookV28()
     out_ws = out_wb.active
     out_ws.title = 'Espécimes'
-    out_ws.append(_TSIINO_CANONICAL_V28)
+    out_ws.append(_DRYLANDFLORAS_CANONICAL_V28)
     for row in rows:
-        out_ws.append([row.get(resolved.get(canon), '') if resolved.get(canon) else '' for canon in _TSIINO_CANONICAL_V28])
+        out_ws.append([row.get(resolved.get(canon), '') if resolved.get(canon) else '' for canon in _DRYLANDFLORAS_CANONICAL_V28])
 
-    bio = _TsiinoBytesIOV28()
+    bio = _DrylandFlorasBytesIOV28()
     out_wb.save(bio)
     bio.seek(0)
     filename = (getattr(file, 'filename', None) or 'planilha').rsplit('.', 1)[0] + '_convertida_INPA.xlsx'
-    return _TsiinoStreamingResponseV28(
+    return _DrylandFlorasStreamingResponseV28(
         bio,
         media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         headers={'Content-Disposition': f'attachment; filename="{filename}"'},
     )
 
-# TSIINO_STANDARD_CHECK_V36
+# DRYLANDFLORAS_STANDARD_CHECK_V36
 @router.post("/standard_check")
 async def standard_check(file: UploadFile = File(...), sheet_name: str | None = Form(None)):
     """Retorna se a planilha enviada tem cabeçalho técnico INPA/BRAHMS.

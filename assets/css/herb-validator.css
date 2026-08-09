@@ -23,7 +23,7 @@ body{
   padding:0 !important;
   background:
     linear-gradient(rgba(246,241,232,.86), rgba(246,241,232,.86)),
-    url("../../figures/tsiino_bg.png");
+    url("../../figures/drylandfloras_bg.png");
   background-repeat:repeat;
   background-size:min(720px, 100vw) auto;
   background-attachment:fixed;
@@ -93,7 +93,7 @@ main.content, #quarto-content, main, .page-columns, .page-layout-full, .content{
     linear-gradient(90deg, rgba(0,0,0,.58) 0%, rgba(0,0,0,.36) 36%, rgba(0,0,0,.10) 100%),
     linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.18) 50%, rgba(46,59,36,.82) 100%),
     url("../../figures/conservacao/conservacaotitlebg.png"),
-    url("../../figures/tsiino_bg.png");
+    url("../../figures/drylandfloras_bg.png");
   background-size:cover, cover, cover, 620px auto;
   background-position:center;
   color:#fff;
@@ -285,7 +285,7 @@ main.content, #quarto-content, main, .page-columns, .page-layout-full, .content{
   border-radius:18px;
   padding:1rem;
   color:#fff;
-  background:linear-gradient(rgba(36,50,30,.82), rgba(36,50,30,.82)), url("../../figures/tsiino_bg.png");
+  background:linear-gradient(rgba(36,50,30,.82), rgba(36,50,30,.82)), url("../../figures/drylandfloras_bg.png");
   background-size:520px auto;
 }
 .hv-card-number span{ display:block; font-family:'Space Mono', monospace; font-size:.72rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
@@ -399,7 +399,7 @@ main.content, #quarto-content, main, .page-columns, .page-layout-full, .content{
   border-radius:18px;
   overflow:hidden;
   border:1px solid rgba(98,106,56,.18);
-  background:linear-gradient(rgba(246,241,232,.82), rgba(246,241,232,.82)), url("../../figures/tsiino_bg.png");
+  background:linear-gradient(rgba(246,241,232,.82), rgba(246,241,232,.82)), url("../../figures/drylandfloras_bg.png");
   background-size:520px auto;
 }
 .hv-map-layout{ display:grid; grid-template-columns:minmax(0, 1.2fr) minmax(240px, .8fr); gap:0; min-height:360px; }
@@ -571,7 +571,7 @@ main.content, #quarto-content, main, .page-columns, .page-layout-full, .content{
   color: rgba(55, 35, 22, 0.58);
 }
 
-/* == Tsiino INPA horizontal column mapper v2 == */
+/* == DrylandFloras INPA horizontal column mapper v2 == */
 .hv-converter-panel {
   margin: clamp(1.5rem, 3vw, 2.8rem) auto;
   width: min(100%, 1480px);
@@ -941,10 +941,10 @@ main.content, #quarto-content, main, .page-columns, .page-layout-full, .content{
     max-width: 185px;
   }
 }
-/* == /Tsiino INPA horizontal column mapper v2 == */
+/* == /DrylandFloras INPA horizontal column mapper v2 == */
 
 
-/* == Tsiino validator compact horizontal mapper + title fix == */
+/* == DrylandFloras validator compact horizontal mapper + title fix == */
 .hv-hero .hv-title,
 .hv-hero .hv-title span,
 .hv-hero h1,
@@ -1316,7 +1316,7 @@ main.content, #quarto-content, main, .page-columns, .page-layout-full, .content{
 }
 
 
-/* == TSIINO INTERNAL CONVERTER FLOW 20260630 == */
+/* == DRYLANDFLORAS INTERNAL CONVERTER FLOW 20260630 == */
 /* Capa do validador: manter título branco e menor, mesmo quando herdar estilos antigos. */
 .hv-hero .hv-title,
 .hv-hero .hv-title span,
@@ -1624,7 +1624,7 @@ main.content, #quarto-content, main, .page-columns, .page-layout-full, .content{
   }
 }
 
-/* == TSIINO VALIDATOR CLEAN HERO AND INTRO == */
+/* == DRYLANDFLORAS VALIDATOR CLEAN HERO AND INTRO == */
 .hv-site-kicker,.hv-kicker,.hv-eyebrow,.hv-site-actions,.hv-hero-actions,.hv-actions-hero{display:none!important;}
 .hv-site-hero-inner,.hv-hero-inner{width:min(720px,46vw)!important;margin-left:auto!important;margin-right:clamp(18px,4.2vw,72px)!important;text-align:right!important;align-self:end!important;}
 .hv-site-title,.hv-title{color:#fff!important;text-align:right!important;font-size:clamp(2.45rem,4.75vw,5.55rem)!important;line-height:.92!important;letter-spacing:-.055em!important;max-width:100%!important;margin-left:auto!important;margin-right:0!important;text-shadow:0 8px 30px rgba(0,0,0,.68)!important;}
@@ -1633,15 +1633,15 @@ main.content, #quarto-content, main, .page-columns, .page-layout-full, .content{
 .hv-clean-overview{border:0!important;box-shadow:none!important;background:transparent!important;padding:clamp(2.2rem,5vw,5rem) 0 clamp(1.2rem,3vw,2.5rem)!important;margin:0!important;}
 .hv-clean-overview-inner{max-width:980px!important;margin-left:auto!important;}
 .hv-clean-section-title{grid-template-columns:1fr minmax(260px,560px)!important;text-align:right!important;margin-bottom:1.1rem!important;}
-.hv-clean-section-title h2{color:var(--tsiino-red,#6E1F1D)!important;font-size:clamp(1.55rem,3.2vw,3.05rem)!important;line-height:1.02!important;letter-spacing:-.035em!important;text-transform:none!important;}
+.hv-clean-section-title h2{color:var(--drylandfloras-red,#6E1F1D)!important;font-size:clamp(1.55rem,3.2vw,3.05rem)!important;line-height:1.02!important;letter-spacing:-.035em!important;text-transform:none!important;}
 .hv-clean-copy{max-width:840px!important;margin-left:auto!important;text-align:right!important;color:rgba(46,59,36,.88)!important;}
 .hv-clean-copy p{margin:0 0 1rem!important;font-size:clamp(1.02rem,1.32vw,1.22rem)!important;line-height:1.78!important;}
 .hv-feature-grid,.hv-tool-strip,.hv-photo-card{display:none!important;}
 @media (max-width:900px){.hv-site-hero-inner,.hv-hero-inner{width:min(92vw,680px)!important;margin-left:24px!important;margin-right:24px!important;text-align:left!important}.hv-site-title,.hv-title,.hv-site-deck,.hv-hero-text,.hv-clean-section-title,.hv-clean-copy{text-align:left!important;max-width:100%!important;margin-left:0!important}.hv-clean-section-title{grid-template-columns:minmax(54px,86px) 1fr!important}}
 
-/* == TSIINO UI + PREFLIGHT PATCH 20260630 == */
+/* == DRYLANDFLORAS UI + PREFLIGHT PATCH 20260630 == */
 :root {
-  --tsiino-hero-title-max: 540px;
+  --drylandfloras-hero-title-max: 540px;
 }
 
 body main.content,
@@ -1710,8 +1710,8 @@ body .hv-page-hero-inner,
 body .hv-validator-hero-inner,
 body .validator-hero-inner,
 body .hv-hero-inner {
-  width: min(var(--tsiino-hero-title-max), 42vw) !important;
-  max-width: var(--tsiino-hero-title-max) !important;
+  width: min(var(--drylandfloras-hero-title-max), 42vw) !important;
+  max-width: var(--drylandfloras-hero-title-max) !important;
   margin-left: auto !important;
   margin-right: clamp(18px, 5vw, 96px) !important;
   text-align: right !important;
@@ -1726,7 +1726,7 @@ body .validator-hero h1,
 body .hv-hero h1,
 body .hv-title,
 body .hv-title span {
-  max-width: var(--tsiino-hero-title-max) !important;
+  max-width: var(--drylandfloras-hero-title-max) !important;
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
   font-size: clamp(2rem, 3.1vw, 3.7rem) !important;
@@ -1768,15 +1768,15 @@ body .hv-overview {
   }
 }
 
-/* == TSIINO STANDARD ONECARD ROUTEFIX PATCH 20260630 == */
-:root { --tsiino-hero-title-max: 350px; }
+/* == DRYLANDFLORAS STANDARD ONECARD ROUTEFIX PATCH 20260630 == */
+:root { --drylandfloras-hero-title-max: 350px; }
 body main.content, body #quarto-content, body .page-columns, body .content, body .column-page, body .column-body { padding-top: 0 !important; margin-top: 0 !important; }
 body #title-block-header, body .quarto-title-block, body .quarto-title-banner, body header.quarto-title-block { display: none !important; margin: 0 !important; padding: 0 !important; }
 body .hv-site-page, body .hv-site-shell, body .hv-page-shell, body .hv-validator-shell, body .hv-tool-page { margin-top: 0 !important; padding-top: 0 !important; }
 body .hv-site-hero, body .hv-page-hero, body .hv-validator-hero, body .validator-hero, body .hv-hero { margin-top: 0 !important; padding-top: clamp(1.8rem, 4vh, 3.5rem) !important; min-height: clamp(390px, 62vh, 620px) !important; border-radius: 0 0 clamp(24px, 3.4vw, 46px) clamp(24px, 3.4vw, 46px) !important; overflow: hidden !important; background-size: cover !important; background-position: center top !important; background-repeat: no-repeat !important; }
 body .hv-site-hero::before, body .hv-page-hero::before, body .hv-validator-hero::before, body .validator-hero::before, body .hv-hero::before { inset: 0 !important; }
-body .hv-site-hero-inner, body .hv-page-hero-inner, body .hv-validator-hero-inner, body .validator-hero-inner, body .hv-hero-inner { width: min(var(--tsiino-hero-title-max), 28vw) !important; max-width: var(--tsiino-hero-title-max) !important; margin-left: auto !important; margin-right: clamp(2.2rem, 5.5vw, 6.5rem) !important; text-align: right !important; align-items: flex-end !important; justify-content: center !important; }
-body .hv-site-title, body .hv-page-title, body .hv-validator-title, body .validator-hero h1, body .hv-hero h1, body .hv-title, body .hv-title span { max-width: var(--tsiino-hero-title-max) !important; color: #fff !important; -webkit-text-fill-color: #fff !important; font-size: clamp(1.22rem, 1.68vw, 2.05rem) !important; line-height: 1.05 !important; letter-spacing: -0.025em !important; text-align: right !important; text-shadow: 0 2px 18px rgba(0,0,0,.55) !important; }
+body .hv-site-hero-inner, body .hv-page-hero-inner, body .hv-validator-hero-inner, body .validator-hero-inner, body .hv-hero-inner { width: min(var(--drylandfloras-hero-title-max), 28vw) !important; max-width: var(--drylandfloras-hero-title-max) !important; margin-left: auto !important; margin-right: clamp(2.2rem, 5.5vw, 6.5rem) !important; text-align: right !important; align-items: flex-end !important; justify-content: center !important; }
+body .hv-site-title, body .hv-page-title, body .hv-validator-title, body .validator-hero h1, body .hv-hero h1, body .hv-title, body .hv-title span { max-width: var(--drylandfloras-hero-title-max) !important; color: #fff !important; -webkit-text-fill-color: #fff !important; font-size: clamp(1.22rem, 1.68vw, 2.05rem) !important; line-height: 1.05 !important; letter-spacing: -0.025em !important; text-align: right !important; text-shadow: 0 2px 18px rgba(0,0,0,.55) !important; }
 body .hv-site-hero-inner p, body .hv-page-hero-inner p, body .hv-validator-hero-inner p, body .validator-hero-inner p, body .hv-hero-inner p, body .hv-site-lead, body .hv-lead, body .hv-subtitle { max-width: 300px !important; margin-left: auto !important; text-align: right !important; font-size: clamp(.82rem, .86vw, .96rem) !important; line-height: 1.45 !important; }
 .hv-direct-column-mapper { margin-top: 1.25rem; padding: clamp(.9rem, 1.7vw, 1.25rem); border: 1px solid rgba(91,63,39,.18); border-radius: 26px; background: rgba(255,252,246,.97); box-shadow: 0 16px 38px rgba(48,32,18,.08); }
 .hv-direct-column-mapper .hv-internal-converter-head { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; margin-bottom:.8rem; }
@@ -1813,7 +1813,7 @@ body .hv-site-hero-inner p, body .hv-page-hero-inner p, body .hv-validator-hero-
 @media (max-width:900px) { body .hv-site-hero-inner, body .hv-page-hero-inner, body .hv-validator-hero-inner, body .validator-hero-inner, body .hv-hero-inner { width:min(82vw,360px) !important; margin-right:clamp(2rem,7vw,4.6rem) !important; } body .hv-site-title, body .hv-page-title, body .hv-validator-title, body .validator-hero h1, body .hv-hero h1, body .hv-title, body .hv-title span { font-size:clamp(1.5rem,7vw,2.35rem) !important; } }
 
 .hv-direct-column-mapper .hv-map-label, .hv-direct-column-mapper .hv-map-required { display:none !important; }
-/* TSIINO MAPPER ONECARD UNDO STANDARD V1 */
+/* DRYLANDFLORAS MAPPER ONECARD UNDO STANDARD V1 */
 .hv-site-title,
 body .hv-site-title {
   font-size: clamp(1.85rem, 3.1vw, 3.85rem) !important;
@@ -1831,7 +1831,7 @@ body .hv-clean-overview {
   margin-left: auto !important;
   margin-right: clamp(44px, 9vw, 132px) !important;
 }
-.tsiino-converter-panel {
+.drylandfloras-converter-panel {
   margin: 1.25rem auto 2rem;
   padding: clamp(1rem, 2.2vw, 1.75rem);
   border: 1px solid rgba(88, 73, 51, 0.18);
@@ -1840,79 +1840,79 @@ body .hv-clean-overview {
   box-shadow: 0 18px 50px rgba(50, 38, 24, 0.10);
   color: #193224;
 }
-.tsiino-converter-header {
+.drylandfloras-converter-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 1rem;
 }
-.tsiino-converter-header h2 {
+.drylandfloras-converter-header h2 {
   margin: 0 0 0.35rem;
   font-size: clamp(1.25rem, 1.8vw, 1.9rem);
   color: #183221;
 }
-.tsiino-converter-header p {
+.drylandfloras-converter-header p {
   max-width: 860px;
   margin: 0;
   line-height: 1.45;
 }
-.tsiino-close-mapper,
-.tsiino-secondary,
-.tsiino-mapper-actions .hv-secondary,
-.tsiino-mapper-actions .hv-primary {
+.drylandfloras-close-mapper,
+.drylandfloras-secondary,
+.drylandfloras-mapper-actions .hv-secondary,
+.drylandfloras-mapper-actions .hv-primary {
   border-radius: 999px;
   white-space: nowrap;
 }
-.tsiino-close-mapper,
-.tsiino-secondary {
+.drylandfloras-close-mapper,
+.drylandfloras-secondary {
   border: 1px solid rgba(80, 72, 55, 0.22);
   background: #fffdf7;
   padding: 0.72rem 1.05rem;
   font-weight: 800;
   color: #183221;
 }
-.tsiino-secondary:disabled {
+.drylandfloras-secondary:disabled {
   opacity: 0.42;
   cursor: not-allowed;
 }
-.tsiino-mapper-toolbar,
-.tsiino-mapper-actions {
+.drylandfloras-mapper-toolbar,
+.drylandfloras-mapper-actions {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.75rem;
   margin: 0.85rem 0;
 }
-.tsiino-mapper-card {
+.drylandfloras-mapper-card {
   border: 1px solid rgba(88, 73, 51, 0.18);
   border-radius: 20px;
   background: linear-gradient(180deg, rgba(255,248,238,0.88), rgba(255,252,247,0.98));
   overflow: hidden;
 }
-.tsiino-onecard-scroll {
+.drylandfloras-onecard-scroll {
   width: 100%;
   max-height: 72vh;
   overflow: auto;
   overscroll-behavior: contain;
   scroll-behavior: auto;
 }
-.tsiino-onecard-grid {
+.drylandfloras-onecard-grid {
   display: grid;
-  grid-template-columns: 170px repeat(calc(var(--tsiino-cols) - 1), minmax(190px, 240px));
+  grid-template-columns: 170px repeat(calc(var(--drylandfloras-cols) - 1), minmax(190px, 240px));
   min-width: max-content;
 }
-.tsiino-row-head,
-.tsiino-standard-cell,
-.tsiino-source-slot,
-.tsiino-data-cell,
-.tsiino-unassigned-cell {
+.drylandfloras-row-head,
+.drylandfloras-standard-cell,
+.drylandfloras-source-slot,
+.drylandfloras-data-cell,
+.drylandfloras-unassigned-cell {
   border-right: 1px solid rgba(77, 59, 38, 0.10);
   border-bottom: 1px solid rgba(77, 59, 38, 0.13);
   padding: 0.85rem;
   background: rgba(255, 251, 244, 0.80);
 }
-.tsiino-row-head {
+.drylandfloras-row-head {
   position: sticky;
   left: 0;
   z-index: 5;
@@ -1921,34 +1921,34 @@ body .hv-clean-overview {
   font-weight: 900;
   font-size: 0.92rem;
 }
-.tsiino-row-head-strong {
+.drylandfloras-row-head-strong {
   font-size: 1.1rem;
   letter-spacing: 0.03em;
 }
-.tsiino-standard-cell {
+.drylandfloras-standard-cell {
   position: sticky;
   top: 0;
   z-index: 4;
   min-height: 116px;
   background: #fff8ef;
 }
-.tsiino-onecard-grid > .tsiino-row-head:first-child {
+.drylandfloras-onecard-grid > .drylandfloras-row-head:first-child {
   top: 0;
   z-index: 8;
 }
-.tsiino-field-code {
+.drylandfloras-field-code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-weight: 900;
   color: #b3201d;
   letter-spacing: 0.07em;
   font-size: 0.78rem;
 }
-.tsiino-field-label {
+.drylandfloras-field-label {
   margin-top: 0.4rem;
   font-weight: 850;
   color: #0d2b22;
 }
-.tsiino-help {
+.drylandfloras-help {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1962,7 +1962,7 @@ body .hv-clean-overview {
   font-family: system-ui, sans-serif;
   font-size: 0.72rem;
 }
-.tsiino-required {
+.drylandfloras-required {
   display: inline-block;
   margin-top: 0.65rem;
   padding: 0.22rem 0.5rem;
@@ -1972,16 +1972,16 @@ body .hv-clean-overview {
   font-weight: 800;
   font-size: 0.76rem;
 }
-.tsiino-source-slot {
+.drylandfloras-source-slot {
   min-height: 88px;
   background: #fffaf2;
 }
-.tsiino-source-slot.is-drag-over {
+.drylandfloras-source-slot.is-drag-over {
   outline: 3px solid rgba(132, 73, 38, 0.35);
   outline-offset: -5px;
   background: #fff1df;
 }
-.tsiino-source-chip {
+.drylandfloras-source-chip {
   display: inline-flex;
   align-items: center;
   gap: 0.48rem;
@@ -1996,10 +1996,10 @@ body .hv-clean-overview {
   font-weight: 850;
   cursor: grab;
 }
-.tsiino-source-chip:active {
+.drylandfloras-source-chip:active {
   cursor: grabbing;
 }
-.tsiino-chip-letter {
+.drylandfloras-chip-letter {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
@@ -2011,18 +2011,18 @@ body .hv-clean-overview {
   color: #8a4a24;
   font-weight: 900;
 }
-.tsiino-chip-name {
+.drylandfloras-chip-name {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.tsiino-chip-remove {
+.drylandfloras-chip-remove {
   color: #a11d23;
   font-size: 1.05rem;
   line-height: 1;
   padding-left: 0.2rem;
 }
-.tsiino-drop-placeholder {
+.drylandfloras-drop-placeholder {
   display: flex;
   min-height: 3rem;
   align-items: center;
@@ -2033,7 +2033,7 @@ body .hv-clean-overview {
   font-weight: 800;
   text-align: center;
 }
-.tsiino-data-cell {
+.drylandfloras-data-cell {
   min-height: 3.7rem;
   color: #1d3027;
   font-size: 0.86rem;
@@ -2041,24 +2041,24 @@ body .hv-clean-overview {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
-.tsiino-unassigned-cell {
+.drylandfloras-unassigned-cell {
   background: #fffaf2;
 }
-.tsiino-unassigned-cell .tsiino-source-chip {
+.drylandfloras-unassigned-cell .drylandfloras-source-chip {
   margin: 0.25rem;
 }
-.tsiino-mapper-hint {
+.drylandfloras-mapper-hint {
   margin: 0.85rem 0 0.35rem;
   color: #546454;
   font-size: 0.92rem;
 }
-.tsiino-converter-message {
+.drylandfloras-converter-message {
   margin-top: 0.75rem;
   font-weight: 700;
 }
-.tsiino-converter-message.error { color: #9b1c1c; }
-.tsiino-converter-message.ok { color: #245f36; }
-.tsiino-converter-message.info { color: #36506e; }
+.drylandfloras-converter-message.error { color: #9b1c1c; }
+.drylandfloras-converter-message.ok { color: #245f36; }
+.drylandfloras-converter-message.info { color: #36506e; }
 @media (max-width: 900px) {
   .hv-site-hero-inner,
   body .hv-site-hero-inner,
@@ -2070,50 +2070,50 @@ body .hv-clean-overview {
     margin-right: auto !important;
     text-align: center !important;
   }
-  .tsiino-onecard-grid {
-    grid-template-columns: 135px repeat(calc(var(--tsiino-cols) - 1), minmax(170px, 210px));
+  .drylandfloras-onecard-grid {
+    grid-template-columns: 135px repeat(calc(var(--drylandfloras-cols) - 1), minmax(170px, 210px));
   }
 }
 
-/* TSIINO MAPPER UX FIX V3 */
+/* DRYLANDFLORAS MAPPER UX FIX V3 */
 .hv-site-hero-inner { max-width: 560px !important; margin-left: auto !important; margin-right: clamp(2rem, 8vw, 8rem) !important; }
 .hv-site-title { font-size: clamp(2rem, 3.4vw, 4.2rem) !important; line-height: 0.95 !important; }
 .hv-clean-overview { max-width: 620px !important; margin-left: auto !important; margin-right: clamp(2rem, 13vw, 14rem) !important; }
-.tsiino-mapper-card { margin: 1.25rem auto 2rem; max-width: min(1720px, calc(100vw - 3rem)); border: 1px solid rgba(72, 59, 36, .18); border-radius: 24px; background: rgba(255, 251, 244, .96); box-shadow: 0 22px 50px rgba(47, 38, 24, .12); padding: 1.25rem; position: relative; }
-.tsiino-mapper-head { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; margin-bottom: .75rem; }
-.tsiino-mapper-head h3 { margin: 0 0 .25rem; font-size: clamp(1.35rem, 2vw, 2.2rem); color: #163326; }
-.tsiino-mapper-head p { margin: 0; max-width: 900px; color: #4f5c4b; }
-.tsiino-mapper-close, .tsiino-mini { border: 1px solid rgba(72, 59, 36, .18); background: rgba(255,255,255,.7); border-radius: 999px; padding: .62rem 1rem; font-weight: 800; color: #183224; cursor: pointer; }
-.tsiino-mini:disabled { opacity: .45; cursor: default; }
-.tsiino-mapper-toolbar { display: flex; align-items: center; gap: .5rem; margin: .65rem 0 .85rem; }
-.tsiino-mapper-scroll { overflow: auto; max-height: min(72vh, 820px); border: 1px solid rgba(72, 59, 36, .16); border-radius: 18px; background: #fffaf2; scroll-behavior: auto; }
-.tsiino-onecard-table { border-collapse: separate; border-spacing: 0; min-width: 1200px; width: max-content; font-size: .98rem; }
-.tsiino-onecard-table th { position: sticky; left: 0; z-index: 3; min-width: 142px; max-width: 142px; background: #f0e4d4; color: #593417; text-align: left; vertical-align: top; font-size: 1rem; letter-spacing: .05em; padding: 1rem; border-right: 1px solid rgba(72, 59, 36, .14); border-bottom: 1px solid rgba(72, 59, 36, .12); }
-.tsiino-onecard-table td { min-width: 220px; max-width: 220px; height: 70px; vertical-align: top; padding: .85rem; border-bottom: 1px solid rgba(72, 59, 36, .11); border-right: 1px solid rgba(72, 59, 36, .09); color: #143024; overflow-wrap: anywhere; }
-.tsiino-standard-row td { background: #fff8ef; }
-.tsiino-source-row td { background: #fffaf4; }
-.tsiino-data-row td { background: rgba(255,255,255,.5); font-weight: 500; font-size: .9rem; white-space: pre-wrap; }
-.tsiino-field-name { display: flex; align-items: center; gap: .45rem; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #b11414; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
-.tsiino-help { width: 1.6rem; height: 1.6rem; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; border: 1px solid rgba(30, 45, 35, .20); background: white; color: #123326; font-weight: 900; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,.06); }
-.tsiino-help-wide { width: 1.8rem; height: 1.8rem; }
-.tsiino-help-required { display: inline-block; margin: .15rem 0; padding: .15rem .5rem; border-radius: 999px; background: #f1d3c7; color: #7a310f; font-weight: 800; }
-.tsiino-popover { position: absolute; z-index: 50; width: min(320px, calc(100vw - 3rem)); background: #173427; color: white; border-radius: 14px; padding: .85rem 1rem; box-shadow: 0 20px 42px rgba(0,0,0,.22); font-size: .92rem; line-height: 1.35; }
-.tsiino-source-chip { display: inline-flex; align-items: center; gap: .55rem; max-width: 100%; border: 1px solid rgba(60, 46, 29, .14); border-radius: 14px; background: white; padding: .55rem .7rem; color: #0d2c20; font-weight: 900; cursor: grab; box-shadow: 0 3px 10px rgba(0,0,0,.05); }
-.tsiino-source-chip span:nth-child(2) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.tsiino-source-letter { flex: 0 0 auto; min-width: 1.8rem; height: 1.8rem; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: #f0ddc8; color: #8a4d22; font-weight: 900; }
-.tsiino-chip-remove { color: #a42824; font-size: 1.25rem; line-height: 1; margin-left: .25rem; }
-.tsiino-dropzone { outline: 1px dashed rgba(72, 59, 36, .16); outline-offset: -8px; }
-.tsiino-dropzone.is-over { background: #f5eadb; outline: 3px solid rgba(124, 73, 37, .45); }
-.tsiino-drop-empty { display: flex; align-items: center; justify-content: center; min-height: 50px; border: 1px dashed rgba(72, 59, 36, .2); border-radius: 14px; color: #8a7a68; font-weight: 800; text-align: center; }
-.tsiino-unmapped-row td { background: #fbf1e5; }
-.tsiino-unmapped-drop { min-height: 64px; display: flex; align-items: center; gap: .55rem; flex-wrap: wrap; }
-.tsiino-muted { color: #817466; }
-.tsiino-mapper-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1rem; }
-.hv-source-preview, .tsiino-preview-card, .tsiino-preview-panel, [data-tsiino-preview-card="1"] { display: none !important; }
-/* END TSIINO MAPPER UX FIX V3 */
+.drylandfloras-mapper-card { margin: 1.25rem auto 2rem; max-width: min(1720px, calc(100vw - 3rem)); border: 1px solid rgba(72, 59, 36, .18); border-radius: 24px; background: rgba(255, 251, 244, .96); box-shadow: 0 22px 50px rgba(47, 38, 24, .12); padding: 1.25rem; position: relative; }
+.drylandfloras-mapper-head { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; margin-bottom: .75rem; }
+.drylandfloras-mapper-head h3 { margin: 0 0 .25rem; font-size: clamp(1.35rem, 2vw, 2.2rem); color: #163326; }
+.drylandfloras-mapper-head p { margin: 0; max-width: 900px; color: #4f5c4b; }
+.drylandfloras-mapper-close, .drylandfloras-mini { border: 1px solid rgba(72, 59, 36, .18); background: rgba(255,255,255,.7); border-radius: 999px; padding: .62rem 1rem; font-weight: 800; color: #183224; cursor: pointer; }
+.drylandfloras-mini:disabled { opacity: .45; cursor: default; }
+.drylandfloras-mapper-toolbar { display: flex; align-items: center; gap: .5rem; margin: .65rem 0 .85rem; }
+.drylandfloras-mapper-scroll { overflow: auto; max-height: min(72vh, 820px); border: 1px solid rgba(72, 59, 36, .16); border-radius: 18px; background: #fffaf2; scroll-behavior: auto; }
+.drylandfloras-onecard-table { border-collapse: separate; border-spacing: 0; min-width: 1200px; width: max-content; font-size: .98rem; }
+.drylandfloras-onecard-table th { position: sticky; left: 0; z-index: 3; min-width: 142px; max-width: 142px; background: #f0e4d4; color: #593417; text-align: left; vertical-align: top; font-size: 1rem; letter-spacing: .05em; padding: 1rem; border-right: 1px solid rgba(72, 59, 36, .14); border-bottom: 1px solid rgba(72, 59, 36, .12); }
+.drylandfloras-onecard-table td { min-width: 220px; max-width: 220px; height: 70px; vertical-align: top; padding: .85rem; border-bottom: 1px solid rgba(72, 59, 36, .11); border-right: 1px solid rgba(72, 59, 36, .09); color: #143024; overflow-wrap: anywhere; }
+.drylandfloras-standard-row td { background: #fff8ef; }
+.drylandfloras-source-row td { background: #fffaf4; }
+.drylandfloras-data-row td { background: rgba(255,255,255,.5); font-weight: 500; font-size: .9rem; white-space: pre-wrap; }
+.drylandfloras-field-name { display: flex; align-items: center; gap: .45rem; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #b11414; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+.drylandfloras-help { width: 1.6rem; height: 1.6rem; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; border: 1px solid rgba(30, 45, 35, .20); background: white; color: #123326; font-weight: 900; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,.06); }
+.drylandfloras-help-wide { width: 1.8rem; height: 1.8rem; }
+.drylandfloras-help-required { display: inline-block; margin: .15rem 0; padding: .15rem .5rem; border-radius: 999px; background: #f1d3c7; color: #7a310f; font-weight: 800; }
+.drylandfloras-popover { position: absolute; z-index: 50; width: min(320px, calc(100vw - 3rem)); background: #173427; color: white; border-radius: 14px; padding: .85rem 1rem; box-shadow: 0 20px 42px rgba(0,0,0,.22); font-size: .92rem; line-height: 1.35; }
+.drylandfloras-source-chip { display: inline-flex; align-items: center; gap: .55rem; max-width: 100%; border: 1px solid rgba(60, 46, 29, .14); border-radius: 14px; background: white; padding: .55rem .7rem; color: #0d2c20; font-weight: 900; cursor: grab; box-shadow: 0 3px 10px rgba(0,0,0,.05); }
+.drylandfloras-source-chip span:nth-child(2) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.drylandfloras-source-letter { flex: 0 0 auto; min-width: 1.8rem; height: 1.8rem; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: #f0ddc8; color: #8a4d22; font-weight: 900; }
+.drylandfloras-chip-remove { color: #a42824; font-size: 1.25rem; line-height: 1; margin-left: .25rem; }
+.drylandfloras-dropzone { outline: 1px dashed rgba(72, 59, 36, .16); outline-offset: -8px; }
+.drylandfloras-dropzone.is-over { background: #f5eadb; outline: 3px solid rgba(124, 73, 37, .45); }
+.drylandfloras-drop-empty { display: flex; align-items: center; justify-content: center; min-height: 50px; border: 1px dashed rgba(72, 59, 36, .2); border-radius: 14px; color: #8a7a68; font-weight: 800; text-align: center; }
+.drylandfloras-unmapped-row td { background: #fbf1e5; }
+.drylandfloras-unmapped-drop { min-height: 64px; display: flex; align-items: center; gap: .55rem; flex-wrap: wrap; }
+.drylandfloras-muted { color: #817466; }
+.drylandfloras-mapper-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1rem; }
+.hv-source-preview, .drylandfloras-preview-card, .drylandfloras-preview-panel, [data-drylandfloras-preview-card="1"] { display: none !important; }
+/* END DRYLANDFLORAS MAPPER UX FIX V3 */
 
-/* TSIINO_RESULTS_FORCE_V1 */
-.tsiino-results-force {
+/* DRYLANDFLORAS_RESULTS_FORCE_V1 */
+.drylandfloras-results-force {
   margin: 1.5rem auto 2rem;
   padding: clamp(1rem, 2.5vw, 1.6rem);
   max-width: min(1180px, calc(100vw - 2rem));
@@ -2122,14 +2122,14 @@ body .hv-clean-overview {
   border-radius: 24px;
   box-shadow: 0 18px 45px rgba(38, 33, 20, 0.08);
 }
-.tsiino-result-head {
+.drylandfloras-result-head {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 1rem;
 }
-.tsiino-result-kicker {
+.drylandfloras-result-kicker {
   margin: 0 0 .25rem;
   font-size: .78rem;
   letter-spacing: .12em;
@@ -2137,81 +2137,81 @@ body .hv-clean-overview {
   color: #a43a2e;
   font-weight: 800;
 }
-.tsiino-result-head h3 {
+.drylandfloras-result-head h3 {
   margin: 0;
   font-size: clamp(1.4rem, 2.5vw, 2rem);
   color: #102c23;
 }
-.tsiino-result-head p {
+.drylandfloras-result-head p {
   margin: .35rem 0 0;
   color: #5b604e;
 }
-.tsiino-result-metrics {
+.drylandfloras-result-metrics {
   display: grid;
   grid-template-columns: repeat(4, minmax(120px, 1fr));
   gap: .75rem;
   margin: 1rem 0;
 }
-.tsiino-result-metrics div {
+.drylandfloras-result-metrics div {
   padding: .9rem 1rem;
   border: 1px solid rgba(90, 79, 48, 0.18);
   border-radius: 16px;
   background: rgba(246, 238, 224, .65);
 }
-.tsiino-result-metrics strong {
+.drylandfloras-result-metrics strong {
   display: block;
   font-size: 1.55rem;
   color: #7a3d20;
 }
-.tsiino-result-metrics span {
+.drylandfloras-result-metrics span {
   display: block;
   color: #4d5544;
   font-weight: 700;
 }
-.tsiino-result-section {
+.drylandfloras-result-section {
   margin-top: .9rem;
   border: 1px solid rgba(90, 79, 48, 0.16);
   border-radius: 18px;
   overflow: hidden;
   background: #fffdf8;
 }
-.tsiino-result-section summary {
+.drylandfloras-result-section summary {
   cursor: pointer;
   padding: .9rem 1rem;
   font-weight: 800;
   color: #102c23;
   background: rgba(246, 238, 224, .75);
 }
-.tsiino-result-issues {
+.drylandfloras-result-issues {
   margin: 0;
   padding: 1rem 1rem 1rem 2.2rem;
 }
-.tsiino-result-issues li {
+.drylandfloras-result-issues li {
   margin: 0 0 .75rem;
 }
-.tsiino-result-issues span,
-.tsiino-result-note,
-.tsiino-result-empty {
+.drylandfloras-result-issues span,
+.drylandfloras-result-note,
+.drylandfloras-result-empty {
   color: #656b58;
 }
-.tsiino-result-table-wrap {
+.drylandfloras-result-table-wrap {
   overflow: auto;
   max-height: 520px;
 }
-.tsiino-result-table-wrap table {
+.drylandfloras-result-table-wrap table {
   border-collapse: collapse;
   width: max-content;
   min-width: 100%;
   font-size: .92rem;
 }
-.tsiino-result-table-wrap th,
-.tsiino-result-table-wrap td {
+.drylandfloras-result-table-wrap th,
+.drylandfloras-result-table-wrap td {
   border: 1px solid rgba(90, 79, 48, 0.14);
   padding: .55rem .7rem;
   vertical-align: top;
   max-width: 280px;
 }
-.tsiino-result-table-wrap th {
+.drylandfloras-result-table-wrap th {
   position: sticky;
   top: 0;
   background: #f6eee0;
@@ -2219,29 +2219,29 @@ body .hv-clean-overview {
   text-transform: uppercase;
   letter-spacing: .04em;
 }
-.tsiino-result-error {
+.drylandfloras-result-error {
   padding: 1rem;
   border-radius: 16px;
   background: #fdebed;
   color: #7b1018;
 }
 @media (max-width: 760px) {
-  .tsiino-result-head { flex-direction: column; }
-  .tsiino-result-metrics { grid-template-columns: repeat(2, 1fr); }
+  .drylandfloras-result-head { flex-direction: column; }
+  .drylandfloras-result-metrics { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* == TSIINO SCROLL + NATIVE RESULTS CLEANUP == */
+/* == DRYLANDFLORAS SCROLL + NATIVE RESULTS CLEANUP == */
 html,
 body{
   height:auto !important;
   min-height:100% !important;
   overflow-y:auto !important;
 }
-body.tsiino-modal-open,
-body.tsiino-results-locked,
+body.drylandfloras-modal-open,
+body.drylandfloras-results-locked,
 body.hv-results-locked,
-html.tsiino-modal-open,
-html.tsiino-results-locked,
+html.drylandfloras-modal-open,
+html.drylandfloras-results-locked,
 html.hv-results-locked{
   overflow-y:auto !important;
   position:static !important;
@@ -2253,10 +2253,10 @@ html.hv-results-locked{
 .hv-results{
   overflow:visible !important;
 }
-#tsiino-results-force,
-.tsiino-results-force,
+#drylandfloras-results-force,
+.drylandfloras-results-force,
 .hv-results-force,
-[data-tsiino-force-results],
+[data-drylandfloras-force-results],
 [data-results-force]{
   display:none !important;
   visibility:hidden !important;
@@ -2292,7 +2292,7 @@ html.hv-results-locked{
   max-height:52vh !important;
 }
 
-/* == TSIINO STOP LOOP AND SCROLL RESTORE == */
+/* == DRYLANDFLORAS STOP LOOP AND SCROLL RESTORE == */
 html, body {
   overflow-y: auto !important;
   overflow-x: hidden !important;
@@ -2302,7 +2302,7 @@ html, body {
 }
 body .hv-results-force,
 body #hv-results-force,
-body [data-tsiino-results-force] {
+body [data-drylandfloras-results-force] {
   display: none !important;
 }
 body .hv-modern-page,
@@ -2318,30 +2318,30 @@ body .hv-mapper-grid-wrap {
   overflow: auto !important;
 }
 
-/* == TSIINO MAPPER APPLY POPUP V4 == */
+/* == DRYLANDFLORAS MAPPER APPLY POPUP V4 == */
 html, body {
   overflow-y: auto !important;
   height: auto !important;
   min-height: 100% !important;
   position: static !important;
 }
-#tsiino-column-mapper .tsiino-field-code {
+#drylandfloras-column-mapper .drylandfloras-field-code {
   font-size: .78rem;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: #B11B18;
   font-weight: 900;
 }
-#tsiino-column-mapper .tsiino-standard-row td {
+#drylandfloras-column-mapper .drylandfloras-standard-row td {
   vertical-align: top;
   min-width: 210px;
   height: auto !important;
 }
-#tsiino-column-mapper .tsiino-source-row td {
+#drylandfloras-column-mapper .drylandfloras-source-row td {
   vertical-align: middle;
   min-height: 80px;
 }
-#tsiino-column-mapper .tsiino-data-row td {
+#drylandfloras-column-mapper .drylandfloras-data-row td {
   font-size: .88rem;
   line-height: 1.28;
   color: rgba(20, 39, 34, .92);
@@ -2350,7 +2350,7 @@ html, body {
   white-space: normal;
   vertical-align: top;
 }
-#tsiino-column-mapper .tsiino-help {
+#drylandfloras-column-mapper .drylandfloras-help {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2364,8 +2364,8 @@ html, body {
   font-weight: 900;
   cursor: pointer;
 }
-#tsiino-column-mapper .tsiino-help-wide { width: 28px; }
-#tsiino-column-mapper .tsiino-popover {
+#drylandfloras-column-mapper .drylandfloras-help-wide { width: 28px; }
+#drylandfloras-column-mapper .drylandfloras-popover {
   position: absolute;
   z-index: 50;
   width: min(340px, calc(100vw - 44px));
@@ -2378,8 +2378,8 @@ html, body {
   font-size: .92rem;
   line-height: 1.45;
 }
-#tsiino-column-mapper .tsiino-help-required,
-#tsiino-column-mapper .tsiino-help-optional {
+#drylandfloras-column-mapper .drylandfloras-help-required,
+#drylandfloras-column-mapper .drylandfloras-help-optional {
   display: inline-flex;
   margin: .35rem 0;
   padding: .2rem .52rem;
@@ -2388,15 +2388,15 @@ html, body {
   color: #74351F;
   font-weight: 900;
 }
-#tsiino-column-mapper .tsiino-help-optional { background: #F2E8D7; }
-#tsiino-column-mapper .tsiino-mapper-toolbar {
+#drylandfloras-column-mapper .drylandfloras-help-optional { background: #F2E8D7; }
+#drylandfloras-column-mapper .drylandfloras-mapper-toolbar {
   display: flex;
   align-items: center;
   gap: .55rem;
   flex-wrap: wrap;
   margin: .85rem 0 1rem;
 }
-#tsiino-column-mapper .tsiino-mini {
+#drylandfloras-column-mapper .drylandfloras-mini {
   border-radius: 999px;
   border: 1px solid rgba(46,59,36,.22);
   background: rgba(255,253,247,.96);
@@ -2404,20 +2404,20 @@ html, body {
   font-weight: 900;
   padding: .55rem .82rem;
 }
-#tsiino-column-mapper .tsiino-mini:disabled,
-#tsiino-column-mapper button:disabled {
+#drylandfloras-column-mapper .drylandfloras-mini:disabled,
+#drylandfloras-column-mapper button:disabled {
   opacity: .45;
   cursor: not-allowed;
 }
-#tsiino-column-mapper .tsiino-source-chip {
+#drylandfloras-column-mapper .drylandfloras-source-chip {
   max-width: 100%;
 }
-#tsiino-column-mapper .tsiino-source-name {
+#drylandfloras-column-mapper .drylandfloras-source-name {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#tsiino-column-mapper .tsiino-mapper-scroll {
+#drylandfloras-column-mapper .drylandfloras-mapper-scroll {
   overflow: auto !important;
   max-height: min(72vh, 760px);
   border-radius: 22px;
@@ -2425,7 +2425,7 @@ html, body {
 
 
 
-/* TSIINO_SCROLL_UNLOCK_V5 */
+/* DRYLANDFLORAS_SCROLL_UNLOCK_V5 */
 html, body {
   overflow-y: auto !important;
   height: auto !important;
@@ -2435,7 +2435,7 @@ html, body {
   max-height: none;
 }
 
-/* == TSIINO CLEAN FRONTEND LOOP FIX == */
+/* == DRYLANDFLORAS CLEAN FRONTEND LOOP FIX == */
 html, body{
   overflow-y:auto !important;
   overflow-x:hidden;
@@ -2463,7 +2463,7 @@ html, body{
 }
 .hv-force-summary strong{
   display:block;
-  color:var(--tsiino-brown, #704023);
+  color:var(--drylandfloras-brown, #704023);
   font-size:clamp(1.6rem, 3vw, 2.4rem);
   line-height:1;
 }
@@ -2471,70 +2471,70 @@ html, body{
   display:block;
   margin-top:.4rem;
   font-weight:900;
-  color:var(--tsiino-ink, #2E3B24);
+  color:var(--drylandfloras-ink, #2E3B24);
 }
 
-/* == TSIINO STABLE CONVERTER RESULTS PATCH == */
+/* == DRYLANDFLORAS STABLE CONVERTER RESULTS PATCH == */
 html, body{ overflow-y:auto !important; height:auto !important; }
 body{ position:static !important; }
 #validator-results{ max-height:none !important; overflow:visible !important; }
 .hv-sheet-wrap{ max-height:70vh !important; overflow:auto !important; }
 .hv-sheet th, .hv-sheet td{ vertical-align:top !important; }
-.tsiino-column-mapper{ overflow:visible !important; }
-.tsiino-mapper-head{ display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; }
-.tsiino-mapper-head h3{ margin:.1rem 0 .3rem; font-size:clamp(1.45rem,2.5vw,2.2rem); color:#22331e; }
-.tsiino-mapper-toolbar, .tsiino-mapper-actions{ display:flex; flex-wrap:wrap; gap:.7rem; align-items:center; margin:1rem 0; position:relative; }
-.tsiino-map-wrap{ width:100%; max-height:68vh; overflow:auto; border:1px solid rgba(46,59,36,.18); border-radius:22px; background:#fffaf2; }
-.tsiino-map-table{ border-collapse:separate; border-spacing:0; min-width:max-content; width:max-content; font-size:.96rem; }
-.tsiino-map-table th, .tsiino-map-table td{ border-right:1px solid rgba(46,59,36,.12); border-bottom:1px solid rgba(46,59,36,.12); padding:.75rem; min-width:230px; max-width:330px; vertical-align:top; background:rgba(255,253,247,.96); }
-.tsiino-map-table .tsiino-rowhead{ position:sticky; left:0; z-index:3; min-width:130px; max-width:130px; background:#f0e4d3; color:#704023; text-align:left; font-weight:900; }
-.tsiino-field-head code{ color:#b12622; font-weight:900; letter-spacing:.09em; text-transform:uppercase; background:transparent; padding:0; }
-.tsiino-help{ width:26px; height:26px; display:inline-flex; align-items:center; justify-content:center; margin-left:.35rem; border:1px solid rgba(46,59,36,.2); border-radius:999px; background:white; color:#123027; font-weight:900; cursor:pointer; }
-.tsiino-help-popover{ display:none; position:absolute; z-index:50; width:min(320px,80vw); padding:.85rem; border:1px solid rgba(46,59,36,.18); border-radius:16px; background:#fffdf7; box-shadow:0 18px 48px rgba(24,29,18,.18); color:#22331e; line-height:1.45; }
-.tsiino-field-head .tsiino-help-popover{ top:2rem; left:.2rem; }
-.tsiino-global-popover{ top:2.3rem; left:0; }
-.tsiino-help-popover.is-open{ display:block; }
-.tsiino-dropzone.is-over{ outline:3px solid rgba(112,64,35,.35); outline-offset:-6px; }
-.tsiino-source-chip{ display:inline-flex; align-items:center; gap:.5rem; max-width:100%; padding:.55rem .75rem; border:1px solid rgba(46,59,36,.15); border-radius:14px; background:#fff; color:#0e2c21; font-weight:900; cursor:grab; }
-.tsiino-source-chip span{ display:inline-flex; align-items:center; justify-content:center; min-width:28px; height:28px; border-radius:999px; background:#f0ddc8; color:#88461d; }
-.tsiino-source-chip b{ color:#a12624; font-size:1.05rem; margin-left:.25rem; }
-.tsiino-empty-drop{ display:block; color:rgba(46,59,36,.55); font-weight:800; border:1px dashed rgba(46,59,36,.25); border-radius:14px; padding:.65rem; text-align:center; }
-.tsiino-sample-cell{ white-space:pre-wrap; word-break:break-word; color:#173029; background:#fffdf9 !important; }
-.tsiino-unassigned-cell{ max-width:none !important; background:#f8efe2 !important; }
-.tsiino-unassigned-cell .tsiino-source-chip{ margin:.25rem; }
+.drylandfloras-column-mapper{ overflow:visible !important; }
+.drylandfloras-mapper-head{ display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; }
+.drylandfloras-mapper-head h3{ margin:.1rem 0 .3rem; font-size:clamp(1.45rem,2.5vw,2.2rem); color:#22331e; }
+.drylandfloras-mapper-toolbar, .drylandfloras-mapper-actions{ display:flex; flex-wrap:wrap; gap:.7rem; align-items:center; margin:1rem 0; position:relative; }
+.drylandfloras-map-wrap{ width:100%; max-height:68vh; overflow:auto; border:1px solid rgba(46,59,36,.18); border-radius:22px; background:#fffaf2; }
+.drylandfloras-map-table{ border-collapse:separate; border-spacing:0; min-width:max-content; width:max-content; font-size:.96rem; }
+.drylandfloras-map-table th, .drylandfloras-map-table td{ border-right:1px solid rgba(46,59,36,.12); border-bottom:1px solid rgba(46,59,36,.12); padding:.75rem; min-width:230px; max-width:330px; vertical-align:top; background:rgba(255,253,247,.96); }
+.drylandfloras-map-table .drylandfloras-rowhead{ position:sticky; left:0; z-index:3; min-width:130px; max-width:130px; background:#f0e4d3; color:#704023; text-align:left; font-weight:900; }
+.drylandfloras-field-head code{ color:#b12622; font-weight:900; letter-spacing:.09em; text-transform:uppercase; background:transparent; padding:0; }
+.drylandfloras-help{ width:26px; height:26px; display:inline-flex; align-items:center; justify-content:center; margin-left:.35rem; border:1px solid rgba(46,59,36,.2); border-radius:999px; background:white; color:#123027; font-weight:900; cursor:pointer; }
+.drylandfloras-help-popover{ display:none; position:absolute; z-index:50; width:min(320px,80vw); padding:.85rem; border:1px solid rgba(46,59,36,.18); border-radius:16px; background:#fffdf7; box-shadow:0 18px 48px rgba(24,29,18,.18); color:#22331e; line-height:1.45; }
+.drylandfloras-field-head .drylandfloras-help-popover{ top:2rem; left:.2rem; }
+.drylandfloras-global-popover{ top:2.3rem; left:0; }
+.drylandfloras-help-popover.is-open{ display:block; }
+.drylandfloras-dropzone.is-over{ outline:3px solid rgba(112,64,35,.35); outline-offset:-6px; }
+.drylandfloras-source-chip{ display:inline-flex; align-items:center; gap:.5rem; max-width:100%; padding:.55rem .75rem; border:1px solid rgba(46,59,36,.15); border-radius:14px; background:#fff; color:#0e2c21; font-weight:900; cursor:grab; }
+.drylandfloras-source-chip span{ display:inline-flex; align-items:center; justify-content:center; min-width:28px; height:28px; border-radius:999px; background:#f0ddc8; color:#88461d; }
+.drylandfloras-source-chip b{ color:#a12624; font-size:1.05rem; margin-left:.25rem; }
+.drylandfloras-empty-drop{ display:block; color:rgba(46,59,36,.55); font-weight:800; border:1px dashed rgba(46,59,36,.25); border-radius:14px; padding:.65rem; text-align:center; }
+.drylandfloras-sample-cell{ white-space:pre-wrap; word-break:break-word; color:#173029; background:#fffdf9 !important; }
+.drylandfloras-unassigned-cell{ max-width:none !important; background:#f8efe2 !important; }
+.drylandfloras-unassigned-cell .drylandfloras-source-chip{ margin:.25rem; }
 
-/* TSIINO MAPPER STABLE V7 */
-html,body{overflow-y:auto!important}.hv-mapper-panel{overflow:visible!important}.hv-mapper-header{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;margin-bottom:1rem}.hv-mapper-header h2{margin:0 0 .35rem;color:var(--tsiino-ink,#2E3B24);font-size:clamp(2rem,3.2vw,3.8rem);line-height:1}.hv-mapper-header p{margin:0;max-width:920px;line-height:1.45}.hv-mapper-toolbar{display:flex;align-items:center;gap:.65rem;margin:1rem 0 1.2rem}.hv-onecard-scroller{max-height:70vh;overflow:auto;border:1px solid rgba(46,59,36,.18);border-radius:22px;background:#fffdf7;box-shadow:0 16px 45px rgba(24,29,18,.08)}.hv-onecard-map{border-collapse:separate;border-spacing:0;min-width:max-content;width:100%}.hv-onecard-map th{position:sticky;left:0;z-index:3;background:#efe4d3;color:#704023;text-align:left;vertical-align:top;min-width:150px;padding:1rem;font-weight:900;border-right:1px solid rgba(46,59,36,.14);border-bottom:1px solid rgba(46,59,36,.12)}.hv-onecard-map td{min-width:230px;max-width:310px;vertical-align:top;padding:1rem;border-right:1px solid rgba(46,59,36,.10);border-bottom:1px solid rgba(46,59,36,.10);background:#fffdf7;color:#0d2a20}.hv-map-field-name{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;text-transform:uppercase;letter-spacing:.08em;color:#a72018;font-weight:900;font-size:.92rem;display:flex;align-items:center;gap:.35rem}.hv-help-button{width:28px;height:28px;border-radius:999px;border:1px solid rgba(46,59,36,.22);background:#fff;color:#0d2a20;font-weight:900;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.hv-help-button.is-active{background:#24381f;color:#fff}.hv-help-popover{position:fixed;z-index:99999;width:min(320px,calc(100vw - 24px));padding:1rem;border-radius:18px;background:#fffdf7;border:1px solid rgba(46,59,36,.18);box-shadow:0 18px 50px rgba(24,29,18,.22);color:#24381f}.hv-help-popover strong{display:block;color:#a72018;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem}.hv-help-popover span{display:block;font-weight:900;margin-bottom:.5rem}.hv-help-popover p{margin:.45rem 0;line-height:1.45}.hv-help-popover em{display:inline-block;margin-top:.4rem;padding:.25rem .55rem;border-radius:999px;background:#f3d4c7;color:#704023;font-style:normal;font-weight:900}.hv-map-dropzone{outline:2px dashed rgba(112,64,35,.18);outline-offset:-10px}.hv-map-dropzone.is-over{background:#f7dfce!important;outline-color:#704023}.hv-map-empty{min-height:54px;display:flex;align-items:center;justify-content:center;color:rgba(46,59,36,.58);font-weight:900;text-align:center}.hv-map-chip{width:100%;display:flex;align-items:center;gap:.55rem;border:1px solid rgba(46,59,36,.14);background:#fff;border-radius:14px;padding:.55rem .65rem;box-shadow:0 6px 16px rgba(24,29,18,.08);cursor:grab;color:#0d2a20;font-weight:900;text-align:left}.hv-map-letter{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:999px;background:#f1dfcc;color:#704023;font-weight:900;flex:0 0 auto}.hv-map-chip-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}.hv-map-remove{margin-left:auto;color:#a72018;font-size:1.2rem;line-height:1}.hv-unmapped-list{display:flex;flex-wrap:wrap;gap:.65rem;align-items:flex-start}.hv-unmapped-list .hv-map-chip{width:auto;max-width:280px}.hv-map-data-row td{min-height:70px;white-space:pre-wrap;line-height:1.35}.hv-map-data-row:nth-child(even) td{background:#fffaf2}.hv-mapper-actions{margin-top:1rem}
+/* DRYLANDFLORAS MAPPER STABLE V7 */
+html,body{overflow-y:auto!important}.hv-mapper-panel{overflow:visible!important}.hv-mapper-header{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;margin-bottom:1rem}.hv-mapper-header h2{margin:0 0 .35rem;color:var(--drylandfloras-ink,#2E3B24);font-size:clamp(2rem,3.2vw,3.8rem);line-height:1}.hv-mapper-header p{margin:0;max-width:920px;line-height:1.45}.hv-mapper-toolbar{display:flex;align-items:center;gap:.65rem;margin:1rem 0 1.2rem}.hv-onecard-scroller{max-height:70vh;overflow:auto;border:1px solid rgba(46,59,36,.18);border-radius:22px;background:#fffdf7;box-shadow:0 16px 45px rgba(24,29,18,.08)}.hv-onecard-map{border-collapse:separate;border-spacing:0;min-width:max-content;width:100%}.hv-onecard-map th{position:sticky;left:0;z-index:3;background:#efe4d3;color:#704023;text-align:left;vertical-align:top;min-width:150px;padding:1rem;font-weight:900;border-right:1px solid rgba(46,59,36,.14);border-bottom:1px solid rgba(46,59,36,.12)}.hv-onecard-map td{min-width:230px;max-width:310px;vertical-align:top;padding:1rem;border-right:1px solid rgba(46,59,36,.10);border-bottom:1px solid rgba(46,59,36,.10);background:#fffdf7;color:#0d2a20}.hv-map-field-name{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;text-transform:uppercase;letter-spacing:.08em;color:#a72018;font-weight:900;font-size:.92rem;display:flex;align-items:center;gap:.35rem}.hv-help-button{width:28px;height:28px;border-radius:999px;border:1px solid rgba(46,59,36,.22);background:#fff;color:#0d2a20;font-weight:900;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.hv-help-button.is-active{background:#24381f;color:#fff}.hv-help-popover{position:fixed;z-index:99999;width:min(320px,calc(100vw - 24px));padding:1rem;border-radius:18px;background:#fffdf7;border:1px solid rgba(46,59,36,.18);box-shadow:0 18px 50px rgba(24,29,18,.22);color:#24381f}.hv-help-popover strong{display:block;color:#a72018;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem}.hv-help-popover span{display:block;font-weight:900;margin-bottom:.5rem}.hv-help-popover p{margin:.45rem 0;line-height:1.45}.hv-help-popover em{display:inline-block;margin-top:.4rem;padding:.25rem .55rem;border-radius:999px;background:#f3d4c7;color:#704023;font-style:normal;font-weight:900}.hv-map-dropzone{outline:2px dashed rgba(112,64,35,.18);outline-offset:-10px}.hv-map-dropzone.is-over{background:#f7dfce!important;outline-color:#704023}.hv-map-empty{min-height:54px;display:flex;align-items:center;justify-content:center;color:rgba(46,59,36,.58);font-weight:900;text-align:center}.hv-map-chip{width:100%;display:flex;align-items:center;gap:.55rem;border:1px solid rgba(46,59,36,.14);background:#fff;border-radius:14px;padding:.55rem .65rem;box-shadow:0 6px 16px rgba(24,29,18,.08);cursor:grab;color:#0d2a20;font-weight:900;text-align:left}.hv-map-letter{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:999px;background:#f1dfcc;color:#704023;font-weight:900;flex:0 0 auto}.hv-map-chip-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}.hv-map-remove{margin-left:auto;color:#a72018;font-size:1.2rem;line-height:1}.hv-unmapped-list{display:flex;flex-wrap:wrap;gap:.65rem;align-items:flex-start}.hv-unmapped-list .hv-map-chip{width:auto;max-width:280px}.hv-map-data-row td{min-height:70px;white-space:pre-wrap;line-height:1.35}.hv-map-data-row:nth-child(even) td{background:#fffaf2}.hv-mapper-actions{margin-top:1rem}
 
-/* TSIINO_MAPPER_SELFCONTAINED_V8 */
-.tsiino-mapper-panel{overflow:visible!important;}
-.tsiino-mapper-head{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;margin-bottom:1rem;}
-.tsiino-mapper-head h3{margin:0 0 .35rem;font-size:clamp(1.8rem,3vw,3rem);color:#26361f;letter-spacing:-.035em;}
-.tsiino-mapper-head p{margin:0;max-width:980px;line-height:1.55;color:rgba(38,54,31,.86);}
-.tsiino-mapper-tools,.tsiino-mapper-actions{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;margin:1rem 0;}
-.tsiino-mapper-scroll{max-width:100%;max-height:70vh;overflow:auto;border:1px solid rgba(46,59,36,.18);border-radius:24px;background:#fffdf7;box-shadow:0 18px 48px rgba(24,29,18,.09);}
-.tsiino-mapper-table{border-collapse:separate;border-spacing:0;min-width:max-content;width:max-content;table-layout:fixed;}
-.tsiino-mapper-table th,.tsiino-mapper-table td{border-right:1px solid rgba(46,59,36,.12);border-bottom:1px solid rgba(46,59,36,.12);vertical-align:top;min-width:230px;max-width:260px;padding:1rem;background:rgba(255,253,247,.96);}
-.tsiino-mapper-table th:first-child{position:sticky;left:0;z-index:3;min-width:145px;max-width:145px;background:#f1e4d3;color:#704023;text-align:left;font-weight:900;letter-spacing:.03em;}
-.tsiino-standard-cell{height:86px;}
-.tsiino-field-code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;color:#b3211f;font-weight:900;letter-spacing:.08em;font-size:.9rem;white-space:nowrap;}
-.tsiino-help{width:28px;height:28px;border-radius:50%;border:1px solid rgba(46,59,36,.25);background:#fff;color:#0c2c25;font-weight:900;line-height:1;cursor:pointer;margin-left:.3rem;box-shadow:0 4px 10px rgba(24,29,18,.08);}
-.tsiino-dropzone{height:74px;background:#fffaf2!important;}
-.tsiino-dropzone.is-over{outline:3px solid rgba(112,64,35,.45);outline-offset:-5px;background:#f7eadb!important;}
-.tsiino-source-chip{display:inline-flex;align-items:center;gap:.55rem;max-width:100%;padding:.65rem .8rem;border-radius:16px;background:#fff;border:1px solid rgba(46,59,36,.16);box-shadow:0 8px 20px rgba(24,29,18,.08);font-weight:900;color:#092c26;cursor:grab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.tsiino-source-chip b{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;background:#f3dfc7;color:#704023;}
-.tsiino-chip-remove{border:0;background:transparent;color:#a1122b;font-weight:900;font-size:1.15rem;cursor:pointer;margin-left:.2rem;}
-.tsiino-drop-empty{display:inline-flex;align-items:center;justify-content:center;min-height:50px;width:100%;border:1px dashed rgba(112,64,35,.3);border-radius:16px;color:rgba(46,59,36,.55);font-weight:800;text-align:center;}
-.tsiino-data-cell{font-size:.92rem;line-height:1.35;color:#183027;white-space:normal;word-break:break-word;background:#fff!important;}
-.tsiino-unassigned-row td{background:#fcf6ed!important;}
-.tsiino-unassigned-bin{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center;min-height:58px;}
-.tsiino-muted{color:rgba(46,59,36,.55);font-weight:800;}
-.tsiino-help-popover{position:fixed;z-index:99999;width:min(320px,calc(100vw - 32px));padding:1rem;border-radius:18px;background:#fffdf7;border:1px solid rgba(46,59,36,.2);box-shadow:0 22px 60px rgba(24,29,18,.22);color:#20331f;}
-.tsiino-help-popover strong{display:block;color:#b3211f;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;}
-.tsiino-help-popover p{margin:.35rem 0;line-height:1.45;}
-@media(max-width:760px){.tsiino-mapper-table th,.tsiino-mapper-table td{min-width:190px;max-width:210px}.tsiino-mapper-table th:first-child{min-width:120px;max-width:120px}.tsiino-mapper-head{display:block}}
+/* DRYLANDFLORAS_MAPPER_SELFCONTAINED_V8 */
+.drylandfloras-mapper-panel{overflow:visible!important;}
+.drylandfloras-mapper-head{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;margin-bottom:1rem;}
+.drylandfloras-mapper-head h3{margin:0 0 .35rem;font-size:clamp(1.8rem,3vw,3rem);color:#26361f;letter-spacing:-.035em;}
+.drylandfloras-mapper-head p{margin:0;max-width:980px;line-height:1.55;color:rgba(38,54,31,.86);}
+.drylandfloras-mapper-tools,.drylandfloras-mapper-actions{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;margin:1rem 0;}
+.drylandfloras-mapper-scroll{max-width:100%;max-height:70vh;overflow:auto;border:1px solid rgba(46,59,36,.18);border-radius:24px;background:#fffdf7;box-shadow:0 18px 48px rgba(24,29,18,.09);}
+.drylandfloras-mapper-table{border-collapse:separate;border-spacing:0;min-width:max-content;width:max-content;table-layout:fixed;}
+.drylandfloras-mapper-table th,.drylandfloras-mapper-table td{border-right:1px solid rgba(46,59,36,.12);border-bottom:1px solid rgba(46,59,36,.12);vertical-align:top;min-width:230px;max-width:260px;padding:1rem;background:rgba(255,253,247,.96);}
+.drylandfloras-mapper-table th:first-child{position:sticky;left:0;z-index:3;min-width:145px;max-width:145px;background:#f1e4d3;color:#704023;text-align:left;font-weight:900;letter-spacing:.03em;}
+.drylandfloras-standard-cell{height:86px;}
+.drylandfloras-field-code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;color:#b3211f;font-weight:900;letter-spacing:.08em;font-size:.9rem;white-space:nowrap;}
+.drylandfloras-help{width:28px;height:28px;border-radius:50%;border:1px solid rgba(46,59,36,.25);background:#fff;color:#0c2c25;font-weight:900;line-height:1;cursor:pointer;margin-left:.3rem;box-shadow:0 4px 10px rgba(24,29,18,.08);}
+.drylandfloras-dropzone{height:74px;background:#fffaf2!important;}
+.drylandfloras-dropzone.is-over{outline:3px solid rgba(112,64,35,.45);outline-offset:-5px;background:#f7eadb!important;}
+.drylandfloras-source-chip{display:inline-flex;align-items:center;gap:.55rem;max-width:100%;padding:.65rem .8rem;border-radius:16px;background:#fff;border:1px solid rgba(46,59,36,.16);box-shadow:0 8px 20px rgba(24,29,18,.08);font-weight:900;color:#092c26;cursor:grab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.drylandfloras-source-chip b{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;background:#f3dfc7;color:#704023;}
+.drylandfloras-chip-remove{border:0;background:transparent;color:#a1122b;font-weight:900;font-size:1.15rem;cursor:pointer;margin-left:.2rem;}
+.drylandfloras-drop-empty{display:inline-flex;align-items:center;justify-content:center;min-height:50px;width:100%;border:1px dashed rgba(112,64,35,.3);border-radius:16px;color:rgba(46,59,36,.55);font-weight:800;text-align:center;}
+.drylandfloras-data-cell{font-size:.92rem;line-height:1.35;color:#183027;white-space:normal;word-break:break-word;background:#fff!important;}
+.drylandfloras-unassigned-row td{background:#fcf6ed!important;}
+.drylandfloras-unassigned-bin{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center;min-height:58px;}
+.drylandfloras-muted{color:rgba(46,59,36,.55);font-weight:800;}
+.drylandfloras-help-popover{position:fixed;z-index:99999;width:min(320px,calc(100vw - 32px));padding:1rem;border-radius:18px;background:#fffdf7;border:1px solid rgba(46,59,36,.2);box-shadow:0 22px 60px rgba(24,29,18,.22);color:#20331f;}
+.drylandfloras-help-popover strong{display:block;color:#b3211f;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;}
+.drylandfloras-help-popover p{margin:.35rem 0;line-height:1.45;}
+@media(max-width:760px){.drylandfloras-mapper-table th,.drylandfloras-mapper-table td{min-width:190px;max-width:210px}.drylandfloras-mapper-table th:first-child{min-width:120px;max-width:120px}.drylandfloras-mapper-head{display:block}}
 
-/* TSIINO_RESULTS_TABLE_DOWNLOAD_V12 */
+/* DRYLANDFLORAS_RESULTS_TABLE_DOWNLOAD_V12 */
 .hv-issues-details{display:none !important;}
 .hv-summary-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.9rem;margin:1rem 0 1.25rem;}
 .hv-summary-cards article{border:1px solid rgba(46,59,36,.16);border-radius:18px;background:rgba(247,241,232,.74);padding:1rem;}
@@ -2553,7 +2553,7 @@ html,body{overflow-y:auto!important}.hv-mapper-panel{overflow:visible!important}
 .hv-cell-has-issue.hv-warning{background:rgba(199,126,0,.08);border-left:4px solid #c77e00;}
 .hv-empty-result{padding:1rem !important;font-weight:800;color:#704023;}
 
-/* TSIINO_VALIDATOR_INDEX_REWRITE_V14 */
+/* DRYLANDFLORAS_VALIDATOR_INDEX_REWRITE_V14 */
 body .hv-site-hero,
 body .hv-hero,
 body .validator-hero {
@@ -2613,7 +2613,7 @@ body .validator-hero-lead {
 }
 
 body .hv-clean-overview,
-body .tsiino-validator-intro-card {
+body .drylandfloras-validator-intro-card {
   width: min(760px, calc(100vw - 48px)) !important;
   max-width: 760px !important;
   margin: clamp(32px, 5vw, 68px) auto clamp(40px, 6vw, 86px) clamp(28px, 6vw, 98px) !important;
@@ -2627,17 +2627,17 @@ body .tsiino-validator-intro-card {
 
 body .hv-clean-overview::before,
 body .hv-clean-overview::after,
-body .tsiino-validator-intro-card::before,
-body .tsiino-validator-intro-card::after,
+body .drylandfloras-validator-intro-card::before,
+body .drylandfloras-validator-intro-card::after,
 body .hv-site-divider,
 body .hv-clean-overview .hv-rule,
-body .tsiino-validator-intro-card .hv-rule {
+body .drylandfloras-validator-intro-card .hv-rule {
   display: none !important;
   content: none !important;
 }
 
 body .hv-clean-overview h2,
-body .tsiino-validator-intro-card h2 {
+body .drylandfloras-validator-intro-card h2 {
   margin: 0 0 0.85rem !important;
   max-width: 640px !important;
   color: #7c1d16 !important;
@@ -2649,7 +2649,7 @@ body .tsiino-validator-intro-card h2 {
 }
 
 body .hv-clean-overview p,
-body .tsiino-validator-intro-card p {
+body .drylandfloras-validator-intro-card p {
   margin: 0 0 0.82rem !important;
   max-width: 670px !important;
   color: #203021 !important;
@@ -2659,7 +2659,7 @@ body .tsiino-validator-intro-card p {
 }
 
 body .hv-clean-overview p:last-child,
-body .tsiino-validator-intro-card p:last-child {
+body .drylandfloras-validator-intro-card p:last-child {
   margin-bottom: 0 !important;
 }
 
@@ -2679,13 +2679,13 @@ body .tsiino-validator-intro-card p:last-child {
   }
 
   body .hv-clean-overview,
-  body .tsiino-validator-intro-card {
+  body .drylandfloras-validator-intro-card {
     width: calc(100vw - 32px) !important;
     margin: 24px auto 48px !important;
     border-radius: 20px !important;
   }
 }
-/* TSIINO_INDEX_LEFT_CARD_V15
+/* DRYLANDFLORAS_INDEX_LEFT_CARD_V15
    Ajusta hero e transforma a explicação do validador em card minimalista. */
 html body .hv-site-hero,
 html body .hv-hero,
@@ -2820,7 +2820,7 @@ html body .hv-minimal-explainer p:first-of-type {
   }
 }
 
-/* TSIINO_RESULTS_CONVERTER_V16 */
+/* DRYLANDFLORAS_RESULTS_CONVERTER_V16 */
 .hv-issues-details,
 .hv-issues-list,
 .hv-auxiliary-issues{display:none !important;}
@@ -2842,7 +2842,7 @@ html body .hv-minimal-explainer p:first-of-type {
 
 
 
-/* TSIINO_MAPPER_ROWS_V17 */
+/* DRYLANDFLORAS_MAPPER_ROWS_V17 */
 .hv-mapper-v17 { margin: 1.5rem 0; border: 1px solid rgba(42,52,32,.18); border-radius: 24px; background: rgba(255,252,246,.96); box-shadow: 0 18px 50px rgba(37,30,20,.10); overflow: hidden; }
 .hv-mapper-v17-head { display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; padding:1.25rem 1.4rem .7rem; }
 .hv-mapper-v17 h3 { margin:0; font-size:clamp(1.7rem,2.5vw,2.65rem); color:#213420; }
@@ -2870,7 +2870,7 @@ html body .hv-minimal-explainer p:first-of-type {
 .hv-mapper-v17 button.hv-secondary { background:#fffdf7; color:#0d2d22; border:1px solid rgba(42,52,32,.18); border-radius:999px; padding:.85rem 1.2rem; font-weight:900; }
 .hv-mapper-v17 button:disabled { opacity:.45; cursor:not-allowed; }
 
-/* TSIINO_MAPPER_ROWS_HELP_V20 */
+/* DRYLANDFLORAS_MAPPER_ROWS_HELP_V20 */
 .hv-mapper-v20 { margin: 1.6rem auto; padding: 1.35rem; border: 1px solid rgba(33,45,29,.14); border-radius: 24px; background: #fffdf7; box-shadow: 0 16px 42px rgba(48,38,20,.08); }
 .hv-mapper-v20-head { display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; }
 .hv-mapper-v20-head h3 { margin:0 0 .35rem; font-size: clamp(1.6rem, 2.5vw, 2.35rem); color:#1c321f; }
@@ -2899,38 +2899,38 @@ html body .hv-minimal-explainer p:first-of-type {
 .hv-mapper-v20-popup-code { color:#b51616; font-weight:900; font-family:ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing:.08em; margin-bottom:.3rem; }
 .hv-mapper-v20-popup p { margin:.45rem 0 0; line-height:1.4; }
 
-/* TSIINO_MAPPER_UI_POPUPS_V21 */
-.tsiino-mapper-polished-v21 {
-  --tsiino-grid-border: rgba(60, 48, 35, .14);
+/* DRYLANDFLORAS_MAPPER_UI_POPUPS_V21 */
+.drylandfloras-mapper-polished-v21 {
+  --drylandfloras-grid-border: rgba(60, 48, 35, .14);
 }
-.tsiino-mapper-polished-v21 .tsiino-mapper-table-v21,
-.tsiino-mapper-polished-v21 table {
+.drylandfloras-mapper-polished-v21 .drylandfloras-mapper-table-v21,
+.drylandfloras-mapper-polished-v21 table {
   border-collapse: separate !important;
   border-spacing: 0 !important;
   width: max-content !important;
   min-width: 100% !important;
   table-layout: fixed !important;
   background: #fffdfa !important;
-  border: 1px solid var(--tsiino-grid-border) !important;
+  border: 1px solid var(--drylandfloras-grid-border) !important;
   border-radius: 18px !important;
   overflow: clip !important;
 }
-.tsiino-mapper-polished-v21 th,
-.tsiino-mapper-polished-v21 td {
+.drylandfloras-mapper-polished-v21 th,
+.drylandfloras-mapper-polished-v21 td {
   min-width: 150px !important;
   max-width: 230px !important;
   width: 190px !important;
   padding: 12px 12px !important;
-  border-right: 1px solid var(--tsiino-grid-border) !important;
-  border-bottom: 1px solid var(--tsiino-grid-border) !important;
+  border-right: 1px solid var(--drylandfloras-grid-border) !important;
+  border-bottom: 1px solid var(--drylandfloras-grid-border) !important;
   vertical-align: top !important;
   white-space: normal !important;
   word-break: normal !important;
   overflow-wrap: anywhere !important;
   line-height: 1.25 !important;
 }
-.tsiino-mapper-polished-v21 th:first-child,
-.tsiino-mapper-polished-v21 td:first-child {
+.drylandfloras-mapper-polished-v21 th:first-child,
+.drylandfloras-mapper-polished-v21 td:first-child {
   position: sticky !important;
   left: 0 !important;
   z-index: 5 !important;
@@ -2943,8 +2943,8 @@ html body .hv-minimal-explainer p:first-of-type {
   text-transform: uppercase !important;
   letter-spacing: .04em !important;
 }
-.tsiino-mapper-polished-v21 tr:first-child th,
-.tsiino-mapper-polished-v21 tr:first-child td {
+.drylandfloras-mapper-polished-v21 tr:first-child th,
+.drylandfloras-mapper-polished-v21 tr:first-child td {
   background: #fff7ec !important;
   color: #b3231e !important;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
@@ -2953,13 +2953,13 @@ html body .hv-minimal-explainer p:first-of-type {
   letter-spacing: .08em !important;
   font-weight: 900 !important;
 }
-.tsiino-mapper-polished-v21 tr:nth-child(2) td:not(:first-child),
-.tsiino-mapper-polished-v21 tr:nth-child(2) th:not(:first-child) {
+.drylandfloras-mapper-polished-v21 tr:nth-child(2) td:not(:first-child),
+.drylandfloras-mapper-polished-v21 tr:nth-child(2) th:not(:first-child) {
   background: #fffaf2 !important;
 }
-.tsiino-mapper-polished-v21 [draggable="true"],
-.tsiino-mapper-polished-v21 .hv-mapper-chip,
-.tsiino-mapper-polished-v21 .tsiino-source-chip {
+.drylandfloras-mapper-polished-v21 [draggable="true"],
+.drylandfloras-mapper-polished-v21 .hv-mapper-chip,
+.drylandfloras-mapper-polished-v21 .drylandfloras-source-chip {
   display: inline-flex !important;
   align-items: center !important;
   gap: .45rem !important;
@@ -2972,7 +2972,7 @@ html body .hv-minimal-explainer p:first-of-type {
   font-weight: 800 !important;
   color: #092a25 !important;
 }
-.tsiino-help-btn {
+.drylandfloras-help-btn {
   display: inline-grid !important;
   place-items: center !important;
   width: 1.45rem !important;
@@ -2986,7 +2986,7 @@ html body .hv-minimal-explainer p:first-of-type {
   box-shadow: 0 4px 12px rgba(0,0,0,.08) !important;
   cursor: pointer !important;
 }
-.tsiino-mapper-help-popover {
+.drylandfloras-mapper-help-popover {
   position: absolute !important;
   z-index: 99999 !important;
   max-width: 340px !important;
@@ -2997,40 +2997,40 @@ html body .hv-minimal-explainer p:first-of-type {
   box-shadow: 0 18px 50px rgba(28, 24, 20, .22) !important;
   color: #17352f !important;
 }
-.tsiino-pop-title { font-weight: 950 !important; font-size: 1.05rem !important; margin-bottom: .18rem !important; }
-.tsiino-pop-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important; color: #b3231e !important; font-weight: 900 !important; letter-spacing: .06em !important; text-transform: uppercase !important; margin-bottom: .55rem !important; }
-.tsiino-pop-req { display: inline-block !important; padding: .25rem .55rem !important; border-radius: 999px !important; background: #f3d7cc !important; color: #7b3f20 !important; font-weight: 850 !important; margin-bottom: .65rem !important; }
-.tsiino-pop-rec { font-size: .98rem !important; line-height: 1.45 !important; }
+.drylandfloras-pop-title { font-weight: 950 !important; font-size: 1.05rem !important; margin-bottom: .18rem !important; }
+.drylandfloras-pop-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important; color: #b3231e !important; font-weight: 900 !important; letter-spacing: .06em !important; text-transform: uppercase !important; margin-bottom: .55rem !important; }
+.drylandfloras-pop-req { display: inline-block !important; padding: .25rem .55rem !important; border-radius: 999px !important; background: #f3d7cc !important; color: #7b3f20 !important; font-weight: 850 !important; margin-bottom: .65rem !important; }
+.drylandfloras-pop-rec { font-size: .98rem !important; line-height: 1.45 !important; }
 
-/* TSIINO_MAPPER_COMPACT_HELP_V23 */
-.tsiino-mapper-compact-help-v23 {
-  --tsiino-map-border: rgba(48, 59, 37, 0.16);
+/* DRYLANDFLORAS_MAPPER_COMPACT_HELP_V23 */
+.drylandfloras-mapper-compact-help-v23 {
+  --drylandfloras-map-border: rgba(48, 59, 37, 0.16);
 }
-.tsiino-mapper-compact-help-v23 table,
-.tsiino-mapper-compact-help-v23 .hv-map-grid,
-.tsiino-mapper-compact-help-v23 .hv-direct-map-grid {
+.drylandfloras-mapper-compact-help-v23 table,
+.drylandfloras-mapper-compact-help-v23 .hv-map-grid,
+.drylandfloras-mapper-compact-help-v23 .hv-direct-map-grid {
   border-collapse: separate !important;
   border-spacing: 0 !important;
   background: rgba(255, 252, 244, 0.96) !important;
-  border: 1px solid var(--tsiino-map-border) !important;
+  border: 1px solid var(--drylandfloras-map-border) !important;
   border-radius: 22px !important;
   overflow: hidden !important;
   box-shadow: 0 18px 60px rgba(36, 41, 24, 0.08) !important;
 }
-.tsiino-mapper-compact-help-v23 th,
-.tsiino-mapper-compact-help-v23 td {
+.drylandfloras-mapper-compact-help-v23 th,
+.drylandfloras-mapper-compact-help-v23 td {
   border-color: rgba(48, 59, 37, 0.10) !important;
   vertical-align: top !important;
 }
-.tsiino-mapper-compact-help-v23 th:first-child,
-.tsiino-mapper-compact-help-v23 td:first-child {
+.drylandfloras-mapper-compact-help-v23 th:first-child,
+.drylandfloras-mapper-compact-help-v23 td:first-child {
   background: rgba(125, 80, 39, 0.12) !important;
   color: #6d3a17 !important;
   font-weight: 800 !important;
   letter-spacing: 0.04em !important;
   min-width: 120px !important;
 }
-.tsiino-source-cell-compact-v23 {
+.drylandfloras-source-cell-compact-v23 {
   position: relative !important;
   max-width: 190px !important;
   min-width: 150px !important;
@@ -3046,14 +3046,14 @@ html body .hv-minimal-explainer p:first-of-type {
   font-weight: 800 !important;
   line-height: 1.2 !important;
 }
-.tsiino-source-cell-compact-v23 button:not(.tsiino-source-help-v23) {
+.drylandfloras-source-cell-compact-v23 button:not(.drylandfloras-source-help-v23) {
   position: absolute !important;
   right: 12px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
   z-index: 2 !important;
 }
-.tsiino-source-help-v23 {
+.drylandfloras-source-help-v23 {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -3072,14 +3072,14 @@ html body .hv-minimal-explainer p:first-of-type {
   padding: 0 !important;
   line-height: 1 !important;
 }
-.tsiino-source-cell-compact-v23 > .tsiino-source-help-v23 {
+.drylandfloras-source-cell-compact-v23 > .drylandfloras-source-help-v23 {
   position: absolute !important;
   right: 40px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
   margin: 0 !important;
 }
-.tsiino-popover-v23 {
+.drylandfloras-popover-v23 {
   position: absolute !important;
   z-index: 999999 !important;
   max-width: 330px !important;
@@ -3091,30 +3091,30 @@ html body .hv-minimal-explainer p:first-of-type {
   color: #173226 !important;
   font-size: 0.96rem !important;
 }
-.tsiino-popover-v23 strong {
+.drylandfloras-popover-v23 strong {
   display: block !important;
   color: #7d1b18 !important;
   font-weight: 900 !important;
   margin-bottom: 8px !important;
 }
-.tsiino-popover-v23 p {
+.drylandfloras-popover-v23 p {
   margin: 0 !important;
   line-height: 1.45 !important;
 }
-/* TSIINO_MAPPER_VALIDATE_FLOW_V28 */
-.tsiino-mapper-hidden-after-validation { display: none !important; }
+/* DRYLANDFLORAS_MAPPER_VALIDATE_FLOW_V28 */
+.drylandfloras-mapper-hidden-after-validation { display: none !important; }
 
 
-/* TSIINO_RESULTS_TAXONOMY_BINDING_V32 */
-.tsiino-tax-moved-note {
+/* DRYLANDFLORAS_RESULTS_TAXONOMY_BINDING_V32 */
+.drylandfloras-tax-moved-note {
   display: inline-block;
   margin-top: .45rem;
 }
 
-/* TSIINO_MAPPER_RESULT_FLOW_V34 */
+/* DRYLANDFLORAS_MAPPER_RESULT_FLOW_V34 */
 .hv-download-inline-v34 { margin-left: 0.75rem !important; }
 
-/* TSIINO_STANDARD_FIRST_FLOW_V36 */
+/* DRYLANDFLORAS_STANDARD_FIRST_FLOW_V36 */
 .hv-download-inline {
   display: inline-flex !important;
   align-items: center;
@@ -3124,8 +3124,8 @@ html body .hv-minimal-explainer p:first-of-type {
 }
 
 
-/* TSIINO_RESULTS_STABLE_V37 */
-.tsiino-results-stable-v37 {
+/* DRYLANDFLORAS_RESULTS_STABLE_V37 */
+.drylandfloras-results-stable-v37 {
   margin-top: 1.1rem;
   border: 1px solid rgba(36, 54, 30, 0.18);
   border-radius: 24px;
@@ -3133,7 +3133,7 @@ html body .hv-minimal-explainer p:first-of-type {
   background: rgba(255, 253, 247, 0.98);
   box-shadow: 0 18px 40px rgba(33, 32, 27, 0.08);
 }
-.tsiino-v37-toolbar {
+.drylandfloras-v37-toolbar {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
@@ -3143,18 +3143,18 @@ html body .hv-minimal-explainer p:first-of-type {
   border-bottom: 1px solid rgba(36, 54, 30, 0.12);
   background: #f4efe5;
 }
-.tsiino-v37-scroll {
+.drylandfloras-v37-scroll {
   overflow: auto;
   max-height: 72vh;
 }
-.tsiino-v37-table {
+.drylandfloras-v37-table {
   width: max-content;
   min-width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   font-size: 0.94rem;
 }
-.tsiino-v37-table thead th {
+.drylandfloras-v37-table thead th {
   position: sticky;
   top: 0;
   z-index: 3;
@@ -3168,7 +3168,7 @@ html body .hv-minimal-explainer p:first-of-type {
   border-right: 1px solid rgba(255,255,255,0.08);
   white-space: nowrap;
 }
-.tsiino-v37-table th.tsiino-v37-rowhead {
+.drylandfloras-v37-table th.drylandfloras-v37-rowhead {
   position: sticky;
   left: 0;
   z-index: 4;
@@ -3179,11 +3179,11 @@ html body .hv-minimal-explainer p:first-of-type {
   font-weight: 900;
   border-right: 1px solid rgba(36, 54, 30, 0.14);
 }
-.tsiino-v37-table thead th.tsiino-v37-rowhead {
+.drylandfloras-v37-table thead th.drylandfloras-v37-rowhead {
   background: #24361e;
   color: #fff;
 }
-.tsiino-v37-table td {
+.drylandfloras-v37-table td {
   vertical-align: top;
   min-width: 170px;
   max-width: 340px;
@@ -3193,20 +3193,20 @@ html body .hv-minimal-explainer p:first-of-type {
   background: #fffdf8;
   color: #082a22;
 }
-.tsiino-v37-value {
+.drylandfloras-v37-value {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   margin-bottom: .35rem;
 }
-.tsiino-v37-cell-error {
+.drylandfloras-v37-cell-error {
   background: #f9e9ee !important;
   box-shadow: inset 5px 0 0 #b92758;
 }
-.tsiino-v37-cell-warning {
+.drylandfloras-v37-cell-warning {
   background: #fff4df !important;
   box-shadow: inset 5px 0 0 #d18a00;
 }
-.tsiino-v37-note {
+.drylandfloras-v37-note {
   display: block;
   margin: .35rem 0 0;
   padding: .45rem .65rem;
@@ -3215,19 +3215,19 @@ html body .hv-minimal-explainer p:first-of-type {
   line-height: 1.22;
   overflow-wrap: anywhere;
 }
-.tsiino-v37-note.error {
+.drylandfloras-v37-note.error {
   background: #f2dbe4;
   color: #970b38;
 }
-.tsiino-v37-note.warning {
+.drylandfloras-v37-note.warning {
   background: #f6deb6;
   color: #7b4300;
 }
-.tsiino-v37-empty {
+.drylandfloras-v37-empty {
   padding: 1rem;
   font-weight: 800;
   color: #7b3e1f;
 }
-.tsiino-v37-download-button {
+.drylandfloras-v37-download-button {
   margin-left: .75rem !important;
 }

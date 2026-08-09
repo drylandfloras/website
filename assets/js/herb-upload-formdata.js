@@ -1,10 +1,10 @@
-/* TSIINO_FORMDATA_FILE_FIX_V18
+/* DRYLANDFLORAS_FORMDATA_FILE_FIX_V18
    Corrige chamadas FormData.append('file', valorNaoBlob, filename) no mapeador.
    O navegador exige que o 2o argumento seja Blob/File quando o 3o argumento existe.
 */
 (function () {
-  if (window.__TSIINO_FORMDATA_FILE_FIX_V18__) return;
-  window.__TSIINO_FORMDATA_FILE_FIX_V18__ = true;
+  if (window.__DRYLANDFLORAS_FORMDATA_FILE_FIX_V18__) return;
+  window.__DRYLANDFLORAS_FORMDATA_FILE_FIX_V18__ = true;
 
   const nativeAppend = FormData.prototype.append;
 
@@ -14,7 +14,7 @@
     return null;
   }
 
-  FormData.prototype.append = function tsiinoSafeAppend(name, value, filename) {
+  FormData.prototype.append = function drylandflorasSafeAppend(name, value, filename) {
     const fieldName = String(name || '');
     const hasFilename = arguments.length >= 3;
     const isBlob = value instanceof Blob;
@@ -33,7 +33,7 @@
     return nativeAppend.apply(this, arguments);
   };
 
-  window.TsiinoFormDataFileFixV18 = {
+  window.DrylandFlorasFormDataFileFixV18 = {
     ready: true,
     selectedSpreadsheetFile,
   };

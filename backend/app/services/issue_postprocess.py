@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Normalizacao final das ocorrencias de validacao do Tsiino."""
+"""Normalizacao final das ocorrencias de validacao do DrylandFloras."""
 from __future__ import annotations
 
 import re
 import unicodedata
 from typing import Any
 
-# TSIINO_ISSUE_GEO_V39B
+# DRYLANDFLORAS_ISSUE_GEO_V39B
 
 DROP_CODES = {
     "TAXONOMY_LOCAL_FIXTURE",

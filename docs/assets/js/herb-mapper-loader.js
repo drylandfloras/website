@@ -1,4 +1,4 @@
-/* TSIINO_MAPPER_OPEN_ALIAS_V10 */
+/* DRYLANDFLORAS_MAPPER_OPEN_ALIAS_V10 */
 (function () {
   function selectedFile() {
     const input = document.getElementById('spreadsheet-file');
@@ -18,14 +18,14 @@
   }
 
   function installMapperOpenAlias() {
-    const integration = window.TsiinoConverterIntegration || window.TsiinoConverter;
+    const integration = window.DrylandFlorasConverterIntegration || window.DrylandFlorasConverter;
     if (!integration || typeof integration !== 'object') {
-      window.TsiinoMapperCompatReady = false;
+      window.DrylandFlorasMapperCompatReady = false;
       return false;
     }
 
-    window.TsiinoConverterIntegration = integration;
-    window.TsiinoConverter = Object.assign(window.TsiinoConverter || {}, integration);
+    window.DrylandFlorasConverterIntegration = integration;
+    window.DrylandFlorasConverter = Object.assign(window.DrylandFlorasConverter || {}, integration);
 
     if (typeof integration.open !== 'function') {
       integration.open = async function (previewOrFile, maybeFile) {
@@ -56,29 +56,29 @@
       };
     }
 
-    if (typeof window.TsiinoConverter.showFromFile !== 'function') {
-      window.TsiinoConverter.showFromFile = function (file, preview) {
+    if (typeof window.DrylandFlorasConverter.showFromFile !== 'function') {
+      window.DrylandFlorasConverter.showFromFile = function (file, preview) {
         return integration.open(preview || file, file);
       };
     }
-    if (typeof window.TsiinoConverter.openAfterValidationFailure !== 'function') {
-      window.TsiinoConverter.openAfterValidationFailure = function (previewOrFile) {
+    if (typeof window.DrylandFlorasConverter.openAfterValidationFailure !== 'function') {
+      window.DrylandFlorasConverter.openAfterValidationFailure = function (previewOrFile) {
         return integration.openAfterValidationFailure(previewOrFile);
       };
     }
 
-    window.TsiinoMapperCompatReady = typeof integration.open === 'function';
-    console.info('[Tsiino] Mapper compat v10:', {
-      integration: typeof window.TsiinoConverterIntegration,
-      open: typeof window.TsiinoConverterIntegration.open,
-      openAfterValidationFailure: typeof window.TsiinoConverterIntegration.openAfterValidationFailure,
-      showFromFile: typeof window.TsiinoConverter.showFromFile
+    window.DrylandFlorasMapperCompatReady = typeof integration.open === 'function';
+    console.info('[DrylandFloras] Mapper compat v10:', {
+      integration: typeof window.DrylandFlorasConverterIntegration,
+      open: typeof window.DrylandFlorasConverterIntegration.open,
+      openAfterValidationFailure: typeof window.DrylandFlorasConverterIntegration.openAfterValidationFailure,
+      showFromFile: typeof window.DrylandFlorasConverter.showFromFile
     });
-    return window.TsiinoMapperCompatReady;
+    return window.DrylandFlorasMapperCompatReady;
   }
 
   installMapperOpenAlias();
   document.addEventListener('DOMContentLoaded', installMapperOpenAlias);
   window.addEventListener('load', installMapperOpenAlias);
-  window.TsiinoInstallMapperOpenAlias = installMapperOpenAlias;
+  window.DrylandFlorasInstallMapperOpenAlias = installMapperOpenAlias;
 })();

@@ -168,11 +168,11 @@ def parse_xlsx(path: Path, sheet_name: str | None = None) -> ParsedSpreadsheet:
 
     return ParsedSpreadsheet(header=header, records=records)
 
-# TSIINO_SPREADSHEET_READER_DETECTOR_V34
+# DRYLANDFLORAS_SPREADSHEET_READER_DETECTOR_V34
 def _detect_header_from_rows(rows, max_scan_rows: int = 20):
     try:
-        from app.services.schema_detector import _tsiino_detect_header_from_values_v34
-        return _tsiino_detect_header_from_values_v34(rows, max_scan_rows=max_scan_rows)
+        from app.services.schema_detector import _drylandfloras_detect_header_from_values_v34
+        return _drylandfloras_detect_header_from_values_v34(rows, max_scan_rows=max_scan_rows)
     except Exception:
         best = None
         best_score = -1
@@ -197,11 +197,11 @@ def _detect_header_from_rows(rows, max_scan_rows: int = 20):
             raise ValueError('Não foi possível detectar a linha de cabeçalho da planilha.')
         return best
 
-# TSIINO_STANDARD_READER_DETECTOR_V36
+# DRYLANDFLORAS_STANDARD_READER_DETECTOR_V36
 def _detect_header_from_rows(rows, max_scan_rows: int = 25):
     try:
-        from app.services.schema_detector import _tsiino_v36_detect_header_from_values
-        return _tsiino_v36_detect_header_from_values(rows, max_scan_rows=max_scan_rows)
+        from app.services.schema_detector import _drylandfloras_v36_detect_header_from_values
+        return _drylandfloras_v36_detect_header_from_values(rows, max_scan_rows=max_scan_rows)
     except Exception as exc:
         # Propaga a falha para o fluxo de mapeamento, sem aceitar cabeçalhos descritivos como padrão.
         raise ValueError(str(exc))

@@ -9,7 +9,7 @@ check_site <- function(
     render_site = FALSE,
     report_dir = "_check_reports",
     expected_files = c(
-      "_input_data/diversidade_tsiino.xlsx",
+      "_input_data/diversidade_drylandfloras.xlsx",
       "logonovo.jpg"
     ),
     ignored_dirs = c(

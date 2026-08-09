@@ -1,6 +1,6 @@
 ﻿(function () {
 const LOCAL_API = 'http://127.0.0.1:8000/api/validator';
-const PROD_API = 'https://api.tsiinohiiwiida.net/api/validator';
+const PROD_API = 'https://api.drylandflorashiiwiida.net/api/validator';
 
 const host = window.location.hostname;
 const isLocal = !host || host === '127.0.0.1' || host === 'localhost';
@@ -124,7 +124,7 @@ const API_BASE = isLocal ? LOCAL_API : PROD_API;
       return;
     }
     link.href = `${API_BASE}/jobs/${jobId}/download.xlsx`;
-    link.download = `tsiino_planilha_anotada_${jobId}.xlsx`;
+    link.download = `drylandfloras_planilha_anotada_${jobId}.xlsx`;
     link.classList.remove('is-disabled');
     link.setAttribute('aria-disabled', 'false');
   }
@@ -388,7 +388,7 @@ const API_BASE = isLocal ? LOCAL_API : PROD_API;
     }
   }
 
-  // TSIINO_COLUMN_PREFLIGHT
+  // DRYLANDFLORAS_COLUMN_PREFLIGHT
   function normalizeColumnForPreflight(value) {
     return String(fixMojibake(value) ?? '')
       .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
@@ -454,7 +454,7 @@ const API_BASE = isLocal ? LOCAL_API : PROD_API;
   }
 
   async function maybeOpenColumnMapperBeforeValidation(file) {
-    const mapper = window.TsiinoConverterIntegration;
+    const mapper = window.DrylandFlorasConverterIntegration;
     if (!mapper || typeof mapper.openMapper !== 'function' || !file) return false;
     try {
       const formData = new FormData();
@@ -469,7 +469,7 @@ const API_BASE = isLocal ? LOCAL_API : PROD_API;
       await mapper.openMapper(file, 'Colunas fora do padrao INPA/BRAHMS detectadas automaticamente. Confira as sugestoes e escolha: baixar convertida sem anotacao ou aplicar mapeamento e validar.');
       return true;
     } catch (error) {
-      console.warn('[Tsiino] Preflight do mapeador falhou; seguindo para validacao direta.', error);
+      console.warn('[DrylandFloras] Preflight do mapeador falhou; seguindo para validacao direta.', error);
       return false;
     }
   }
@@ -483,7 +483,7 @@ const API_BASE = isLocal ? LOCAL_API : PROD_API;
   }
 
   async function maybeOpenMapperFromIssues(items) {
-    const mapper = window.TsiinoConverterIntegration;
+    const mapper = window.DrylandFlorasConverterIntegration;
     const file = $('spreadsheet-file')?.files?.[0];
     if (!mapper || typeof mapper.openMapper !== 'function' || !file || !issuesIndicateSchemaProblem(items)) return false;
     setStatus('A planilha tem colunas obrigatorias ausentes no padrao INPA/BRAHMS. Abrindo o mapeador para converter antes de validar.', 'warning');
@@ -544,21 +544,21 @@ const API_BASE = isLocal ? LOCAL_API : PROD_API;
     } catch (error) {
       const mappingFile = document.getElementById('spreadsheet-file')?.files?.[0];
       const message = String(error?.message || error || 'Erro desconhecido');
-      const hasInternalMapper = Boolean(window.TsiinoConverterIntegration?.openAfterValidationFailure);
+      const hasInternalMapper = Boolean(window.DrylandFlorasConverterIntegration?.openAfterValidationFailure);
 
       // Se a API rejeitar a planilha por cabeÃ§alho/estrutura, nÃ£o recarregue a pÃ¡gina:
       // abra o mapeador interno e deixe a usuÃ¡ria converter + validar no mesmo fluxo.
       if (mappingFile && hasInternalMapper) {
         try {
           setStatus('A planilha nÃ£o foi reconhecida no padrÃ£o INPA/BRAHMS. Abrindo o mapeador de colunas.', 'warning');
-          await window.TsiinoConverterIntegration.openAfterValidationFailure(error);
+          await window.DrylandFlorasConverterIntegration.openAfterValidationFailure(error);
           return;
         } catch (mapperError) {
-          console.warn('[Tsiino] O mapeador interno nÃ£o conseguiu abrir.', mapperError);
+          console.warn('[DrylandFloras] O mapeador interno nÃ£o conseguiu abrir.', mapperError);
         }
       }
 
-      setStatus(`NÃ£o foi possÃ­vel validar: ${escapeHtml(message)}. Em teste local, confirme se a API estÃ¡ rodando em http://127.0.0.1:8000. No site publicado, a API deve responder em https://api.tsiinohiiwiida.net/health.`, 'error');
+      setStatus(`NÃ£o foi possÃ­vel validar: ${escapeHtml(message)}. Em teste local, confirme se a API estÃ¡ rodando em http://127.0.0.1:8000. No site publicado, a API deve responder em https://api.drylandflorashiiwiida.net/health.`, 'error');
     } finally {
       setBusy(false);
     }
@@ -585,7 +585,7 @@ const API_BASE = isLocal ? LOCAL_API : PROD_API;
     if (mapClose) mapClose.addEventListener('click', () => { const panel = $('validator-map-panel'); if (panel) panel.hidden = true; });
   });
 
-  window.TsiinoValidatorBridge = {
+  window.DrylandFlorasValidatorBridge = {
     apiBase: API_BASE,
     setStatus,
     setBusy,

@@ -57,5 +57,5 @@ format:
     include-in-header: gtm-head.html
     include-before-body: gtm-body.html
     include-after-body:
-      - tsiino-footer.html
+      - drylandfloras-footer.html
       - _includes/language-router.html
