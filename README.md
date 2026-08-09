@@ -1,103 +1,84 @@
-# Tsiino Hiiwiida
 
-<p align="center">
-  <img src="logonovo.jpg" alt="Logo do projeto Tsiino Hiiwiida" width="300">
-</p>
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-Repositório do site do projeto **Tsiino Hiiwiida: Revelando múltiplas dimensões da biodiversidade de plantas e fungos no Alto Rio Negro**, um dos projetos apoiados pela **Chamada Expedições** da **Iniciativa Amazônia +10**.
+# Dryland Floras Network <img src="figures/DFN_logo.png" align="right" width="120" />
 
-## Sobre o projeto
+The Dryland Floras Network aims to serve as a global platform connecting
+botanists, ecologists and other researchers working to understand the
+diversity, evolution and conservation of dryland floras worldwide,
+bringing together expertise from across arid deserts and semi-arid
+steppes, grasslands, savannas and woodlands. The network’s goals are to:
+Foster communication, collaboration, knowledge exchange and new research
+opportunities among scientists studying dryland floras across regions
+and disciplines. Facilitate the sharing and integration of knowledge
+across the world’s diverse dryland systems. Maintain a dynamic directory
+connecting researchers, institutions and expertise in dryland floras
+across continents. Support outreach and collaborative initiatives that
+advance the study, understanding and conservation of dryland floras.
 
-O **Tsiino Hiiwiida** é um projeto científico voltado à documentação, compreensão e divulgação da biodiversidade de plantas e fungos na região da **Cabeça do Cachorro**, no **Alto Rio Negro**, Amazônia brasileira.
+#### *1. `reflora_summary`: Summarizing REFLORA collections*
 
-A região, conhecida como **Tsiino Hiiwiida** em língua Baniwa, é considerada uma das últimas fronteiras globais de conhecimento sobre biodiversidade. Sua paisagem reúne campinaranas, florestas de terra-firme, igapós, montanhas e outros habitats que fazem da área um importante cenário para estudos sobre evolução, taxonomia, biogeografia e conservação.
+The following code can be used to extract a summary of all
+REFLORA-associated collections, including herbarium acronym, curator’s
+email contact, number of records and a direct link to the original
+REFLORA Integrated Publishing Toolkit
+([IPT](https://ipt.jbrj.gov.br/reflora)).  
 
-Apesar de seu grande potencial para a descoberta de novas espécies, a região ainda permanece pouco explorada botanicamente. O projeto busca preencher lacunas de conhecimento sobre a flora e a funga da Cabeça do Cachorro por meio de expedições científicas, estudos taxonômicos, sistemática molecular, biomonitoramento e tecnologias metagenômicas.
+``` r
+library(refloraR)
 
-## Chamada Expedições — Amazônia +10
+summary_df <- reflora_summary(verbose = TRUE,
+                              save = TRUE,
+                              dir = "reflora_summary")
+```
 
-Este projeto integra a **Chamada Expedições**, iniciativa voltada ao financiamento de pesquisas científicas na Amazônia.
+  
+By specifying a vector of herbarium acronyms, the user can extract a
+summary for just the specific herbarium collection.  
 
-A chamada faz parte da **Iniciativa Amazônia +10**, que apoia projetos de pesquisa voltados ao avanço do conhecimento sobre a biodiversidade, a sociobiodiversidade e os desafios ambientais da Amazônia brasileira.
+``` r
+summary_some_df <- reflora_summary(herbarium = c("ALCB", "RB", "HUEFS", "US", "K"),
+                                   verbose = TRUE,
+                                   save = TRUE,
+                                   dir = "reflora_summary")
+```
 
-## Objetivo do site
+  
+  
 
-Este site foi desenvolvido para divulgar informações sobre o projeto **Tsiino Hiiwiida**, suas expedições, pesquisadores envolvidos, áreas de atuação, notícias, imagens e demais materiais relacionados às atividades científicas realizadas no Alto Rio Negro.
+#### *2. `reflora_download`: Downloading REFLORA specimen records*
 
-O site também tem como objetivo facilitar o acesso público às informações do projeto e fortalecer a comunicação científica sobre a biodiversidade de plantas e fungos da região.
+The following code can be used to download original specimen records in
+DwC-A format and associated metada for all REFLORA collections.  
 
-## Resumo do projeto
+``` r
+library(refloraR)
 
-A proposta reúne uma ampla rede colaborativa formada por pesquisadores, estudantes indígenas e não indígenas, parataxonomistas e instituições nacionais e internacionais.
+reflora_download(verbose = TRUE,
+                 dir = "reflora_download")
+```
 
-As expedições de pesquisa têm como foco o levantamento da flora e da funga da Cabeça do Cachorro, contribuindo para:
+  
+By specifying a vector of herbarium acronyms, the user can download
+specimens records for just the specific herbarium collection.  
 
-- enriquecer coleções científicas;
-- revelar espécies novas;
-- investigar diversidade críptica;
-- identificar espécies filogeneticamente enigmáticas;
-- produzir o primeiro catálogo taxonomicamente verificado da flora e funga da região;
-- fortalecer a formação e a participação de comunidades indígenas locais;
-- fomentar colaborações entre instituições amazônicas, brasileiras e internacionais.
+``` r
+reflora_download(herbarium = c("ALCB", "HUEFS", "RB", "US", "K"),
+                 verbose = TRUE,
+                 dir = "reflora_download")
+```
 
-## Pesquisadores responsáveis
+  
+  
 
-- **FAPEAM:** Charles Eugene Zartman — Instituto Nacional de Pesquisas da Amazônia (INPA)
-- **FAPERJ:** Domingos Benicio Oliveira Silva Cardoso — Jardim Botânico do Rio de Janeiro (JBRJ)
-- **UKRI:** Sandra Diane Knapp — Natural History Museum
-- **FAPESPA:** Anna Luiza Ilkiu-Borges — Museu Paraense Emílio Goeldi (MPEG)
-- **FACEPE:** Clistenes Williams Araújo do Nascimento — Universidade Federal Rural de Pernambuco (UFRPE)
-- **FAPEMA:** Dirce Leimi Komura — Instituto Federal de Ciência e Tecnologia do Maranhão (IFMA)
-- **FAPESP:** Denilson Fernandes Peralta — Instituto de Pesquisas Ambientais (IPA)
-- **FAPESQ:** Felipe Wartchow — Universidade Federal da Paraíba (UFPB)
-- **FAPDF:** Micheline Carvalho-Silva — Universidade de Brasília (UnB)
+## Documentation
 
-## Abrangência territorial
+Full function documentation and articles are available at the `refloraR`
+[website](https://dboslab.github.io/refloraR-website/).  
+  
 
-O projeto tem como área de abrangência a região da **Cabeça do Cachorro**, ou **Tsiino Hiiwiida**, em língua Baniwa, localizada no **Alto Rio Negro**, na Amazônia brasileira.
+## Citation
 
-## Áreas do conhecimento relacionadas
-
-O projeto envolve diferentes áreas das Ciências Biológicas, incluindo:
-
-- Taxonomia vegetal
-- Botânica
-- Fitogeografia
-- Ecologia de ecossistemas
-- Conservação e multiplicação de germoplasma
-- Sistemática molecular
-- Genética vegetal
-- Genética molecular e de microrganismos
-- Morfologia vegetal
-- Fisiologia vegetal
-- Botânica aplicada
-- Saúde pública
-
-## Recursos investidos
-
-**R$ 5.971.396,56**
-
-## Estrutura do site
-
-O site apresenta seções relacionadas ao projeto e à Iniciativa Amazônia +10, incluindo:
-
-- Sobre
-- Chamadas
-- Projetos apoiados
-- Imprensa
-- Notícias
-- Redes sociais
-
-## Estrutura do repositório
-
-A estrutura do repositório pode variar conforme a tecnologia utilizada no desenvolvimento do site. De forma geral, o projeto pode conter arquivos como:
-
-```bash
-.
-├── README.md
-├── index.html
-├── logonovo.jpg
-├── assets/
-├── css/
-├── js/
-└── public/
+Cardoso, D. & Calderón, C. 2025. *refloraR*: An R Package for Exploring
+Plant Specimen Collections from REFLORA Virtual Herbarium.
+<https://github.com/dboslab/refloraR>
