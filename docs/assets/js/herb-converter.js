@@ -1,9 +1,9 @@
-/* TSIINO_MAPPER_ROWS_HELP_V20 */
+/* DRYLANDFLORAS_MAPPER_ROWS_HELP_V20 */
 (function () {
   'use strict';
 
   const LOCAL_API = 'http://127.0.0.1:8000/api/validator';
-  const PROD_API = 'https://api.tsiinohiiwiida.net/api/validator';
+  const PROD_API = 'https://api.drylandflorashiiwiida.net/api/validator';
   const host = window.location.hostname;
   const API_BASE = (!host || host === '127.0.0.1' || host === 'localhost') ? LOCAL_API : PROD_API;
 
@@ -207,7 +207,7 @@
     try {
       rowsInfo = await (await postForm('/converter/preview_rows', file, { max_rows:'80' })).json();
     } catch (err) {
-      console.warn('[Tsiino] preview_rows indisponível; usando preview principal.', err);
+      console.warn('[DrylandFloras] preview_rows indisponível; usando preview principal.', err);
     }
     const merged = Object.assign({}, preview || {}, rowsInfo || {});
     const columns = extractColumns(merged);
@@ -218,10 +218,10 @@
   }
 
   function ensurePanel() {
-    let panel = $('tsiino-mapper-v20');
+    let panel = $('drylandfloras-mapper-v20');
     if (panel) return panel;
     panel = document.createElement('section');
-    panel.id = 'tsiino-mapper-v20';
+    panel.id = 'drylandfloras-mapper-v20';
     panel.className = 'hv-mapper-v20';
     const anchor = $('validator-status') || $('herb-validator-form') || document.querySelector('form');
     if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(panel, anchor.nextSibling);
@@ -360,11 +360,11 @@
       const blob = await convertBlob();
       const job = await uploadBlob(blob);
       const jobId = job.job_id || job.jobId || job.id;
-      if (window.TsiinoValidatorBridge?.applyJob) await window.TsiinoValidatorBridge.applyJob(jobId);
-      else if (window.TsiinoRenderResultFromJobResponse) await window.TsiinoRenderResultFromJobResponse(job);
+      if (window.DrylandFlorasValidatorBridge?.applyJob) await window.DrylandFlorasValidatorBridge.applyJob(jobId);
+      else if (window.DrylandFlorasRenderResultFromJobResponse) await window.DrylandFlorasRenderResultFromJobResponse(job);
       setStatus('Validação concluída.');
     } catch (err) {
-      console.error('[Tsiino] Falha ao aplicar mapeamento e validar', err);
+      console.error('[DrylandFloras] Falha ao aplicar mapeamento e validar', err);
       setStatus('Não foi possível converter e validar: ' + (err.message || err));
     } finally {
       if (btn) { btn.disabled = false; btn.textContent = 'Aplicar mapeamento e validar'; }
@@ -392,7 +392,7 @@
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closePopup(); if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'&&!e.shiftKey){e.preventDefault();undo();} if((e.ctrlKey||e.metaKey)&&(e.key.toLowerCase()==='y'||(e.shiftKey&&e.key.toLowerCase()==='z'))){e.preventDefault();redo();} });
 
   const integration = { open: openMapper, showFromFile: openMapper, openAfterValidationFailure: async function(x){ return openMapper(x instanceof File ? x : undefined); }, openFromFile: openMapper, openMapper, version:'mapper-rows-help-v20' };
-  window.TsiinoConverterIntegration = integration;
-  window.TsiinoConverter = Object.assign(window.TsiinoConverter || {}, { showFromFile: openMapper, open: openMapper, version:'mapper-rows-help-v20' });
-  window.TsiinoMapperCompatReady = true;
+  window.DrylandFlorasConverterIntegration = integration;
+  window.DrylandFlorasConverter = Object.assign(window.DrylandFlorasConverter || {}, { showFromFile: openMapper, open: openMapper, version:'mapper-rows-help-v20' });
+  window.DrylandFlorasMapperCompatReady = true;
 })();

@@ -12,7 +12,7 @@ from app.services.rule_engine import issue
 
 SOURCE_NAME = "Flora e Funga do Brasil - Lista Oficial"
 SOURCE_URL = "https://ipt.jbrj.gov.br/jbrj/archive.do?r=lista_especies_flora_brasil"
-DB_FILENAME = "tsiino_reference.sqlite"
+DB_FILENAME = "drylandfloras_reference.sqlite"
 
 
 def _backend_root() -> Path:
@@ -410,7 +410,7 @@ def validate_taxonomy_ffb(record: dict[str, Any]) -> list[ValidationIssue]:
 
     return issues
 
-# TSIINO_COMPAT_TAXONOMY_ALIASES
+# DRYLANDFLORAS_COMPAT_TAXONOMY_ALIASES
 if "reference_status" not in globals():
     def reference_status():
         for name in ("ffb_reference_status", "taxonomy_reference_status", "get_reference_status", "status"):
@@ -427,22 +427,22 @@ if "validate_taxonomy_ffb" not in globals():
                 return fn(*args, **kwargs)
         return []
 
-# TSIINO_TAXONOMY_VALIDATION_V25
+# DRYLANDFLORAS_TAXONOMY_VALIDATION_V25
 # Ajustes de qualidade taxonomica:
 # - nao emitir alerta taxonomico quando a identificacao esta vazia/incompleta;
 # - nao repetir a mesma mensagem na mesma celula;
 # - suprimir falso conflito familia-genero quando o genero pertence a familia informada.
 try:
-    _tsiino_original_validate_taxonomy_ffb_v25 = validate_taxonomy_ffb
+    _drylandfloras_original_validate_taxonomy_ffb_v25 = validate_taxonomy_ffb
 except NameError:  # pragma: no cover
-    _tsiino_original_validate_taxonomy_ffb_v25 = None
+    _drylandfloras_original_validate_taxonomy_ffb_v25 = None
 
-_TSIINO_GENUS_FAMILY_OVERRIDES_V25 = {
+_DRYLANDFLORAS_GENUS_FAMILY_OVERRIDES_V25 = {
     "miconia": {"melastomataceae"},
 }
 
 
-def _tsiino_norm_v25(value):
+def _drylandfloras_norm_v25(value):
     import re as _re
     import unicodedata as _unicodedata
     if value is None:
@@ -454,7 +454,7 @@ def _tsiino_norm_v25(value):
     return s
 
 
-def _tsiino_issue_text_v25(obj):
+def _drylandfloras_issue_text_v25(obj):
     bits = []
     for name in ("message", "detail", "description", "code", "field", "column"):
         try:
@@ -471,7 +471,7 @@ def _tsiino_issue_text_v25(obj):
     return " | ".join(bits)
 
 
-def _tsiino_issue_field_v25(obj):
+def _drylandfloras_issue_field_v25(obj):
     for name in ("field", "column"):
         try:
             value = getattr(obj, name, None)
@@ -484,29 +484,29 @@ def _tsiino_issue_field_v25(obj):
     return ""
 
 
-def _tsiino_row_from_args_v25(args, kwargs):
+def _drylandfloras_row_from_args_v25(args, kwargs):
     for obj in list(args) + list(kwargs.values()):
         if isinstance(obj, dict):
             return obj
     return {}
 
 
-def _tsiino_row_value_v25(row, *names):
+def _drylandfloras_row_value_v25(row, *names):
     if not isinstance(row, dict):
         return ""
-    wanted = {_tsiino_norm_v25(n).replace(" ", "") for n in names}
+    wanted = {_drylandfloras_norm_v25(n).replace(" ", "") for n in names}
     for key, value in row.items():
-        k = _tsiino_norm_v25(key).replace(" ", "")
+        k = _drylandfloras_norm_v25(key).replace(" ", "")
         if k in wanted:
             return "" if value is None else str(value).strip()
     return ""
 
 
-def _tsiino_families_for_genus_v25(genus):
-    gnorm = _tsiino_norm_v25(genus).replace(" ", "")
+def _drylandfloras_families_for_genus_v25(genus):
+    gnorm = _drylandfloras_norm_v25(genus).replace(" ", "")
     if not gnorm:
         return set()
-    families = set(_TSIINO_GENUS_FAMILY_OVERRIDES_V25.get(gnorm, set()))
+    families = set(_DRYLANDFLORAS_GENUS_FAMILY_OVERRIDES_V25.get(gnorm, set()))
     conn = None
     try:
         conn = _connect()  # type: ignore[name-defined]
@@ -533,7 +533,7 @@ def _tsiino_families_for_genus_v25(genus):
                 try:
                     for r in conn.execute(f'select distinct "{family_col}" from "{table}" where lower("{genus_col}") = ? limit 20', (gnorm,)).fetchall():
                         if r and r[0]:
-                            families.add(_tsiino_norm_v25(r[0]).replace(" ", ""))
+                            families.add(_drylandfloras_norm_v25(r[0]).replace(" ", ""))
                 except Exception:
                     pass
             # fallback for canonical/scientific name columns: first word == genus
@@ -544,7 +544,7 @@ def _tsiino_families_for_genus_v25(genus):
                         like = genus.strip() + "%"
                         for r in conn.execute(f'select distinct "{family_col}" from "{table}" where "{name_col}" like ? limit 20', (like,)).fetchall():
                             if r and r[0]:
-                                families.add(_tsiino_norm_v25(r[0]).replace(" ", ""))
+                                families.add(_drylandfloras_norm_v25(r[0]).replace(" ", ""))
                     except Exception:
                         pass
     except Exception:
@@ -558,12 +558,12 @@ def _tsiino_families_for_genus_v25(genus):
     return families
 
 
-def _tsiino_should_drop_taxonomy_issue_v25(issue_obj, row):
-    family = _tsiino_row_value_v25(row, "family", "familia", "família")
-    genus = _tsiino_row_value_v25(row, "genus", "genero", "gênero")
-    sp1 = _tsiino_row_value_v25(row, "sp1", "species", "especie", "espécie", "epiteto", "epíteto", "epiteto especifico", "epíteto específico")
-    field = _tsiino_norm_v25(_tsiino_issue_field_v25(issue_obj)).replace(" ", "")
-    text = _tsiino_norm_v25(_tsiino_issue_text_v25(issue_obj))
+def _drylandfloras_should_drop_taxonomy_issue_v25(issue_obj, row):
+    family = _drylandfloras_row_value_v25(row, "family", "familia", "família")
+    genus = _drylandfloras_row_value_v25(row, "genus", "genero", "gênero")
+    sp1 = _drylandfloras_row_value_v25(row, "sp1", "species", "especie", "espécie", "epiteto", "epíteto", "epiteto especifico", "epíteto específico")
+    field = _drylandfloras_norm_v25(_drylandfloras_issue_field_v25(issue_obj)).replace(" ", "")
+    text = _drylandfloras_norm_v25(_drylandfloras_issue_text_v25(issue_obj))
 
     # Sem identificacao suficiente: nao acusar taxonomia. Campos obrigatorios, se existirem,
     # continuam sendo responsabilidade do rule_engine, nao da Flora e Funga.
@@ -584,17 +584,17 @@ def _tsiino_should_drop_taxonomy_issue_v25(issue_obj, row):
 
     # Falso positivo familia-genero. Ex.: Miconia pertence a Melastomataceae.
     if family and genus and ("familia informada" in text or "familia esperada" in text or "nao coincide" in text):
-        allowed = _tsiino_families_for_genus_v25(genus)
-        if _tsiino_norm_v25(family).replace(" ", "") in allowed:
+        allowed = _drylandfloras_families_for_genus_v25(genus)
+        if _drylandfloras_norm_v25(family).replace(" ", "") in allowed:
             return True
     return False
 
 
-def _tsiino_dedupe_issues_v25(items):
+def _drylandfloras_dedupe_issues_v25(items):
     out = []
     seen = set()
     for item in items or []:
-        key = (_tsiino_norm_v25(_tsiino_issue_field_v25(item)), _tsiino_norm_v25(_tsiino_issue_text_v25(item)))
+        key = (_drylandfloras_norm_v25(_drylandfloras_issue_field_v25(item)), _drylandfloras_norm_v25(_drylandfloras_issue_text_v25(item)))
         if key in seen:
             continue
         seen.add(key)
@@ -602,76 +602,76 @@ def _tsiino_dedupe_issues_v25(items):
     return out
 
 
-if _tsiino_original_validate_taxonomy_ffb_v25 is not None:
+if _drylandfloras_original_validate_taxonomy_ffb_v25 is not None:
     def validate_taxonomy_ffb(*args, **kwargs):  # type: ignore[no-redef]
-        row = _tsiino_row_from_args_v25(args, kwargs)
-        family = _tsiino_row_value_v25(row, "family", "familia", "família")
-        genus = _tsiino_row_value_v25(row, "genus", "genero", "gênero")
-        sp1 = _tsiino_row_value_v25(row, "sp1", "species", "especie", "espécie", "epiteto", "epíteto")
+        row = _drylandfloras_row_from_args_v25(args, kwargs)
+        family = _drylandfloras_row_value_v25(row, "family", "familia", "família")
+        genus = _drylandfloras_row_value_v25(row, "genus", "genero", "gênero")
+        sp1 = _drylandfloras_row_value_v25(row, "sp1", "species", "especie", "espécie", "epiteto", "epíteto")
         if not genus and not sp1:
             return []
         try:
-            raw = _tsiino_original_validate_taxonomy_ffb_v25(*args, **kwargs)
+            raw = _drylandfloras_original_validate_taxonomy_ffb_v25(*args, **kwargs)
         except TypeError:
-            raw = _tsiino_original_validate_taxonomy_ffb_v25(row)
-        kept = [i for i in (raw or []) if not _tsiino_should_drop_taxonomy_issue_v25(i, row)]
-        return _tsiino_dedupe_issues_v25(kept)
+            raw = _drylandfloras_original_validate_taxonomy_ffb_v25(row)
+        kept = [i for i in (raw or []) if not _drylandfloras_should_drop_taxonomy_issue_v25(i, row)]
+        return _drylandfloras_dedupe_issues_v25(kept)
 
-# TSIINO_TAXONOMY_FFB_V27
+# DRYLANDFLORAS_TAXONOMY_FFB_V27
 # Correção curatorial: validação taxonômica conservadora, com busca de gênero
 # no SQLite da Flora e Funga, sugestões fuzzy e sem alerta quando a identificação
 # está vazia/incompleta.
 try:
-    _tsiino_original_validate_taxonomy_ffb_v27 = validate_taxonomy_ffb
+    _drylandfloras_original_validate_taxonomy_ffb_v27 = validate_taxonomy_ffb
 except Exception:  # pragma: no cover
-    _tsiino_original_validate_taxonomy_ffb_v27 = None
+    _drylandfloras_original_validate_taxonomy_ffb_v27 = None
 
-import difflib as _tsiino_difflib
-import inspect as _tsiino_inspect
-import re as _tsiino_re
-import sqlite3 as _tsiino_sqlite3
-import unicodedata as _tsiino_unicodedata
-from functools import lru_cache as _tsiino_lru_cache
-from pathlib import Path as _tsiino_Path
+import difflib as _drylandfloras_difflib
+import inspect as _drylandfloras_inspect
+import re as _drylandfloras_re
+import sqlite3 as _drylandfloras_sqlite3
+import unicodedata as _drylandfloras_unicodedata
+from functools import lru_cache as _drylandfloras_lru_cache
+from pathlib import Path as _drylandfloras_Path
 
 
-def _tsiino_norm_taxon_v27(value):
+def _drylandfloras_norm_taxon_v27(value):
     if value is None:
         return ""
     text = str(value).strip()
     if text.lower() in {"nan", "none", "null"}:
         return ""
-    text = _tsiino_unicodedata.normalize("NFKD", text)
-    text = "".join(ch for ch in text if not _tsiino_unicodedata.combining(ch))
+    text = _drylandfloras_unicodedata.normalize("NFKD", text)
+    text = "".join(ch for ch in text if not _drylandfloras_unicodedata.combining(ch))
     text = text.replace("×", "x")
-    text = _tsiino_re.sub(r"[^A-Za-z0-9]+", " ", text).strip().lower()
+    text = _drylandfloras_re.sub(r"[^A-Za-z0-9]+", " ", text).strip().lower()
     return text
 
 
-def _tsiino_key_taxon_v27(value):
-    return _tsiino_re.sub(r"[^a-z0-9]+", "", _tsiino_norm_taxon_v27(value))
+def _drylandfloras_key_taxon_v27(value):
+    return _drylandfloras_re.sub(r"[^a-z0-9]+", "", _drylandfloras_norm_taxon_v27(value))
 
 
-def _tsiino_title_taxon_v27(value):
+def _drylandfloras_title_taxon_v27(value):
     text = str(value or "").strip()
     if not text:
         return ""
     return text[:1].upper() + text[1:]
 
 
-def _tsiino_get_row_value_v27(row, *names):
+def _drylandfloras_get_row_value_v27(row, *names):
     if row is None:
         return ""
     if isinstance(row, dict):
         lower_map = {str(k).lower(): v for k, v in row.items()}
-        norm_map = {_tsiino_key_taxon_v27(k): v for k, v in row.items()}
+        norm_map = {_drylandfloras_key_taxon_v27(k): v for k, v in row.items()}
         for name in names:
             if name in row and row.get(name) not in (None, ""):
                 return row.get(name)
             lname = str(name).lower()
             if lname in lower_map and lower_map[lname] not in (None, ""):
                 return lower_map[lname]
-            nname = _tsiino_key_taxon_v27(name)
+            nname = _drylandfloras_key_taxon_v27(name)
             if nname in norm_map and norm_map[nname] not in (None, ""):
                 return norm_map[nname]
     else:
@@ -683,7 +683,7 @@ def _tsiino_get_row_value_v27(row, *names):
     return ""
 
 
-def _tsiino_row_number_v27(args, kwargs, row):
+def _drylandfloras_row_number_v27(args, kwargs, row):
     for key in ("row_number", "row", "linha"):
         if kwargs.get(key) is not None:
             return kwargs.get(key)
@@ -700,12 +700,12 @@ def _tsiino_row_number_v27(args, kwargs, row):
     return None
 
 
-def _tsiino_make_issue_v27(row_number, field, severity, code, message, suggestion=None):
+def _drylandfloras_make_issue_v27(row_number, field, severity, code, message, suggestion=None):
     # Usa o helper issue() do projeto quando disponível, adaptando-se à assinatura.
     factory = globals().get("issue")
     if callable(factory):
         try:
-            sig = _tsiino_inspect.signature(factory)
+            sig = _drylandfloras_inspect.signature(factory)
             kwargs = {}
             for name in sig.parameters:
                 lname = name.lower()
@@ -748,23 +748,23 @@ def _tsiino_make_issue_v27(row_number, field, severity, code, message, suggestio
     return {"row_number": row_number, "field": field, "severity": severity, "code": code, "message": message, "suggestion": suggestion}
 
 
-def _tsiino_db_path_v27():
+def _drylandfloras_db_path_v27():
     # Reaproveita constantes existentes quando presentes.
     for name in ("DEFAULT_DB", "DB_PATH", "REFERENCE_DB", "FFB_DB", "SQLITE_PATH"):
         value = globals().get(name)
         if value:
             try:
-                p = _tsiino_Path(value)
+                p = _drylandfloras_Path(value)
                 if p.exists():
                     return p
             except Exception:
                 pass
-    here = _tsiino_Path(__file__).resolve()
+    here = _drylandfloras_Path(__file__).resolve()
     candidates = [
-        here.parents[3] / "reference" / "tsiino_reference.sqlite",
-        here.parents[2] / "reference" / "tsiino_reference.sqlite",
-        _tsiino_Path.cwd() / "reference" / "tsiino_reference.sqlite",
-        _tsiino_Path.cwd() / "backend" / "reference" / "tsiino_reference.sqlite",
+        here.parents[3] / "reference" / "drylandfloras_reference.sqlite",
+        here.parents[2] / "reference" / "drylandfloras_reference.sqlite",
+        _drylandfloras_Path.cwd() / "reference" / "drylandfloras_reference.sqlite",
+        _drylandfloras_Path.cwd() / "backend" / "reference" / "drylandfloras_reference.sqlite",
     ]
     for p in candidates:
         try:
@@ -775,15 +775,15 @@ def _tsiino_db_path_v27():
     return candidates[0]
 
 
-@_tsiino_lru_cache(maxsize=1)
-def _tsiino_schema_v27():
-    path = _tsiino_db_path_v27()
+@_drylandfloras_lru_cache(maxsize=1)
+def _drylandfloras_schema_v27():
+    path = _drylandfloras_db_path_v27()
     out = {}
     if not path.exists():
         return out
     try:
-        conn = _tsiino_sqlite3.connect(str(path))
-        conn.row_factory = _tsiino_sqlite3.Row
+        conn = _drylandfloras_sqlite3.connect(str(path))
+        conn.row_factory = _drylandfloras_sqlite3.Row
         tables = conn.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()
         for row in tables:
             name = row[0]
@@ -795,31 +795,31 @@ def _tsiino_schema_v27():
     return out
 
 
-def _tsiino_connect_v27():
-    path = _tsiino_db_path_v27()
+def _drylandfloras_connect_v27():
+    path = _drylandfloras_db_path_v27()
     if not path.exists():
         return None
     try:
-        conn = _tsiino_sqlite3.connect(str(path))
-        conn.row_factory = _tsiino_sqlite3.Row
+        conn = _drylandfloras_sqlite3.connect(str(path))
+        conn.row_factory = _drylandfloras_sqlite3.Row
         return conn
     except Exception:
         return None
 
 
-def _tsiino_col_v27(cols, *candidates):
+def _drylandfloras_col_v27(cols, *candidates):
     low = {c.lower(): c for c in cols}
-    key = {_tsiino_key_taxon_v27(c): c for c in cols}
+    key = {_drylandfloras_key_taxon_v27(c): c for c in cols}
     for cand in candidates:
         if cand.lower() in low:
             return low[cand.lower()]
-        kc = _tsiino_key_taxon_v27(cand)
+        kc = _drylandfloras_key_taxon_v27(cand)
         if kc in key:
             return key[kc]
     return None
 
 
-_TSIINO_GENUS_FAMILY_OVERRIDES_V27 = {
+_DRYLANDFLORAS_GENUS_FAMILY_OVERRIDES_V27 = {
     "miconia": "Melastomataceae",
     "piper": "Piperaceae",
     "peperomia": "Piperaceae",
@@ -831,23 +831,23 @@ _TSIINO_GENUS_FAMILY_OVERRIDES_V27 = {
 }
 
 
-def _tsiino_query_genus_rows_v27(genus):
-    gkey = _tsiino_key_taxon_v27(genus)
+def _drylandfloras_query_genus_rows_v27(genus):
+    gkey = _drylandfloras_key_taxon_v27(genus)
     if not gkey:
         return []
     rows = []
-    conn = _tsiino_connect_v27()
+    conn = _drylandfloras_connect_v27()
     if conn is None:
-        fam = _TSIINO_GENUS_FAMILY_OVERRIDES_V27.get(gkey)
-        return [{"genus": _tsiino_title_taxon_v27(genus), "family": fam}] if fam else []
+        fam = _DRYLANDFLORAS_GENUS_FAMILY_OVERRIDES_V27.get(gkey)
+        return [{"genus": _drylandfloras_title_taxon_v27(genus), "family": fam}] if fam else []
     try:
-        schema = _tsiino_schema_v27()
+        schema = _drylandfloras_schema_v27()
         for table, cols in schema.items():
-            genus_col = _tsiino_col_v27(cols, "genus")
-            family_col = _tsiino_col_v27(cols, "family", "familia")
-            canonical_col = _tsiino_col_v27(cols, "canonical_name", "canonical", "scientific_name", "scientificname", "name")
-            rank_col = _tsiino_col_v27(cols, "rank", "taxon_rank", "taxonrank")
-            status_col = _tsiino_col_v27(cols, "taxonomic_status", "status", "taxon_status", "taxonomicstatus")
+            genus_col = _drylandfloras_col_v27(cols, "genus")
+            family_col = _drylandfloras_col_v27(cols, "family", "familia")
+            canonical_col = _drylandfloras_col_v27(cols, "canonical_name", "canonical", "scientific_name", "scientificname", "name")
+            rank_col = _drylandfloras_col_v27(cols, "rank", "taxon_rank", "taxonrank")
+            status_col = _drylandfloras_col_v27(cols, "taxonomic_status", "status", "taxon_status", "taxonomicstatus")
             if genus_col:
                 select = f'"{genus_col}" as genus'
                 if family_col:
@@ -888,27 +888,27 @@ def _tsiino_query_genus_rows_v27(genus):
         # Se canonical/scientific_name veio como binômio, pega só a primeira palavra.
         rg = str(rg or "").strip().split()[0] if str(rg or "").strip() else str(genus).strip()
         rf = r.get("family") or r.get("FAMILY")
-        key = (_tsiino_key_taxon_v27(rg), _tsiino_key_taxon_v27(rf))
+        key = (_drylandfloras_key_taxon_v27(rg), _drylandfloras_key_taxon_v27(rf))
         if key not in seen and key[0] == gkey:
             seen.add(key)
-            clean.append({"genus": _tsiino_title_taxon_v27(rg), "family": rf})
-    if not clean and gkey in _TSIINO_GENUS_FAMILY_OVERRIDES_V27:
-        clean.append({"genus": _tsiino_title_taxon_v27(genus), "family": _TSIINO_GENUS_FAMILY_OVERRIDES_V27[gkey]})
+            clean.append({"genus": _drylandfloras_title_taxon_v27(rg), "family": rf})
+    if not clean and gkey in _DRYLANDFLORAS_GENUS_FAMILY_OVERRIDES_V27:
+        clean.append({"genus": _drylandfloras_title_taxon_v27(genus), "family": _DRYLANDFLORAS_GENUS_FAMILY_OVERRIDES_V27[gkey]})
     return clean
 
 
-@_tsiino_lru_cache(maxsize=1)
-def _tsiino_all_genera_v27():
+@_drylandfloras_lru_cache(maxsize=1)
+def _drylandfloras_all_genera_v27():
     genera = {}
-    conn = _tsiino_connect_v27()
+    conn = _drylandfloras_connect_v27()
     if conn is not None:
         try:
-            schema = _tsiino_schema_v27()
+            schema = _drylandfloras_schema_v27()
             for table, cols in schema.items():
-                genus_col = _tsiino_col_v27(cols, "genus")
-                family_col = _tsiino_col_v27(cols, "family", "familia")
-                canonical_col = _tsiino_col_v27(cols, "canonical_name", "canonical", "scientific_name", "scientificname", "name")
-                rank_col = _tsiino_col_v27(cols, "rank", "taxon_rank", "taxonrank")
+                genus_col = _drylandfloras_col_v27(cols, "genus")
+                family_col = _drylandfloras_col_v27(cols, "family", "familia")
+                canonical_col = _drylandfloras_col_v27(cols, "canonical_name", "canonical", "scientific_name", "scientificname", "name")
+                rank_col = _drylandfloras_col_v27(cols, "rank", "taxon_rank", "taxonrank")
                 if genus_col:
                     select = f'"{genus_col}" as genus'
                     select += f', "{family_col}" as family' if family_col else ', NULL as family'
@@ -916,9 +916,9 @@ def _tsiino_all_genera_v27():
                         for r in conn.execute(f'SELECT DISTINCT {select} FROM "{table}" WHERE "{genus_col}" IS NOT NULL'):
                             g = str(r["genus"] or "").strip().split()[0]
                             if g:
-                                genera.setdefault(_tsiino_key_taxon_v27(g), {"genus": _tsiino_title_taxon_v27(g), "families": set()})
+                                genera.setdefault(_drylandfloras_key_taxon_v27(g), {"genus": _drylandfloras_title_taxon_v27(g), "families": set()})
                                 if r["family"]:
-                                    genera[_tsiino_key_taxon_v27(g)]["families"].add(str(r["family"]))
+                                    genera[_drylandfloras_key_taxon_v27(g)]["families"].add(str(r["family"]))
                     except Exception:
                         pass
                 if canonical_col and rank_col:
@@ -928,9 +928,9 @@ def _tsiino_all_genera_v27():
                         for r in conn.execute(f'SELECT DISTINCT {select} FROM "{table}" WHERE lower("{rank_col}") LIKE "%gen%" AND "{canonical_col}" IS NOT NULL'):
                             g = str(r["genus"] or "").strip().split()[0]
                             if g:
-                                genera.setdefault(_tsiino_key_taxon_v27(g), {"genus": _tsiino_title_taxon_v27(g), "families": set()})
+                                genera.setdefault(_drylandfloras_key_taxon_v27(g), {"genus": _drylandfloras_title_taxon_v27(g), "families": set()})
                                 if r["family"]:
-                                    genera[_tsiino_key_taxon_v27(g)]["families"].add(str(r["family"]))
+                                    genera[_drylandfloras_key_taxon_v27(g)]["families"].add(str(r["family"]))
                     except Exception:
                         pass
         finally:
@@ -938,25 +938,25 @@ def _tsiino_all_genera_v27():
                 conn.close()
             except Exception:
                 pass
-    for gkey, fam in _TSIINO_GENUS_FAMILY_OVERRIDES_V27.items():
-        genera.setdefault(gkey, {"genus": _tsiino_title_taxon_v27(gkey), "families": set()})
+    for gkey, fam in _DRYLANDFLORAS_GENUS_FAMILY_OVERRIDES_V27.items():
+        genera.setdefault(gkey, {"genus": _drylandfloras_title_taxon_v27(gkey), "families": set()})
         if fam:
             genera[gkey]["families"].add(fam)
     return genera
 
 
-def _tsiino_suggest_genus_v27(genus, family=None):
-    gkey = _tsiino_key_taxon_v27(genus)
+def _drylandfloras_suggest_genus_v27(genus, family=None):
+    gkey = _drylandfloras_key_taxon_v27(genus)
     if not gkey:
         return None
-    all_genera = _tsiino_all_genera_v27()
+    all_genera = _drylandfloras_all_genera_v27()
     if not all_genera:
         return None
     # Preferir candidatos da mesma família quando família estiver preenchida.
-    fkey = _tsiino_key_taxon_v27(family)
+    fkey = _drylandfloras_key_taxon_v27(family)
     keys = list(all_genera.keys())
     if fkey:
-        same_family = [k for k, v in all_genera.items() if any(_tsiino_key_taxon_v27(f) == fkey for f in v.get("families", []))]
+        same_family = [k for k, v in all_genera.items() if any(_drylandfloras_key_taxon_v27(f) == fkey for f in v.get("families", []))]
         if same_family:
             keys = same_family
     # Reduz a busca por prefixo para evitar sugestão absurda.
@@ -964,12 +964,12 @@ def _tsiino_suggest_genus_v27(genus, family=None):
     local = [k for k in keys if k.startswith(prefix[:1])]
     if local:
         keys = local
-    matches = _tsiino_difflib.get_close_matches(gkey, keys, n=3, cutoff=0.72)
+    matches = _drylandfloras_difflib.get_close_matches(gkey, keys, n=3, cutoff=0.72)
     if not matches:
         # fallback: contém prefixo de 3 ou distância visual aceitável
         scored = []
         for k in keys:
-            score = _tsiino_difflib.SequenceMatcher(None, gkey, k).ratio()
+            score = _drylandfloras_difflib.SequenceMatcher(None, gkey, k).ratio()
             if score >= 0.70:
                 scored.append((score, k))
         scored.sort(reverse=True)
@@ -979,21 +979,21 @@ def _tsiino_suggest_genus_v27(genus, family=None):
     return None
 
 
-def _tsiino_query_species_exists_v27(genus, sp1):
+def _drylandfloras_query_species_exists_v27(genus, sp1):
     genus = str(genus or "").strip()
     sp1 = str(sp1 or "").strip()
     if not genus or not sp1:
         return True
     binom = f"{genus} {sp1}".strip()
-    conn = _tsiino_connect_v27()
+    conn = _drylandfloras_connect_v27()
     if conn is None:
         return None
     try:
-        schema = _tsiino_schema_v27()
+        schema = _drylandfloras_schema_v27()
         for table, cols in schema.items():
-            genus_col = _tsiino_col_v27(cols, "genus")
-            epi_col = _tsiino_col_v27(cols, "specific_epithet", "specificepithet", "sp1", "epithet", "epiteto")
-            canonical_col = _tsiino_col_v27(cols, "canonical_name", "canonical", "scientific_name", "scientificname", "name")
+            genus_col = _drylandfloras_col_v27(cols, "genus")
+            epi_col = _drylandfloras_col_v27(cols, "specific_epithet", "specificepithet", "sp1", "epithet", "epiteto")
+            canonical_col = _drylandfloras_col_v27(cols, "canonical_name", "canonical", "scientific_name", "scientificname", "name")
             if genus_col and epi_col:
                 try:
                     row = conn.execute(f'SELECT 1 FROM "{table}" WHERE lower("{genus_col}") = lower(?) AND lower("{epi_col}") = lower(?) LIMIT 1', (genus, sp1)).fetchone()
@@ -1016,21 +1016,21 @@ def _tsiino_query_species_exists_v27(genus, sp1):
     return False
 
 
-def _tsiino_suggest_species_v27(genus, sp1):
+def _drylandfloras_suggest_species_v27(genus, sp1):
     genus = str(genus or "").strip()
     sp1 = str(sp1 or "").strip()
     if not genus or not sp1:
         return None
-    conn = _tsiino_connect_v27()
+    conn = _drylandfloras_connect_v27()
     if conn is None:
         return None
     candidates = set()
     try:
-        schema = _tsiino_schema_v27()
+        schema = _drylandfloras_schema_v27()
         for table, cols in schema.items():
-            genus_col = _tsiino_col_v27(cols, "genus")
-            epi_col = _tsiino_col_v27(cols, "specific_epithet", "specificepithet", "sp1", "epithet", "epiteto")
-            canonical_col = _tsiino_col_v27(cols, "canonical_name", "canonical", "scientific_name", "scientificname", "name")
+            genus_col = _drylandfloras_col_v27(cols, "genus")
+            epi_col = _drylandfloras_col_v27(cols, "specific_epithet", "specificepithet", "sp1", "epithet", "epiteto")
+            canonical_col = _drylandfloras_col_v27(cols, "canonical_name", "canonical", "scientific_name", "scientificname", "name")
             if genus_col and epi_col:
                 try:
                     for r in conn.execute(f'SELECT DISTINCT "{epi_col}" as epithet FROM "{table}" WHERE lower("{genus_col}") = lower(?) AND "{epi_col}" IS NOT NULL LIMIT 3000', (genus,)):
@@ -1044,7 +1044,7 @@ def _tsiino_suggest_species_v27(genus, sp1):
                     like = genus + " %"
                     for r in conn.execute(f'SELECT DISTINCT "{canonical_col}" as name FROM "{table}" WHERE "{canonical_col}" LIKE ? LIMIT 3000', (like,)):
                         parts = str(r["name"] or "").split()
-                        if len(parts) >= 2 and _tsiino_key_taxon_v27(parts[0]) == _tsiino_key_taxon_v27(genus):
+                        if len(parts) >= 2 and _drylandfloras_key_taxon_v27(parts[0]) == _drylandfloras_key_taxon_v27(genus):
                             candidates.add(parts[1])
                 except Exception:
                     pass
@@ -1053,14 +1053,14 @@ def _tsiino_suggest_species_v27(genus, sp1):
             conn.close()
         except Exception:
             pass
-    cmap = {_tsiino_key_taxon_v27(c): c for c in candidates if c}
-    matches = _tsiino_difflib.get_close_matches(_tsiino_key_taxon_v27(sp1), list(cmap.keys()), n=1, cutoff=0.74)
+    cmap = {_drylandfloras_key_taxon_v27(c): c for c in candidates if c}
+    matches = _drylandfloras_difflib.get_close_matches(_drylandfloras_key_taxon_v27(sp1), list(cmap.keys()), n=1, cutoff=0.74)
     if matches:
-        return f"{_tsiino_title_taxon_v27(genus)} {cmap[matches[0]]}"
+        return f"{_drylandfloras_title_taxon_v27(genus)} {cmap[matches[0]]}"
     return None
 
 
-def _tsiino_dedupe_issues_v27(items):
+def _drylandfloras_dedupe_issues_v27(items):
     out = []
     seen = set()
     for it in items or []:
@@ -1074,7 +1074,7 @@ def _tsiino_dedupe_issues_v27(items):
             field = getattr(it, "field", None) or getattr(it, "column", None)
             msg = getattr(it, "message", "")
             code = getattr(it, "code", "")
-        key = (_tsiino_key_taxon_v27(row), _tsiino_key_taxon_v27(field), _tsiino_key_taxon_v27(code), _tsiino_key_taxon_v27(msg))
+        key = (_drylandfloras_key_taxon_v27(row), _drylandfloras_key_taxon_v27(field), _drylandfloras_key_taxon_v27(code), _drylandfloras_key_taxon_v27(msg))
         if key not in seen:
             seen.add(key)
             out.append(it)
@@ -1083,82 +1083,82 @@ def _tsiino_dedupe_issues_v27(items):
 
 def validate_taxonomy_ffb(*args, **kwargs):  # noqa: D401 - assinatura compatível com o projeto
     row = args[0] if args else kwargs.get("row") or kwargs.get("record") or kwargs.get("data")
-    row_number = _tsiino_row_number_v27(args, kwargs, row)
+    row_number = _drylandfloras_row_number_v27(args, kwargs, row)
 
-    family = _tsiino_get_row_value_v27(row, "family", "familia", "current family", "corrected family")
-    genus = _tsiino_get_row_value_v27(row, "genus", "genero", "gênero", "current genus", "corrected genus")
-    sp1 = _tsiino_get_row_value_v27(row, "sp1", "species", "especie", "espécie", "epiteto", "epíteto", "specific_epithet")
+    family = _drylandfloras_get_row_value_v27(row, "family", "familia", "current family", "corrected family")
+    genus = _drylandfloras_get_row_value_v27(row, "genus", "genero", "gênero", "current genus", "corrected genus")
+    sp1 = _drylandfloras_get_row_value_v27(row, "sp1", "species", "especie", "espécie", "epiteto", "epíteto", "specific_epithet")
 
-    family_key = _tsiino_key_taxon_v27(family)
-    genus_key = _tsiino_key_taxon_v27(genus)
-    sp1_key = _tsiino_key_taxon_v27(sp1)
+    family_key = _drylandfloras_key_taxon_v27(family)
+    genus_key = _drylandfloras_key_taxon_v27(genus)
+    sp1_key = _drylandfloras_key_taxon_v27(sp1)
 
     # Identificação vazia ou só família: não é erro taxonômico da FFB.
     # A validação estrutural pode acusar campo obrigatório; aqui evitamos falso alerta taxonômico.
     if not genus_key:
         return []
 
-    genus_rows = _tsiino_query_genus_rows_v27(genus)
+    genus_rows = _drylandfloras_query_genus_rows_v27(genus)
     if not genus_rows:
-        suggestion = _tsiino_suggest_genus_v27(genus, family)
+        suggestion = _drylandfloras_suggest_genus_v27(genus, family)
         msg = "Gênero não encontrado na Flora e Funga do Brasil."
         if suggestion:
             msg += f" Sugestão: {suggestion}."
-        return [_tsiino_make_issue_v27(row_number, "genus", "error", "TAXON_GENUS_NOT_FOUND", msg, suggestion)]
+        return [_drylandfloras_make_issue_v27(row_number, "genus", "error", "TAXON_GENUS_NOT_FOUND", msg, suggestion)]
 
     # Se família preenchida e há família conhecida para o gênero, só alerta se houver conflito real.
     families = [r.get("family") for r in genus_rows if r.get("family")]
     if family_key and families:
-        fam_keys = {_tsiino_key_taxon_v27(f) for f in families if f}
+        fam_keys = {_drylandfloras_key_taxon_v27(f) for f in families if f}
         # Overrides seguros e normalização para casos conhecidos como Miconia/Melastomataceae e Piper/Piperaceae.
-        override_family = _TSIINO_GENUS_FAMILY_OVERRIDES_V27.get(genus_key)
+        override_family = _DRYLANDFLORAS_GENUS_FAMILY_OVERRIDES_V27.get(genus_key)
         if override_family:
-            fam_keys.add(_tsiino_key_taxon_v27(override_family))
+            fam_keys.add(_drylandfloras_key_taxon_v27(override_family))
         if family_key not in fam_keys:
             expected = sorted({str(f) for f in families if f})[0] if families else None
             # Só emite se houver uma família esperada confiável.
             if expected:
                 msg = f"Família informada não coincide com a família esperada para o gênero na Flora e Funga ({expected}). Sugestão: {expected}."
-                return [_tsiino_make_issue_v27(row_number, "family", "warning", "TAXON_FAMILY_GENUS_MISMATCH", msg, expected)]
+                return [_drylandfloras_make_issue_v27(row_number, "family", "warning", "TAXON_FAMILY_GENUS_MISMATCH", msg, expected)]
 
     # Se não há epíteto específico, não dispara alerta de espécie. Gênero válido basta.
     if not sp1_key:
         return []
 
-    species_exists = _tsiino_query_species_exists_v27(genus, sp1)
+    species_exists = _drylandfloras_query_species_exists_v27(genus, sp1)
     if species_exists is True:
         return []
     if species_exists is False:
-        suggestion = _tsiino_suggest_species_v27(genus, sp1)
+        suggestion = _drylandfloras_suggest_species_v27(genus, sp1)
         msg = "Espécie não encontrada para este gênero na Flora e Funga do Brasil."
         if suggestion:
             msg += f" Sugestão: {suggestion}."
-        return [_tsiino_make_issue_v27(row_number, "sp1", "error", "TAXON_SPECIES_NOT_FOUND", msg, suggestion)]
+        return [_drylandfloras_make_issue_v27(row_number, "sp1", "error", "TAXON_SPECIES_NOT_FOUND", msg, suggestion)]
     return []
 
-# TSIINO_TAXONOMY_ROW_STRICT_V29
+# DRYLANDFLORAS_TAXONOMY_ROW_STRICT_V29
 # Hotfix conservador: remove falsos positivos taxonômicos quando a identificação
 # está vazia/incompleta e impede que uma sugestão de espécie de outro gênero seja
 # exibida na linha corrente.
 try:
-    _tsiino_validate_taxonomy_ffb_original_v29
+    _drylandfloras_validate_taxonomy_ffb_original_v29
 except NameError:
-    _tsiino_validate_taxonomy_ffb_original_v29 = validate_taxonomy_ffb
+    _drylandfloras_validate_taxonomy_ffb_original_v29 = validate_taxonomy_ffb
 
-import re as _tsiino_re_v29
-import unicodedata as _tsiino_unicodedata_v29
+import re as _drylandfloras_re_v29
+import unicodedata as _drylandfloras_unicodedata_v29
 
 
-def _tsiino_norm_v29(value):
+def _drylandfloras_norm_v29(value):
     if value is None:
         return ''
     txt = str(value).strip()
-    txt = ''.join(ch for ch in _tsiino_unicodedata_v29.normalize('NFKD', txt) if not _tsiino_unicodedata_v29.combining(ch))
-    txt = _tsiino_re_v29.sub(r'\s+', ' ', txt).strip().lower()
+    txt = ''.join(ch for ch in _drylandfloras_unicodedata_v29.normalize('NFKD', txt) if not _drylandfloras_unicodedata_v29.combining(ch))
+    txt = _drylandfloras_re_v29.sub(r'\s+', ' ', txt).strip().lower()
     return txt
 
 
-def _tsiino_row_value_v29(row, *names):
+def _drylandfloras_row_value_v29(row, *names):
     if row is None:
         return ''
     keys = []
@@ -1183,7 +1183,7 @@ def _tsiino_row_value_v29(row, *names):
     return ''
 
 
-def _tsiino_issue_text_v29(issue):
+def _drylandfloras_issue_text_v29(issue):
     parts = []
     if isinstance(issue, dict):
         for k in ('message', 'detail', 'description', 'suggestion', 'code'):
@@ -1198,7 +1198,7 @@ def _tsiino_issue_text_v29(issue):
     return ' '.join(parts)
 
 
-def _tsiino_issue_key_v29(issue):
+def _drylandfloras_issue_key_v29(issue):
     if isinstance(issue, dict):
         return (
             issue.get('row_number') or issue.get('row') or issue.get('line_number'),
@@ -1214,19 +1214,19 @@ def _tsiino_issue_key_v29(issue):
     )
 
 
-def _tsiino_suggestion_genus_v29(text):
-    m = _tsiino_re_v29.search(r'sugest(?:a|ã)o\s*:\s*([A-ZÁÉÍÓÚÂÊÔÃÕÇ][A-Za-zÁÉÍÓÚÂÊÔÃÕÇáéíóúâêôãõç-]+)', text, flags=_tsiino_re_v29.I)
+def _drylandfloras_suggestion_genus_v29(text):
+    m = _drylandfloras_re_v29.search(r'sugest(?:a|ã)o\s*:\s*([A-ZÁÉÍÓÚÂÊÔÃÕÇ][A-Za-zÁÉÍÓÚÂÊÔÃÕÇáéíóúâêôãõç-]+)', text, flags=_drylandfloras_re_v29.I)
     if not m:
         return ''
-    return _tsiino_norm_v29(m.group(1))
+    return _drylandfloras_norm_v29(m.group(1))
 
 
-def _tsiino_is_taxonomy_text_v29(text):
-    n = _tsiino_norm_v29(text)
+def _drylandfloras_is_taxonomy_text_v29(text):
+    n = _drylandfloras_norm_v29(text)
     return any(x in n for x in ('flora e funga', 'genero', 'especie', 'familia informada', 'familia e genero'))
 
 
-_TSIINO_VALID_FAMILY_BY_GENUS_V29 = {
+_DRYLANDFLORAS_VALID_FAMILY_BY_GENUS_V29 = {
     'miconia': 'melastomataceae',
     'piper': 'piperaceae',
     'peperomia': 'piperaceae',
@@ -1241,7 +1241,7 @@ _TSIINO_VALID_FAMILY_BY_GENUS_V29 = {
 
 
 def validate_taxonomy_ffb(*args, **kwargs):
-    issues = _tsiino_validate_taxonomy_ffb_original_v29(*args, **kwargs)
+    issues = _drylandfloras_validate_taxonomy_ffb_original_v29(*args, **kwargs)
     row = None
     for arg in args:
         if isinstance(arg, dict) or hasattr(arg, 'get'):
@@ -1250,13 +1250,13 @@ def validate_taxonomy_ffb(*args, **kwargs):
     if row is None:
         row = kwargs.get('row') or kwargs.get('record') or kwargs.get('data')
 
-    family = _tsiino_row_value_v29(row, 'family', 'familia', 'current family', 'corrected family')
-    genus = _tsiino_row_value_v29(row, 'genus', 'genero', 'gênero', 'current genus', 'corrected genus')
-    sp1 = _tsiino_row_value_v29(row, 'sp1', 'species', 'especie', 'espécie', 'epiteto', 'epíteto', 'specific_epithet')
+    family = _drylandfloras_row_value_v29(row, 'family', 'familia', 'current family', 'corrected family')
+    genus = _drylandfloras_row_value_v29(row, 'genus', 'genero', 'gênero', 'current genus', 'corrected genus')
+    sp1 = _drylandfloras_row_value_v29(row, 'sp1', 'species', 'especie', 'espécie', 'epiteto', 'epíteto', 'specific_epithet')
 
-    nfam = _tsiino_norm_v29(family)
-    ngen = _tsiino_norm_v29(genus)
-    nsp1 = _tsiino_norm_v29(sp1)
+    nfam = _drylandfloras_norm_v29(family)
+    ngen = _drylandfloras_norm_v29(genus)
+    nsp1 = _drylandfloras_norm_v29(sp1)
 
     if not isinstance(issues, list):
         try:
@@ -1267,9 +1267,9 @@ def validate_taxonomy_ffb(*args, **kwargs):
     out = []
     seen = set()
     for issue in issues:
-        txt = _tsiino_issue_text_v29(issue)
-        ntxt = _tsiino_norm_v29(txt)
-        is_tax = _tsiino_is_taxonomy_text_v29(txt)
+        txt = _drylandfloras_issue_text_v29(issue)
+        ntxt = _drylandfloras_norm_v29(txt)
+        is_tax = _drylandfloras_is_taxonomy_text_v29(txt)
 
         # Identificação vazia/incompleta: não gerar ruído taxonômico.
         if is_tax and not ngen:
@@ -1280,32 +1280,32 @@ def validate_taxonomy_ffb(*args, **kwargs):
             continue
 
         # Família-gênero: não avisar quando o par conhecido está coerente.
-        expected_family = _TSIINO_VALID_FAMILY_BY_GENUS_V29.get(ngen)
+        expected_family = _DRYLANDFLORAS_VALID_FAMILY_BY_GENUS_V29.get(ngen)
         if expected_family and nfam == expected_family and ('familia' in ntxt or 'genero' in ntxt):
             if 'nao encontrado' in ntxt or 'nao coincide' in ntxt or 'familia informada' in ntxt:
                 continue
 
         # Sugestão de espécie de outro gênero é quase sempre eco/alocação errada.
-        sugg_genus = _tsiino_suggestion_genus_v29(txt)
+        sugg_genus = _drylandfloras_suggestion_genus_v29(txt)
         if sugg_genus and ngen and sugg_genus != ngen:
             if 'especie' in ntxt and 'para este genero' in ntxt:
                 continue
 
         # Alguns gêneros válidos comuns não devem receber alerta genérico de gênero.
-        if ngen in _TSIINO_VALID_FAMILY_BY_GENUS_V29 and 'genero nao encontrado' in ntxt:
+        if ngen in _DRYLANDFLORAS_VALID_FAMILY_BY_GENUS_V29 and 'genero nao encontrado' in ntxt:
             continue
 
-        key = _tsiino_issue_key_v29(issue)
+        key = _drylandfloras_issue_key_v29(issue)
         if key in seen:
             continue
         seen.add(key)
         out.append(issue)
     return out
 
-# TSIINO_TAXONOMY_FFB_STRICT_DB_V34
+# DRYLANDFLORAS_TAXONOMY_FFB_STRICT_DB_V34
 # Validação taxonômica conservadora e genérica: consulta a própria base SQLite da Flora e Funga.
 # Não usa pares família–gênero hardcoded de planilhas. Só alerta com evidência da base.
-def _tsiino_strip_accents_v34(value):
+def _drylandfloras_strip_accents_v34(value):
     import unicodedata, re
     s = '' if value is None else str(value).strip()
     s = unicodedata.normalize('NFKD', s)
@@ -1313,26 +1313,26 @@ def _tsiino_strip_accents_v34(value):
     s = re.sub(r'\s+', ' ', s).strip()
     return s
 
-def _tsiino_norm_tax_v34(value):
+def _drylandfloras_norm_tax_v34(value):
     import re
-    s = _tsiino_strip_accents_v34(value).lower()
+    s = _drylandfloras_strip_accents_v34(value).lower()
     s = re.sub(r'[^a-z0-9]+', ' ', s).strip()
     return s
 
-def _tsiino_get_row_value_v34(row, *names):
+def _drylandfloras_get_row_value_v34(row, *names):
     if not isinstance(row, dict):
         return ''
     for name in names:
         if name in row and row.get(name) not in (None, ''):
             return row.get(name)
-    norm_map = {_tsiino_norm_tax_v34(k).replace(' ', '_'): v for k, v in row.items()}
+    norm_map = {_drylandfloras_norm_tax_v34(k).replace(' ', '_'): v for k, v in row.items()}
     for name in names:
-        key = _tsiino_norm_tax_v34(name).replace(' ', '_')
+        key = _drylandfloras_norm_tax_v34(name).replace(' ', '_')
         if key in norm_map and norm_map[key] not in (None, ''):
             return norm_map[key]
     return ''
 
-def _tsiino_row_number_v34(row, kwargs):
+def _drylandfloras_row_number_v34(row, kwargs):
     for k in ('_ROW_NUMBER', 'row_number', 'row', 'linha'):
         try:
             v = row.get(k) if isinstance(row, dict) else None
@@ -1349,25 +1349,25 @@ def _tsiino_row_number_v34(row, kwargs):
             pass
     return None
 
-def _tsiino_default_db_v34():
+def _drylandfloras_default_db_v34():
     try:
         return DEFAULT_DB
     except Exception:
         from pathlib import Path
-        return Path(__file__).resolve().parents[2] / 'reference' / 'tsiino_reference.sqlite'
+        return Path(__file__).resolve().parents[2] / 'reference' / 'drylandfloras_reference.sqlite'
 
-def _tsiino_connect_v34():
+def _drylandfloras_connect_v34():
     import sqlite3
-    db = _tsiino_default_db_v34()
+    db = _drylandfloras_default_db_v34()
     return sqlite3.connect(str(db))
 
-from functools import lru_cache as _tsiino_lru_cache_v34
+from functools import lru_cache as _drylandfloras_lru_cache_v34
 
-@_tsiino_lru_cache_v34(maxsize=1)
-def _tsiino_table_columns_v34():
+@_drylandfloras_lru_cache_v34(maxsize=1)
+def _drylandfloras_table_columns_v34():
     out = []
     try:
-        con = _tsiino_connect_v34()
+        con = _drylandfloras_connect_v34()
         cur = con.execute("SELECT name FROM sqlite_master WHERE type='table'")
         for (table,) in cur.fetchall():
             cols = [r[1] for r in con.execute(f'PRAGMA table_info("{table}")').fetchall()]
@@ -1378,7 +1378,7 @@ def _tsiino_table_columns_v34():
         pass
     return out
 
-def _tsiino_col_v34(lower, *candidates):
+def _drylandfloras_col_v34(lower, *candidates):
     for c in candidates:
         if c.lower() in lower:
             return lower[c.lower()]
@@ -1389,17 +1389,17 @@ def _tsiino_col_v34(lower, *candidates):
                 return orig
     return None
 
-@_tsiino_lru_cache_v34(maxsize=4096)
-def _tsiino_families_for_genus_v34(genus_norm):
+@_drylandfloras_lru_cache_v34(maxsize=4096)
+def _drylandfloras_families_for_genus_v34(genus_norm):
     families = set()
     if not genus_norm:
         return tuple()
     try:
-        con = _tsiino_connect_v34()
-        for table, cols, lower in _tsiino_table_columns_v34():
-            fam_col = _tsiino_col_v34(lower, 'family', 'familia')
-            gen_col = _tsiino_col_v34(lower, 'genus', 'genero')
-            sci_col = _tsiino_col_v34(lower, 'scientificName', 'scientific_name', 'canonicalName', 'canonical_name', 'accepted_name', 'name')
+        con = _drylandfloras_connect_v34()
+        for table, cols, lower in _drylandfloras_table_columns_v34():
+            fam_col = _drylandfloras_col_v34(lower, 'family', 'familia')
+            gen_col = _drylandfloras_col_v34(lower, 'genus', 'genero')
+            sci_col = _drylandfloras_col_v34(lower, 'scientificName', 'scientific_name', 'canonicalName', 'canonical_name', 'accepted_name', 'name')
             if fam_col and gen_col:
                 try:
                     q = f'SELECT DISTINCT "{fam_col}" FROM "{table}" WHERE lower("{gen_col}") = ? AND "{fam_col}" IS NOT NULL LIMIT 20'
@@ -1412,7 +1412,7 @@ def _tsiino_families_for_genus_v34(genus_norm):
                 try:
                     q = f'SELECT DISTINCT "{fam_col}", "{sci_col}" FROM "{table}" WHERE lower("{sci_col}") LIKE ? LIMIT 100'
                     for fam, sci in con.execute(q, (genus_norm + ' %',)).fetchall():
-                        if fam and _tsiino_norm_tax_v34(str(sci).split()[0] if sci else '') == genus_norm:
+                        if fam and _drylandfloras_norm_tax_v34(str(sci).split()[0] if sci else '') == genus_norm:
                             families.add(str(fam).strip())
                 except Exception:
                     pass
@@ -1421,14 +1421,14 @@ def _tsiino_families_for_genus_v34(genus_norm):
         pass
     return tuple(sorted(families))
 
-@_tsiino_lru_cache_v34(maxsize=1)
-def _tsiino_all_genera_v34():
+@_drylandfloras_lru_cache_v34(maxsize=1)
+def _drylandfloras_all_genera_v34():
     genera = set()
     try:
-        con = _tsiino_connect_v34()
-        for table, cols, lower in _tsiino_table_columns_v34():
-            gen_col = _tsiino_col_v34(lower, 'genus', 'genero')
-            sci_col = _tsiino_col_v34(lower, 'scientificName', 'scientific_name', 'canonicalName', 'canonical_name', 'accepted_name', 'name')
+        con = _drylandfloras_connect_v34()
+        for table, cols, lower in _drylandfloras_table_columns_v34():
+            gen_col = _drylandfloras_col_v34(lower, 'genus', 'genero')
+            sci_col = _drylandfloras_col_v34(lower, 'scientificName', 'scientific_name', 'canonicalName', 'canonical_name', 'accepted_name', 'name')
             if gen_col:
                 try:
                     for (g,) in con.execute(f'SELECT DISTINCT "{gen_col}" FROM "{table}" WHERE "{gen_col}" IS NOT NULL').fetchall():
@@ -1450,22 +1450,22 @@ def _tsiino_all_genera_v34():
         pass
     return tuple(sorted(genera, key=lambda x: x.lower()))
 
-@_tsiino_lru_cache_v34(maxsize=8192)
-def _tsiino_species_epithets_for_genus_v34(genus_norm):
+@_drylandfloras_lru_cache_v34(maxsize=8192)
+def _drylandfloras_species_epithets_for_genus_v34(genus_norm):
     eps = {}
     if not genus_norm:
         return tuple()
     try:
-        con = _tsiino_connect_v34()
-        for table, cols, lower in _tsiino_table_columns_v34():
-            gen_col = _tsiino_col_v34(lower, 'genus', 'genero')
-            ep_col = _tsiino_col_v34(lower, 'specificEpithet', 'specific_epithet', 'specificepithet', 'sp1', 'epithet')
-            sci_col = _tsiino_col_v34(lower, 'scientificName', 'scientific_name', 'canonicalName', 'canonical_name', 'accepted_name', 'name')
+        con = _drylandfloras_connect_v34()
+        for table, cols, lower in _drylandfloras_table_columns_v34():
+            gen_col = _drylandfloras_col_v34(lower, 'genus', 'genero')
+            ep_col = _drylandfloras_col_v34(lower, 'specificEpithet', 'specific_epithet', 'specificepithet', 'sp1', 'epithet')
+            sci_col = _drylandfloras_col_v34(lower, 'scientificName', 'scientific_name', 'canonicalName', 'canonical_name', 'accepted_name', 'name')
             if gen_col and ep_col:
                 try:
                     q = f'SELECT DISTINCT "{ep_col}", "{gen_col}" FROM "{table}" WHERE lower("{gen_col}") = ? AND "{ep_col}" IS NOT NULL LIMIT 5000'
                     for ep, g in con.execute(q, (genus_norm,)).fetchall():
-                        epn = _tsiino_norm_tax_v34(ep)
+                        epn = _drylandfloras_norm_tax_v34(ep)
                         if epn:
                             eps.setdefault(epn, f'{str(g).strip()} {str(ep).strip()}')
                 except Exception:
@@ -1475,8 +1475,8 @@ def _tsiino_species_epithets_for_genus_v34(genus_norm):
                     q = f'SELECT DISTINCT "{sci_col}" FROM "{table}" WHERE lower("{sci_col}") LIKE ? LIMIT 5000'
                     for (sci,) in con.execute(q, (genus_norm + ' %',)).fetchall():
                         parts = str(sci or '').strip().split()
-                        if len(parts) >= 2 and _tsiino_norm_tax_v34(parts[0]) == genus_norm:
-                            epn = _tsiino_norm_tax_v34(parts[1])
+                        if len(parts) >= 2 and _drylandfloras_norm_tax_v34(parts[0]) == genus_norm:
+                            epn = _drylandfloras_norm_tax_v34(parts[1])
                             if epn:
                                 eps.setdefault(epn, f'{parts[0]} {parts[1]}')
                 except Exception:
@@ -1486,7 +1486,7 @@ def _tsiino_species_epithets_for_genus_v34(genus_norm):
         pass
     return tuple(sorted(eps.items()))
 
-def _tsiino_best_match_v34(query_norm, candidates, cutoff=0.88):
+def _drylandfloras_best_match_v34(query_norm, candidates, cutoff=0.88):
     if not query_norm or not candidates:
         return None
     import difflib
@@ -1496,13 +1496,13 @@ def _tsiino_best_match_v34(query_norm, candidates, cutoff=0.88):
         if isinstance(c, tuple):
             norm, label = c
         else:
-            norm, label = _tsiino_norm_tax_v34(c), c
+            norm, label = _drylandfloras_norm_tax_v34(c), c
         cand_norm.append(norm)
         back[norm] = label
     hit = difflib.get_close_matches(query_norm, cand_norm, n=1, cutoff=cutoff)
     return back.get(hit[0]) if hit else None
 
-def _tsiino_make_issue_v34(row_number, field, severity, code, message, value=None, suggestion=None):
+def _drylandfloras_make_issue_v34(row_number, field, severity, code, message, value=None, suggestion=None):
     fn = globals().get('issue')
     attempts = []
     kw = dict(row_number=row_number, field=field, severity=severity, code=code, message=message, value=value, suggestion=suggestion)
@@ -1535,45 +1535,45 @@ def validate_taxonomy_ffb(*args, **kwargs):
             break
     if row is None:
         row = kwargs.get('row') or {}
-    row_number = _tsiino_row_number_v34(row, kwargs)
-    family = _tsiino_strip_accents_v34(_tsiino_get_row_value_v34(row, 'family', 'familia', 'Current Family', 'Corrected Family'))
-    genus = _tsiino_strip_accents_v34(_tsiino_get_row_value_v34(row, 'genus', 'genero', 'gênero'))
-    sp1 = _tsiino_strip_accents_v34(_tsiino_get_row_value_v34(row, 'sp1', 'species', 'epiteto', 'epíteto', 'epiteto especifico'))
+    row_number = _drylandfloras_row_number_v34(row, kwargs)
+    family = _drylandfloras_strip_accents_v34(_drylandfloras_get_row_value_v34(row, 'family', 'familia', 'Current Family', 'Corrected Family'))
+    genus = _drylandfloras_strip_accents_v34(_drylandfloras_get_row_value_v34(row, 'genus', 'genero', 'gênero'))
+    sp1 = _drylandfloras_strip_accents_v34(_drylandfloras_get_row_value_v34(row, 'sp1', 'species', 'epiteto', 'epíteto', 'epiteto especifico'))
     if not genus:
         return []
-    genus_norm = _tsiino_norm_tax_v34(genus)
-    family_norm = _tsiino_norm_tax_v34(family)
+    genus_norm = _drylandfloras_norm_tax_v34(genus)
+    family_norm = _drylandfloras_norm_tax_v34(family)
     issues_out = []
-    families = _tsiino_families_for_genus_v34(genus_norm)
-    families_norm = {_tsiino_norm_tax_v34(f) for f in families}
+    families = _drylandfloras_families_for_genus_v34(genus_norm)
+    families_norm = {_drylandfloras_norm_tax_v34(f) for f in families}
     if not families:
-        suggestion = _tsiino_best_match_v34(genus_norm, _tsiino_all_genera_v34(), cutoff=0.91)
-        if suggestion and _tsiino_norm_tax_v34(suggestion) != genus_norm:
+        suggestion = _drylandfloras_best_match_v34(genus_norm, _drylandfloras_all_genera_v34(), cutoff=0.91)
+        if suggestion and _drylandfloras_norm_tax_v34(suggestion) != genus_norm:
             msg = f'Gênero não encontrado na Flora e Funga do Brasil. Sugestão: {suggestion}.'
-            issues_out.append(_tsiino_make_issue_v34(row_number, 'genus', 'warning', 'TAXONOMY_GENUS_NOT_FOUND', msg, genus, suggestion))
+            issues_out.append(_drylandfloras_make_issue_v34(row_number, 'genus', 'warning', 'TAXONOMY_GENUS_NOT_FOUND', msg, genus, suggestion))
         return issues_out
     if family and families_norm and family_norm not in families_norm:
         suggestion_family = families[0]
         msg = f'Família informada não coincide com a família esperada para o gênero na Flora e Funga ({suggestion_family}). Sugestão: {suggestion_family}.'
-        issues_out.append(_tsiino_make_issue_v34(row_number, 'family', 'warning', 'TAXONOMY_FAMILY_MISMATCH', msg, family, suggestion_family))
+        issues_out.append(_drylandfloras_make_issue_v34(row_number, 'family', 'warning', 'TAXONOMY_FAMILY_MISMATCH', msg, family, suggestion_family))
     if not sp1:
-        return _tsiino_dedup_issues_v34(issues_out)
-    sp_norm = _tsiino_norm_tax_v34(sp1).split()[0] if _tsiino_norm_tax_v34(sp1) else ''
+        return _drylandfloras_dedup_issues_v34(issues_out)
+    sp_norm = _drylandfloras_norm_tax_v34(sp1).split()[0] if _drylandfloras_norm_tax_v34(sp1) else ''
     if not sp_norm:
-        return _tsiino_dedup_issues_v34(issues_out)
-    epithets = _tsiino_species_epithets_for_genus_v34(genus_norm)
+        return _drylandfloras_dedup_issues_v34(issues_out)
+    epithets = _drylandfloras_species_epithets_for_genus_v34(genus_norm)
     ep_norms = {e for e, label in epithets}
     if sp_norm in ep_norms:
-        return _tsiino_dedup_issues_v34(issues_out)
-    suggestion = _tsiino_best_match_v34(sp_norm, epithets, cutoff=0.88)
+        return _drylandfloras_dedup_issues_v34(issues_out)
+    suggestion = _drylandfloras_best_match_v34(sp_norm, epithets, cutoff=0.88)
     if suggestion:
-        sgen = _tsiino_norm_tax_v34(str(suggestion).split()[0] if str(suggestion).split() else '')
+        sgen = _drylandfloras_norm_tax_v34(str(suggestion).split()[0] if str(suggestion).split() else '')
         if sgen == genus_norm:
             msg = f'Espécie não encontrada para este gênero na Flora e Funga do Brasil. Sugestão: {suggestion}.'
-            issues_out.append(_tsiino_make_issue_v34(row_number, 'sp1', 'warning', 'TAXONOMY_SPECIES_NOT_FOUND', msg, sp1, suggestion))
-    return _tsiino_dedup_issues_v34(issues_out)
+            issues_out.append(_drylandfloras_make_issue_v34(row_number, 'sp1', 'warning', 'TAXONOMY_SPECIES_NOT_FOUND', msg, sp1, suggestion))
+    return _drylandfloras_dedup_issues_v34(issues_out)
 
-def _tsiino_dedup_issues_v34(items):
+def _drylandfloras_dedup_issues_v34(items):
     seen = set()
     out = []
     for it in items:

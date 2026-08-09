@@ -4,7 +4,7 @@
  * dashboard labels, Leaflet popups and common spreadsheet-driven role labels.
  * Save this file as UTF-8.
  */
-window.TsiinoTranslations = {
+window.DrylandFlorasTranslations = {
   "defaultLanguage": "pt",
   "availableLanguages": [
     "pt",
@@ -14,7 +14,7 @@ window.TsiinoTranslations = {
     "pt": "Português",
     "en": "English"
   },
-  "storageKey": "tsiino-language",
+  "storageKey": "drylandfloras-language",
   "strings": {
     "en": {
       "Sobre": "About",

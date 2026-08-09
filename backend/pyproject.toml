@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tsiino-herbarium-validator"
+name = "drylandfloras-herbarium-validator"
 version = "0.1.0"
 description = "FastAPI backend for herbarium spreadsheet validation"
 requires-python = ">=3.11"

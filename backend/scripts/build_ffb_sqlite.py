@@ -10,7 +10,7 @@ Or using a local DwC-A archive:
     cd backend
     python scripts/build_ffb_sqlite.py --dwca C:\\path\\to\\ffb.zip
 
-The resulting database is written to backend/reference/tsiino_reference.sqlite by default.
+The resulting database is written to backend/reference/drylandfloras_reference.sqlite by default.
 """
 
 from __future__ import annotations
@@ -221,7 +221,7 @@ def create_schema(conn: sqlite3.Connection) -> None:
 def build_database(dwca_path: Path, sqlite_path: Path, source_url: str | None, source_version: str | None) -> None:
     sqlite_path.parent.mkdir(parents=True, exist_ok=True)
 
-    with tempfile.TemporaryDirectory(prefix="tsiino_ffb_dwca_") as tmp:
+    with tempfile.TemporaryDirectory(prefix="drylandfloras_ffb_dwca_") as tmp:
         tmpdir = Path(tmp)
         extract_dir = tmpdir / "dwca"
         print(f"Extraindo: {dwca_path}")
@@ -456,7 +456,7 @@ def main() -> None:
     parser.add_argument("--dwca", type=Path, help="Arquivo DwC-A local, .zip")
     parser.add_argument("--download", action="store_true", help="Baixar DwC-A do IPT/JBRJ")
     parser.add_argument("--url", default=DEFAULT_FFB_DWCA_URL)
-    parser.add_argument("--output", type=Path, default=Path("reference") / "tsiino_reference.sqlite")
+    parser.add_argument("--output", type=Path, default=Path("reference") / "drylandfloras_reference.sqlite")
     parser.add_argument("--source-version", default=None)
     args = parser.parse_args()
 

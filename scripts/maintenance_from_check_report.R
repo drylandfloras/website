@@ -393,8 +393,8 @@ apply_common_site_fixes <- function(
   plan <- tibble::tribble(
     ~rel_file, ~descricao,
     "index.qmd", "Corrigir links internos team.html/expedicoes.html e caminhos de CSVs da raiz quando existirem em _input_data/.",
-    "diversidade/index.qmd", "Corrigir caminho da planilha diversidade_tsiino.xlsx para ../_input_data/.",
-    "expedicoes/index.qmd", "Corrigir caminhos de expedicoes_tsiino.csv e geojson para ../_input_data/.",
+    "diversidade/index.qmd", "Corrigir caminho da planilha diversidade_drylandfloras.xlsx para ../_input_data/.",
+    "expedicoes/index.qmd", "Corrigir caminhos de expedicoes_drylandfloras.csv e geojson para ../_input_data/.",
     "team/index.qmd", "Corrigir caminho da planilha C2_team.xlsx para ../_input_data/."
   ) |>
     dplyr::mutate(abs_file = fs::path(root, rel_file), exists = fs::file_exists(abs_file))
@@ -418,8 +418,8 @@ apply_common_site_fixes <- function(
       new_text <- gsub('href="expedicoes.html"', 'href="expedicoes/"', new_text, fixed = TRUE)
       new_text <- gsub("href='expedicoes.html'", "href='expedicoes/'", new_text, fixed = TRUE)
       new_text <- gsub("(expedicoes.html)", "(expedicoes/)", new_text, fixed = TRUE)
-      new_text <- replace_if_file_exists(new_text, '"expedicoes_tsiino.csv"', '"_input_data/expedicoes_tsiino.csv"', "_input_data/expedicoes_tsiino.csv")
-      new_text <- replace_if_file_exists(new_text, "'expedicoes_tsiino.csv'", "'_input_data/expedicoes_tsiino.csv'", "_input_data/expedicoes_tsiino.csv")
+      new_text <- replace_if_file_exists(new_text, '"expedicoes_drylandfloras.csv"', '"_input_data/expedicoes_drylandfloras.csv"', "_input_data/expedicoes_drylandfloras.csv")
+      new_text <- replace_if_file_exists(new_text, "'expedicoes_drylandfloras.csv'", "'_input_data/expedicoes_drylandfloras.csv'", "_input_data/expedicoes_drylandfloras.csv")
       new_text <- replace_if_file_exists(new_text, '"divulgacao_instagram.csv"', '"_input_data/divulgacao_instagram.csv"', "_input_data/divulgacao_instagram.csv")
       new_text <- replace_if_file_exists(new_text, "'divulgacao_instagram.csv'", "'_input_data/divulgacao_instagram.csv'", "_input_data/divulgacao_instagram.csv")
       new_text <- replace_if_file_exists(new_text, '"divulgacao_reportagens.csv"', '"_input_data/divulgacao_reportagens.csv"', "_input_data/divulgacao_reportagens.csv")
@@ -427,17 +427,17 @@ apply_common_site_fixes <- function(
     }
     
     if (rel_file == "diversidade/index.qmd") {
-      new_text <- gsub('"diversidade_tsiino.xlsx"', '"../_input_data/diversidade_tsiino.xlsx"', new_text, fixed = TRUE)
-      new_text <- gsub("'diversidade_tsiino.xlsx'", "'../_input_data/diversidade_tsiino.xlsx'", new_text, fixed = TRUE)
-      new_text <- gsub('"_input_data/diversidade_tsiino.xlsx"', '"../_input_data/diversidade_tsiino.xlsx"', new_text, fixed = TRUE)
-      new_text <- gsub("'_input_data/diversidade_tsiino.xlsx'", "'../_input_data/diversidade_tsiino.xlsx'", new_text, fixed = TRUE)
+      new_text <- gsub('"diversidade_drylandfloras.xlsx"', '"../_input_data/diversidade_drylandfloras.xlsx"', new_text, fixed = TRUE)
+      new_text <- gsub("'diversidade_drylandfloras.xlsx'", "'../_input_data/diversidade_drylandfloras.xlsx'", new_text, fixed = TRUE)
+      new_text <- gsub('"_input_data/diversidade_drylandfloras.xlsx"', '"../_input_data/diversidade_drylandfloras.xlsx"', new_text, fixed = TRUE)
+      new_text <- gsub("'_input_data/diversidade_drylandfloras.xlsx'", "'../_input_data/diversidade_drylandfloras.xlsx'", new_text, fixed = TRUE)
     }
     
     if (rel_file == "expedicoes/index.qmd") {
-      new_text <- gsub('"expedicoes_tsiino.csv"', '"../_input_data/expedicoes_tsiino.csv"', new_text, fixed = TRUE)
-      new_text <- gsub("'expedicoes_tsiino.csv'", "'../_input_data/expedicoes_tsiino.csv'", new_text, fixed = TRUE)
-      new_text <- gsub('"_input_data/expedicoes_tsiino.csv"', '"../_input_data/expedicoes_tsiino.csv"', new_text, fixed = TRUE)
-      new_text <- gsub("'_input_data/expedicoes_tsiino.csv'", "'../_input_data/expedicoes_tsiino.csv'", new_text, fixed = TRUE)
+      new_text <- gsub('"expedicoes_drylandfloras.csv"', '"../_input_data/expedicoes_drylandfloras.csv"', new_text, fixed = TRUE)
+      new_text <- gsub("'expedicoes_drylandfloras.csv'", "'../_input_data/expedicoes_drylandfloras.csv'", new_text, fixed = TRUE)
+      new_text <- gsub('"_input_data/expedicoes_drylandfloras.csv"', '"../_input_data/expedicoes_drylandfloras.csv"', new_text, fixed = TRUE)
+      new_text <- gsub("'_input_data/expedicoes_drylandfloras.csv'", "'../_input_data/expedicoes_drylandfloras.csv'", new_text, fixed = TRUE)
       new_text <- gsub('"sao_gabriel_da_cachoeira.geojson"', '"../_input_data/sao_gabriel_da_cachoeira.geojson"', new_text, fixed = TRUE)
       new_text <- gsub("'sao_gabriel_da_cachoeira.geojson'", "'../_input_data/sao_gabriel_da_cachoeira.geojson'", new_text, fixed = TRUE)
     }

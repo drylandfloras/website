@@ -3,7 +3,7 @@ from __future__ import annotations
 from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="Tsiino Herbarium Validator API")
+app = FastAPI(title="DrylandFloras Herbarium Validator API")
 
 app.add_middleware(
     CORSMiddleware,

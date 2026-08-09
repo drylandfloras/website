@@ -1,7 +1,7 @@
-// TSIINO_ISSUE_GEO_V39B
+// DRYLANDFLORAS_ISSUE_GEO_V39B
 (function () {
   'use strict';
-  if (window.TsiinoIssueGeoV39B) return;
+  if (window.DrylandFlorasIssueGeoV39B) return;
   function normalizeItem(item) {
     if (!item || typeof item !== 'object') return item;
     const out = Object.assign({}, item);
@@ -20,7 +20,7 @@
     return data;
   }
   const originalFetch = window.fetch;
-  window.fetch = async function tsiinoIssueGeoFetch(input, init) {
+  window.fetch = async function drylandflorasIssueGeoFetch(input, init) {
     const response = await originalFetch.apply(this, arguments);
     try {
       const url = typeof input === 'string' ? input : (input && input.url) || '';
@@ -33,5 +33,5 @@
       return new Response(JSON.stringify(normalized), { status: response.status, statusText: response.statusText, headers });
     } catch (err) { return response; }
   };
-  window.TsiinoIssueGeoV39B = { ready: true, normalizeItem };
+  window.DrylandFlorasIssueGeoV39B = { ready: true, normalizeItem };
 })();

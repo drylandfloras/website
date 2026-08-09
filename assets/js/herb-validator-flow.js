@@ -1,14 +1,14 @@
-// TSIINO_STABLE_SUBMIT_FLOW_20260701
+// DRYLANDFLORAS_STABLE_SUBMIT_FLOW_20260701
 (function () {
   const LOCAL_API = 'http://127.0.0.1:8000/api/validator';
-  const PROD_API = 'https://api.tsiinohiiwiida.net/api/validator';
+  const PROD_API = 'https://api.drylandflorashiiwiida.net/api/validator';
   const host = window.location.hostname;
   const API_BASE = (!host || host === '127.0.0.1' || host === 'localhost') ? LOCAL_API : PROD_API;
   let running = false;
   let lastJobId = null;
   function $(id) { return document.getElementById(id); }
   function setStatus(message, type) {
-    if (window.TsiinoValidatorBridge && typeof window.TsiinoValidatorBridge.setStatus === 'function') { window.TsiinoValidatorBridge.setStatus(message, type || 'info'); return; }
+    if (window.DrylandFlorasValidatorBridge && typeof window.DrylandFlorasValidatorBridge.setStatus === 'function') { window.DrylandFlorasValidatorBridge.setStatus(message, type || 'info'); return; }
     const el = $('validator-status'); if (el) { el.hidden = false; el.className = 'hv-status ' + (type || 'info'); el.textContent = message; }
   }
   function setBusy(flag) { const btn = $('validate-button'); if (!btn) return; btn.disabled = !!flag; btn.textContent = flag ? 'Validando...' : 'Validar planilha'; }
@@ -37,9 +37,9 @@
   }
   async function renderJob(jobId) {
     lastJobId = jobId;
-    if (window.TsiinoValidatorBridge && typeof window.TsiinoValidatorBridge.applyJob === 'function') await window.TsiinoValidatorBridge.applyJob(jobId); else throw new Error('TsiinoValidatorBridge.applyJob não está disponível.');
+    if (window.DrylandFlorasValidatorBridge && typeof window.DrylandFlorasValidatorBridge.applyJob === 'function') await window.DrylandFlorasValidatorBridge.applyJob(jobId); else throw new Error('DrylandFlorasValidatorBridge.applyJob não está disponível.');
     const download = $('download-annotated');
-    if (download) { download.href = API_BASE + '/jobs/' + encodeURIComponent(jobId) + '/download.xlsx'; download.setAttribute('download', 'tsiino_planilha_anotada_' + jobId + '.xlsx'); download.classList.remove('is-disabled'); download.setAttribute('aria-disabled', 'false'); }
+    if (download) { download.href = API_BASE + '/jobs/' + encodeURIComponent(jobId) + '/download.xlsx'; download.setAttribute('download', 'drylandfloras_planilha_anotada_' + jobId + '.xlsx'); download.classList.remove('is-disabled'); download.setAttribute('aria-disabled', 'false'); }
     const results = $('validator-results'); if (results) results.hidden = false; setTimeout(cleanRenderedTable, 50);
   }
   function cleanRenderedTable() {
@@ -58,14 +58,14 @@
       setStatus('Analisando estrutura da planilha...', 'info'); const preview = await previewFile(file);
       if (!preview.detected_standard) {
         setStatus('Planilha fora do padrão detectada. Faça o mapeamento das colunas e valide a versão convertida.', 'warning');
-        if (typeof window.TsiinoInstallMapperOpenAlias === 'function') window.TsiinoInstallMapperOpenAlias();
-        const mapper = window.TsiinoConverterIntegration || window.TsiinoConverter;
+        if (typeof window.DrylandFlorasInstallMapperOpenAlias === 'function') window.DrylandFlorasInstallMapperOpenAlias();
+        const mapper = window.DrylandFlorasConverterIntegration || window.DrylandFlorasConverter;
         const openMapper = mapper && (mapper.open || mapper.openAfterValidationFailure || mapper.showFromFile || mapper.openFromPreview || mapper.openMapper);
         if (typeof openMapper !== 'function') {
-          console.error('[Tsiino] Mapper indisponível no hotfix v10:', {
-            integration: window.TsiinoConverterIntegration,
-            converter: window.TsiinoConverter,
-            compatReady: window.TsiinoMapperCompatReady
+          console.error('[DrylandFloras] Mapper indisponível no hotfix v10:', {
+            integration: window.DrylandFlorasConverterIntegration,
+            converter: window.DrylandFlorasConverter,
+            compatReady: window.DrylandFlorasMapperCompatReady
           });
           throw new Error('O mapeador de colunas não carregou.');
         }
@@ -75,11 +75,11 @@
       setStatus('Planilha padrão INPA/BRAHMS reconhecida. Normalizando cabeçalho técnico e validando...', 'info');
       const normalized = await convertFile(file, preview.suggested_mapping || {}, false); const jobId = await uploadForValidation(normalized); await renderJob(jobId);
       setStatus('Validação concluída. Corrija as células destacadas ou baixe a cópia .xlsx anotada.', 'ok');
-    } catch (err) { console.error('[Tsiino] Falha na validação:', err); setStatus('Não foi possível validar: ' + (err && err.message ? err.message : err), 'error'); }
+    } catch (err) { console.error('[DrylandFloras] Falha na validação:', err); setStatus('Não foi possível validar: ' + (err && err.message ? err.message : err), 'error'); }
     finally { running = false; setBusy(false); }
   }
-  function resetOnFileChange() { running = false; setBusy(false); const results = $('validator-results'); if (results) results.hidden = true; const download = $('download-annotated'); if (download) { download.href = '#'; download.classList.add('is-disabled'); download.setAttribute('aria-disabled', 'true'); } const map = $('map-button'); if (map) { map.classList.add('is-disabled'); map.setAttribute('aria-disabled', 'true'); } if (window.TsiinoConverterIntegration && typeof window.TsiinoConverterIntegration.close === 'function') window.TsiinoConverterIntegration.close(); setStatus('Selecione uma planilha e clique em Validar planilha.', 'info'); }
+  function resetOnFileChange() { running = false; setBusy(false); const results = $('validator-results'); if (results) results.hidden = true; const download = $('download-annotated'); if (download) { download.href = '#'; download.classList.add('is-disabled'); download.setAttribute('aria-disabled', 'true'); } const map = $('map-button'); if (map) { map.classList.add('is-disabled'); map.setAttribute('aria-disabled', 'true'); } if (window.DrylandFlorasConverterIntegration && typeof window.DrylandFlorasConverterIntegration.close === 'function') window.DrylandFlorasConverterIntegration.close(); setStatus('Selecione uma planilha e clique em Validar planilha.', 'info'); }
   function init() { document.documentElement.style.overflowY = 'auto'; document.body.style.overflowY = 'auto'; const form = $('herb-validator-form'); if (form) form.addEventListener('submit', handleSubmit, true); const file = $('spreadsheet-file'); if (file) file.addEventListener('change', resetOnFileChange); }
-  window.TsiinoStableValidatorFlow = { previewFile, convertFile, uploadForValidation, renderJob, apiBase: API_BASE, get lastJobId() { return lastJobId; } };
+  window.DrylandFlorasStableValidatorFlow = { previewFile, convertFile, uploadForValidation, renderJob, apiBase: API_BASE, get lastJobId() { return lastJobId; } };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

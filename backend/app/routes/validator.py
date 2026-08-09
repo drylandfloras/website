@@ -231,13 +231,13 @@ def _annotated_workbook(job: dict[str, Any]) -> BytesIO:
             comment_text += f"\nSugestão: {item['suggestion']}"
         if item.get("source"):
             comment_text += f"\nFonte: {item['source']}"
-        cell.comment = Comment(comment_text, "Tsiino Validator")
+        cell.comment = Comment(comment_text, "DrylandFloras Validator")
 
     ws.freeze_panes = ws.cell(row=header_row + 1, column=1).coordinate
 
-    if "Validação Tsiino" in wb.sheetnames:
-        del wb["Validação Tsiino"]
-    rep = wb.create_sheet("Validação Tsiino", 0)
+    if "Validação DrylandFloras" in wb.sheetnames:
+        del wb["Validação DrylandFloras"]
+    rep = wb.create_sheet("Validação DrylandFloras", 0)
     rep.append(["Resumo da validação"])
     rep.append(["Linhas", job["summary"].get("total_rows")])
     rep.append(["Erros", job["summary"].get("error_count")])
@@ -366,7 +366,7 @@ def download_annotated(job_id: str) -> StreamingResponse:
     if not job:
         raise HTTPException(status_code=404, detail="Job não encontrado.")
     output = _annotated_workbook(job)
-    filename = f"tsiino_planilha_anotada_{job_id}.xlsx"
+    filename = f"drylandfloras_planilha_anotada_{job_id}.xlsx"
     return StreamingResponse(
         output,
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",

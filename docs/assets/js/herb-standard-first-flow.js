@@ -1,10 +1,10 @@
-// TSIINO_STANDARD_FIRST_FLOW_V36
+// DRYLANDFLORAS_STANDARD_FIRST_FLOW_V36
 (function () {
-  if (window.TsiinoStandardFirstFlowV36) return;
-  window.TsiinoStandardFirstFlowV36 = { ready: true };
+  if (window.DrylandFlorasStandardFirstFlowV36) return;
+  window.DrylandFlorasStandardFirstFlowV36 = { ready: true };
 
   const LOCAL_API = 'http://127.0.0.1:8000/api/validator';
-  const PROD_API = 'https://api.tsiinohiiwiida.net/api/validator';
+  const PROD_API = 'https://api.drylandflorashiiwiida.net/api/validator';
   const host = window.location.hostname;
   const API_BASE = (!host || host === '127.0.0.1' || host === 'localhost') ? LOCAL_API : PROD_API;
 
@@ -56,8 +56,8 @@
   function hideMapper() {
     const selectors = [
       '#inpa-mapper-panel', '#mapper-panel', '#converter-panel', '#column-mapper',
-      '.tsiino-mapper-panel', '.tsiino-converter-panel', '.hv-mapper-panel',
-      '[data-tsiino-mapper]', '[data-mapper-panel]'
+      '.drylandfloras-mapper-panel', '.drylandfloras-converter-panel', '.hv-mapper-panel',
+      '[data-drylandfloras-mapper]', '[data-mapper-panel]'
     ];
     selectors.forEach((sel) => document.querySelectorAll(sel).forEach((node) => {
       if (!node) return;
@@ -79,10 +79,10 @@
     const jobId = job && (job.job_id || job.id || job.jobId || (job.job && (job.job.job_id || job.job.id)));
     if (!jobId) throw new Error('A API validou, mas não retornou job_id.');
     hideMapper();
-    if (typeof window.TsiinoRenderResultFromJobResponse === 'function') {
-      await window.TsiinoRenderResultFromJobResponse({ job_id: jobId, id: jobId });
-    } else if (window.TsiinoValidatorBridge && typeof window.TsiinoValidatorBridge.applyJob === 'function') {
-      await window.TsiinoValidatorBridge.applyJob(jobId);
+    if (typeof window.DrylandFlorasRenderResultFromJobResponse === 'function') {
+      await window.DrylandFlorasRenderResultFromJobResponse({ job_id: jobId, id: jobId });
+    } else if (window.DrylandFlorasValidatorBridge && typeof window.DrylandFlorasValidatorBridge.applyJob === 'function') {
+      await window.DrylandFlorasValidatorBridge.applyJob(jobId);
     } else {
       const results = $('validator-results');
       if (results) results.hidden = false;
@@ -97,7 +97,7 @@
   async function openMapper(file) {
     const fd = buildFormData(file);
     const preview = await postJson(API_BASE + '/converter/preview', fd);
-    const mapper = window.TsiinoConverterIntegration || window.TsiinoConverter;
+    const mapper = window.DrylandFlorasConverterIntegration || window.DrylandFlorasConverter;
     const open = mapper && (mapper.open || mapper.openAfterValidationFailure || mapper.showFromFile || mapper.openFromPreview || mapper.openMapper);
     if (typeof open !== 'function') throw new Error('O mapeador de colunas não carregou.');
     await open.call(mapper, preview, file);
@@ -130,7 +130,7 @@
       setStatus('Validação concluída. Corrija as células destacadas ou baixe a cópia .xlsx anotada.', 'ok');
       await renderJob(job);
     } catch (directError) {
-      console.warn('[Tsiino v36] Validação direta falhou; abrindo mapeador se for schema fora do padrão.', directError);
+      console.warn('[DrylandFloras v36] Validação direta falhou; abrindo mapeador se for schema fora do padrão.', directError);
       try {
         // Checagem explícita: se mesmo assim o backend reconhecer como padrão, mostramos o erro real,
         // porque não deve cair no mapeador.

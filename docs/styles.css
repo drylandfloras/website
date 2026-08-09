@@ -105,7 +105,7 @@
   }
 }
 
-/* FOOTER GLOBAL — TSIINO HIIWIIDA */
+/* FOOTER GLOBAL — DRYLANDFLORAS HIIWIIDA */
 
 html,
 body {
@@ -114,7 +114,7 @@ body {
   overflow-x: hidden;
 }
 
-.tsiino-site-footer {
+.drylandfloras-site-footer {
   position: relative !important;
   width: 100vw !important;
   max-width: 100vw !important;
@@ -128,12 +128,12 @@ body {
   font-family: "Montserrat", Arial, sans-serif;
 }
 
-body > .tsiino-site-footer {
+body > .drylandfloras-site-footer {
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
 
-.tsiino-footer-inner {
+.drylandfloras-footer-inner {
   width: min(1700px, 100%);
   margin: 0 auto;
   display: grid;
@@ -142,24 +142,24 @@ body > .tsiino-site-footer {
   gap: clamp(1.5rem, 3vw, 4rem);
 }
 
-.tsiino-footer-logos,
-.tsiino-footer-contact,
-.tsiino-footer-dev {
+.drylandfloras-footer-logos,
+.drylandfloras-footer-contact,
+.drylandfloras-footer-dev {
   min-width: 0;
 }
 
-.tsiino-site-footer a {
+.drylandfloras-site-footer a {
   color: #F6F1E8 !important;
   text-decoration: none !important;
 }
 
-.tsiino-site-footer a:hover {
+.drylandfloras-site-footer a:hover {
   color: #D99A27 !important;
 }
 
 /* Logos */
 
-.tsiino-footer-logos {
+.drylandfloras-footer-logos {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -167,7 +167,7 @@ body > .tsiino-site-footer {
   gap: clamp(0.75rem, 1.3vw, 1.4rem);
 }
 
-.tsiino-footer-logos a {
+.drylandfloras-footer-logos a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -175,12 +175,12 @@ body > .tsiino-site-footer {
   transition: transform 0.16s ease, opacity 0.16s ease;
 }
 
-.tsiino-footer-logos a:hover {
+.drylandfloras-footer-logos a:hover {
   transform: translateY(-1px);
   opacity: 0.86;
 }
 
-.tsiino-footer-logo {
+.drylandfloras-footer-logo {
   display: block;
   width: auto;
   object-fit: contain;
@@ -188,39 +188,39 @@ body > .tsiino-site-footer {
   max-height: 64px;
 }
 
-.tsiino-footer-logo-project {
+.drylandfloras-footer-logo-project {
   height: 60px;
 }
 
-.tsiino-footer-logo-amazonia {
+.drylandfloras-footer-logo-amazonia {
   height: 52px;
 }
 
-.tsiino-footer-logo-confap {
+.drylandfloras-footer-logo-confap {
   height: 42px;
 }
 
-.tsiino-footer-logo-cnpq {
+.drylandfloras-footer-logo-cnpq {
   height: 36px;
 }
 
-.tsiino-footer-logo-governo {
+.drylandfloras-footer-logo-governo {
   height: 44px;
   max-width: 160px;
 }
 
-.tsiino-footer-logo-missing {
+.drylandfloras-footer-logo-missing {
   display: none !important;
 }
 
 /* Contato */
 
-.tsiino-footer-contact {
+.drylandfloras-footer-contact {
   text-align: center;
   line-height: 1.35;
 }
 
-.tsiino-footer-title {
+.drylandfloras-footer-title {
   margin-bottom: 0.45rem;
   font-family: "Space Mono", monospace;
   font-size: 0.72rem;
@@ -230,7 +230,7 @@ body > .tsiino-site-footer {
   color: #D99A27;
 }
 
-.tsiino-footer-contact a {
+.drylandfloras-footer-contact a {
   font-size: clamp(0.95rem, 1.1vw, 1.12rem);
   font-weight: 800;
   white-space: nowrap;
@@ -238,19 +238,19 @@ body > .tsiino-site-footer {
 
 /* Desenvolvido por */
 
-.tsiino-footer-dev {
+.drylandfloras-footer-dev {
   text-align: right;
   line-height: 1.35;
 }
 
-.tsiino-footer-dev-links {
+.drylandfloras-footer-dev-links {
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-end;
   gap: 0.75rem;
 }
 
-.tsiino-footer-dev-links a {
+.drylandfloras-footer-dev-links a {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -259,7 +259,7 @@ body > .tsiino-site-footer {
   font-weight: 700;
 }
 
-.tsiino-footer-dev-links i {
+.drylandfloras-footer-dev-links i {
   font-size: 1rem;
   line-height: 1;
 }
@@ -267,94 +267,94 @@ body > .tsiino-site-footer {
 /* Responsivo */
 
 @media (max-width: 1100px) {
-  .tsiino-footer-inner {
+  .drylandfloras-footer-inner {
     grid-template-columns: 1fr;
     text-align: center;
   }
 
-  .tsiino-footer-logos {
+  .drylandfloras-footer-logos {
     justify-content: center;
     flex-wrap: wrap;
   }
 
-  .tsiino-footer-contact {
+  .drylandfloras-footer-contact {
     text-align: center;
   }
 
-  .tsiino-footer-dev {
+  .drylandfloras-footer-dev {
     text-align: center;
   }
 
-  .tsiino-footer-dev-links {
+  .drylandfloras-footer-dev-links {
     justify-content: center;
     flex-wrap: wrap;
   }
 
-  .tsiino-footer-contact a {
+  .drylandfloras-footer-contact a {
     white-space: normal;
   }
 
-  .tsiino-footer-logo-project {
+  .drylandfloras-footer-logo-project {
     height: 52px;
   }
 
-  .tsiino-footer-logo-amazonia {
+  .drylandfloras-footer-logo-amazonia {
     height: 44px;
   }
 
-  .tsiino-footer-logo-confap {
+  .drylandfloras-footer-logo-confap {
     height: 42px;
   }
 
-  .tsiino-footer-logo-cnpq {
+  .drylandfloras-footer-logo-cnpq {
     height: 34px;
   }
 
-  .tsiino-footer-logo-governo {
+  .drylandfloras-footer-logo-governo {
     height: 44px;
     max-width: 150px;
   }
 }
 
 @media (max-width: 520px) {
-  .tsiino-site-footer {
+  .drylandfloras-site-footer {
     padding: 1.6rem 1rem !important;
   }
 
-  .tsiino-footer-inner {
+  .drylandfloras-footer-inner {
     gap: 1.4rem;
   }
 
-  .tsiino-footer-logos {
+  .drylandfloras-footer-logos {
     gap: 0.75rem 0.95rem;
   }
 
-  .tsiino-footer-logo-project {
+  .drylandfloras-footer-logo-project {
     height: 46px;
   }
 
-  .tsiino-footer-logo-amazonia {
+  .drylandfloras-footer-logo-amazonia {
     height: 38px;
   }
 
-  .tsiino-footer-logo-confap {
+  .drylandfloras-footer-logo-confap {
     height: 38px;
   }
 
-  .tsiino-footer-logo-cnpq {
+  .drylandfloras-footer-logo-cnpq {
     height: 30px;
   }
 
-  .tsiino-footer-logo-governo {
+  .drylandfloras-footer-logo-governo {
     height: 34px;
     max-width: 135px;
   }
 
-  .tsiino-footer-contact a {
+  .drylandfloras-footer-contact a {
     font-size: 0.95rem;
   }
 
-  .tsiino-footer-dev-links a {
+  .drylandfloras-footer-dev-links a {
     font-size: 0.82rem;
   }
 }
@@ -366,13 +366,13 @@ body {
   overflow-x: hidden;
 }
 
-body > .tsiino-site-footer {
+body > .drylandfloras-site-footer {
   width: 100vw !important;
   max-width: 100vw !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
 
-body .tsiino-site-footer {
+body .drylandfloras-site-footer {
   display: block !important;
 }

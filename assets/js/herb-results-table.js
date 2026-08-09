@@ -1,4 +1,4 @@
-/* TSIINO_RESULTS_STABLE_V37
+/* DRYLANDFLORAS_RESULTS_STABLE_V37
    Renderizador robusto para resultados do validador.
    Objetivo: quando a API retorna issues/contadores, mas a tabela aparece vazia
    ou apenas com LINHA, reconstruir a planilha anotada a partir de /jobs/{id}/table
@@ -7,11 +7,11 @@
 (function () {
   'use strict';
 
-  const MARK = 'TSIINO_RESULTS_STABLE_V37';
+  const MARK = 'DRYLANDFLORAS_RESULTS_STABLE_V37';
   const LOCAL_API = 'http://127.0.0.1:8000/api/validator';
-  const PROD_API = 'https://api.tsiinohiiwiida.net/api/validator';
+  const PROD_API = 'https://api.drylandflorashiiwiida.net/api/validator';
   const host = window.location.hostname;
-  const API_BASE = (window.TsiinoValidatorBridge && window.TsiinoValidatorBridge.apiBase) ||
+  const API_BASE = (window.DrylandFlorasValidatorBridge && window.DrylandFlorasValidatorBridge.apiBase) ||
     ((!host || host === '127.0.0.1' || host === 'localhost') ? LOCAL_API : PROD_API);
 
   const originalFetch = window.fetch ? window.fetch.bind(window) : null;
@@ -258,12 +258,12 @@
   function ensureResultsContainer() {
     const results = document.getElementById('validator-results') || document.querySelector('[id*="result"], .hv-results, .validator-results');
     if (!results) return null;
-    results.classList.add('tsiino-v37-active');
-    let box = document.getElementById('tsiino-results-stable-v37');
+    results.classList.add('drylandfloras-v37-active');
+    let box = document.getElementById('drylandfloras-results-stable-v37');
     if (!box) {
       box = document.createElement('div');
-      box.id = 'tsiino-results-stable-v37';
-      box.className = 'tsiino-results-stable-v37';
+      box.id = 'drylandfloras-results-stable-v37';
+      box.className = 'drylandfloras-results-stable-v37';
       const anchor = Array.from(results.querySelectorAll('p, div, h2, h3')).find((el) => /Planilha anotada/i.test(el.textContent || ''));
       if (anchor && anchor.parentElement) {
         anchor.parentElement.insertBefore(box, anchor.nextSibling);
@@ -298,7 +298,7 @@
       rows = rows.filter((row, idx) => rowIssues(row, issues, idx).length === 0);
     }
 
-    const header = ['<th class="tsiino-v37-rowhead">LINHA</th>']
+    const header = ['<th class="drylandfloras-v37-rowhead">LINHA</th>']
       .concat(columns.map((col) => `<th>${fieldLabels[col] || String(col).toUpperCase()}</th>`)).join('');
 
     const body = rows.map((row, idx) => {
@@ -307,23 +307,23 @@
         const value = cleanMojibake(getValue(row, col));
         const cellIssues = issuesFor(row, col, issues, idx);
         const sev = cellIssues.some((i) => i.severity === 'error') ? 'error' : (cellIssues.length ? 'warning' : '');
-        const notes = cellIssues.map((issue) => `<div class="tsiino-v37-note ${issue.severity}">${escapeHtml(issue.message)}</div>`).join('');
-        return `<td class="${sev ? 'tsiino-v37-cell-' + sev : ''}"><div class="tsiino-v37-value">${escapeHtml(value)}</div>${notes}</td>`;
+        const notes = cellIssues.map((issue) => `<div class="drylandfloras-v37-note ${issue.severity}">${escapeHtml(issue.message)}</div>`).join('');
+        return `<td class="${sev ? 'drylandfloras-v37-cell-' + sev : ''}"><div class="drylandfloras-v37-value">${escapeHtml(value)}</div>${notes}</td>`;
       }).join('');
-      return `<tr><th class="tsiino-v37-rowhead">${escapeHtml(rn)}</th>${cells}</tr>`;
+      return `<tr><th class="drylandfloras-v37-rowhead">${escapeHtml(rn)}</th>${cells}</tr>`;
     }).join('');
 
     const msg = rows.length
       ? ''
-      : '<div class="tsiino-v37-empty">Nenhuma linha para o filtro atual. Clique em <strong>Todos</strong> para voltar à planilha completa.</div>';
+      : '<div class="drylandfloras-v37-empty">Nenhuma linha para o filtro atual. Clique em <strong>Todos</strong> para voltar à planilha completa.</div>';
 
     box.innerHTML = `
-      <div class="tsiino-v37-toolbar" aria-label="Resultado renderizado pelo estabilizador v37">
+      <div class="drylandfloras-v37-toolbar" aria-label="Resultado renderizado pelo estabilizador v37">
         <span>${rows.length} linhas exibidas</span>
         <span>${issues.length} ocorrências vinculadas a células</span>
       </div>
-      <div class="tsiino-v37-scroll">
-        <table class="tsiino-v37-table">
+      <div class="drylandfloras-v37-scroll">
+        <table class="drylandfloras-v37-table">
           <thead><tr>${header}</tr></thead>
           <tbody>${body}</tbody>
         </table>
@@ -359,7 +359,7 @@
       syncFilterButtons('all');
       render();
     } catch (err) {
-      console.warn('[Tsiino v37] Falha ao renderizar job', jobId, err);
+      console.warn('[DrylandFloras v37] Falha ao renderizar job', jobId, err);
     } finally {
       state.loading = false;
     }
@@ -402,7 +402,7 @@
     const filters = Array.from(results.querySelectorAll('.hv-filter, [data-filter]')).pop();
     if (download && filters && download.parentElement !== filters.parentElement) {
       filters.insertAdjacentElement('afterend', download);
-      download.classList.add('tsiino-v37-download-button');
+      download.classList.add('drylandfloras-v37-download-button');
     }
   }
 
@@ -415,8 +415,8 @@
     if (!originalFetch) return;
     const priorFetch = window.fetch.bind(window);
     // Evite encapsular várias vezes.
-    if (window.__tsiinoResultsStableV37FetchInstalled) return;
-    window.__tsiinoResultsStableV37FetchInstalled = true;
+    if (window.__drylandflorasResultsStableV37FetchInstalled) return;
+    window.__drylandflorasResultsStableV37FetchInstalled = true;
     window.fetch = async function (...args) {
       const res = await priorFetch(...args);
       try {
@@ -445,8 +445,8 @@
     installFetchWatcher();
     setInterval(scanPerformanceForJob, 1500);
     setTimeout(scanPerformanceForJob, 500);
-    window.TsiinoResultsStableV37 = { renderJob, render, state, mark: MARK };
-    console.info('[Tsiino] Results stable v37 carregado.');
+    window.DrylandFlorasResultsStableV37 = { renderJob, render, state, mark: MARK };
+    console.info('[DrylandFloras] Results stable v37 carregado.');
   }
 
   if (document.readyState === 'loading') {
