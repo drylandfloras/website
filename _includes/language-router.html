@@ -5,11 +5,14 @@
   "use strict";
 
   function getSitePrefix() {
-    var favicon = document.querySelector('link[rel~="icon"][href*="figures/tsiino_hex_sticker.png"]');
-    if (!favicon) return "";
-
-    var href = favicon.getAttribute("href") || "";
-    return href.replace(/figures\/tsiino_hex_sticker\.png(?:[?#].*)?$/, "");
+    var bootstrap = document.getElementById("quarto-bootstrap");
+    if (bootstrap) {
+      var href = bootstrap.getAttribute("href") || "";
+      var marker = "site_libs/bootstrap/";
+      var idx = href.indexOf(marker);
+      if (idx >= 0) return href.slice(0, idx);
+    }
+    return "";
   }
 
   function loadScript(src, callback) {
