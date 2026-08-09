@@ -1,4 +1,4 @@
-/* Tsiino Hiiwiida language switcher — full-site runtime v2
+/* Dryland Floras language switcher — full-site runtime v2
  * Source language: Portuguese (pt-BR). Target: English.
  * Designed for Quarto static pages, R-generated HTML widgets, Leaflet popups,
  * Plotly/SVG labels, and dynamically inserted content.
