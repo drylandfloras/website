@@ -7,12 +7,6 @@ project:
     - css/**
     - assets/**
     - test_data/**
-  resources:
-    - figures/**
-    - js/**
-    - css/**
-    - assets/**
-    - test_data/**
 
 website:
   title: "Dryland Floras Network"
@@ -31,10 +25,10 @@ website:
     left:
       - text: "About"
         href: index.qmd
-      - text: "Expeditions"
-        href: expedicoes/index.qmd
-      - text: "Data access"
-        href: acesso/index.qmd
+      - text: "Symposium"
+        href: symposium/index.qmd
+      - text: "Collaboration"
+        href: collaboration/index.qmd
       - text: "Tools"
         menu:
           - text: "Herbarium spreadsheet validator"

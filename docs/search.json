@@ -1,14 +1,14 @@
 [
   {
-    "objectID": "team/index.html",
-    "href": "team/index.html",
-    "title": "Team",
+    "objectID": "ferramentas/validador-herbario/index.html",
+    "href": "ferramentas/validador-herbario/index.html",
+    "title": "Herbarium spreadsheet validator",
     "section": "",
-    "text": "Team\nThis page will present the researchers, institutions and collaborators participating in the Dryland Floras Network.\nUnder construction."
+    "text": "Herbarium spreadsheet validator\nThis tool page will host validation resources for herbarium data shared within the Dryland Floras Network.\nUnder construction."
   },
   {
-    "objectID": "expedicoes/index.html",
-    "href": "expedicoes/index.html",
+    "objectID": "symposium/index.html",
+    "href": "symposium/index.html",
     "title": "Expeditions",
     "section": "",
     "text": "Expeditions\nThis page will highlight expedition activities and collaboration opportunities across dryland regions.\nUnder construction."
@@ -18,20 +18,34 @@
     "href": "index.html",
     "title": "Dryland Floras Network",
     "section": "",
-    "text": "About\nThe Dryland Floras Network is a global community focused on understanding, documenting and conserving plant diversity across drylands worldwide.\n\n\nUpdates\nUnder construction.\n\n\nJoin\nSign up or unregister from the email list\n“Become part of a global community of researchers working across drylands worldwide. Whether you are a botanist, ecologist or researcher from another discipline, and whether you are a student, early-career scientist or senior researcher, the Dryland Floras Network welcomes everyone interested in sharing knowledge, building collaborations and advancing the science of dryland floras.”\nUnder construction.\n\n\nNetwork counter\n\nAffiliated scientists: Under construction.\nCountries of affiliation: countries."
+    "text": "About\nThe Dryland Floras Network is a global community focused on understanding, documenting and conserving plant diversity across drylands worldwide.\n\n\nUpdates\nUnder construction.\n\n\nJoin\nSign up or unregister from the email list\nBecome part of a global community of researchers working across drylands worldwide. Whether you are a botanist, ecologist or researcher from another discipline, and whether you are a student, early-career scientist or senior researcher, the Dryland Floras Network welcomes everyone interested in sharing knowledge, building collaborations and advancing the science of dryland floras.\nUnder construction.\n\n\nNetwork counter\n\nAffiliated scientists: Under construction.\nCountries of affiliation: countries."
   },
   {
-    "objectID": "acesso/index.html",
-    "href": "acesso/index.html",
+    "objectID": "collaboration/index.html",
+    "href": "collaboration/index.html",
     "title": "Data access",
     "section": "",
     "text": "Data access\nThis section will centralize links to datasets, protocols and resources used by the Dryland Floras Network.\nUnder construction."
   },
   {
-    "objectID": "ferramentas/validador-herbario/index.html",
-    "href": "ferramentas/validador-herbario/index.html",
-    "title": "Herbarium spreadsheet validator",
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "MIT License",
     "section": "",
-    "text": "Herbarium spreadsheet validator\nThis tool page will host validation resources for herbarium data shared within the Dryland Floras Network.\nUnder construction."
+    "text": "MIT License\nCopyright (c) 2026 Debora Zuanny\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+  },
+  {
+    "objectID": "team/index.html",
+    "href": "team/index.html",
+    "title": "Team",
+    "section": "",
+    "text": "Team\nThis page will present the researchers, institutions and collaborators participating in the Dryland Floras Network.\nUnder construction."
+  },
+  {
+    "objectID": "figures/logos/institutions/README_coloque_logos_aqui.html",
+    "href": "figures/logos/institutions/README_coloque_logos_aqui.html",
+    "title": "Logos pendentes das instituições",
+    "section": "",
+    "text": "Logos pendentes das instituições\nColoque aqui as logos das instituições participantes e parceiras.\nO index.qmd usa os caminhos definidos em _input_data/institutions.yml. Quando uma logo não existe, o card usa automaticamente uma caixa com a sigla da instituição.\nSugestão: usar PNG ou SVG com fundo transparente, preferencialmente versão horizontal ou institucional simplificada."
   }
 ]
