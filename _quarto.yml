@@ -3,9 +3,8 @@ project:
   type: website
   render:
     - index.qmd
+    - symposium/index.qmd
     - collaboration/index.qmd
-    - expedicoes/index.qmd
-    - symposium/validador-herbario/index.qmd
     - team/index.qmd
   resources:
     - figures/**
@@ -35,10 +34,6 @@ website:
         href: symposium/index.qmd
       - text: "Collaboration"
         href: collaboration/index.qmd
-      - text: "Tools"
-        menu:
-          - text: "Herbarium spreadsheet validator"
-            href: ferramentas/validador-herbario/index.qmd
       - text: "Team"
         href: team/index.qmd
 
