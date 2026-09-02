@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://deborazuanny.github.io/drylandfloras/ferramentas/validador-herbario/index.html</loc>
-    <lastmod>2026-09-01T23:18:34.432Z</lastmod>
-  </url>
-  <url>
-    <loc>https://deborazuanny.github.io/drylandfloras/symposium/index.html</loc>
-    <lastmod>2026-09-01T23:18:34.432Z</lastmod>
+    <loc>https://deborazuanny.github.io/drylandfloras/team/index.html</loc>
+    <lastmod>2026-09-01T23:18:34.822Z</lastmod>
   </url>
   <url>
     <loc>https://deborazuanny.github.io/drylandfloras/index.html</loc>
@@ -15,17 +11,5 @@
   <url>
     <loc>https://deborazuanny.github.io/drylandfloras/collaboration/index.html</loc>
     <lastmod>2026-09-01T23:18:33.395Z</lastmod>
-  </url>
-  <url>
-    <loc>https://deborazuanny.github.io/drylandfloras/LICENSE.html</loc>
-    <lastmod>2026-09-01T23:18:33.091Z</lastmod>
-  </url>
-  <url>
-    <loc>https://deborazuanny.github.io/drylandfloras/team/index.html</loc>
-    <lastmod>2026-09-01T23:18:34.822Z</lastmod>
-  </url>
-  <url>
-    <loc>https://deborazuanny.github.io/drylandfloras/figures/logos/institutions/README_coloque_logos_aqui.html</loc>
-    <lastmod>2026-09-01T23:18:34.622Z</lastmod>
   </url>
 </urlset>

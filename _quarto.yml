@@ -1,6 +1,12 @@
 project:
   output-dir: docs
   type: website
+  render:
+    - index.qmd
+    - collaboration/index.qmd
+    - expedicoes/index.qmd
+    - symposium/validador-herbario/index.qmd
+    - team/index.qmd
   resources:
     - figures/**
     - js/**
