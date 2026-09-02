@@ -12,6 +12,6 @@ execute:
 
 # Team
 
-This page will present the researchers, institutions and collaborators participating in the Dryland Floras Network.
+This page will present the researchers, institutions and collaborators participating in the Dryland Floras Network. Please reach out via email to sign up!
 
 **Under construction.**
