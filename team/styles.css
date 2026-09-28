@@ -1,0 +1,60 @@
+.member-card {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 2rem;
+  align-items: stretch;
+  margin-bottom: 3rem;
+}
+
+.member-photo {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 250px;
+}
+
+.member-photo p {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.member-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.member-info h2 {
+  margin-top: 0;
+}
+
+.member-info p {
+  text-align: justify;
+}
+
+.member-links a {
+  margin-right: 1rem;
+  white-space: nowrap;
+}
+
+/* Em telas pequenas, a foto fica acima do texto */
+@media (max-width: 700px) {
+  .member-card {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .member-photo {
+    max-width: 250px;
+    min-height: auto;
+  }
+
+  .member-photo img {
+    height: 250px;
+    min-height: auto;
+  }
+}
