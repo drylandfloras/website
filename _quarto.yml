@@ -15,7 +15,7 @@ project:
 
 website:
   title: "Dryland Floras Network"
-  site-url: "https://deborazuanny.github.io/drylandfloras/"
+  site-url: "https://drylandfloras.github.io/website/"
   page-navigation: true
   reader-mode: false
   search: false

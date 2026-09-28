@@ -1,0 +1,37 @@
+.symposium-footer {
+  position: relative;
+  width: 100%;
+  height: 330px;
+  margin-top: 5rem;
+  overflow: hidden;
+
+  background-image: url("images/desert.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Gradiente branco que faz a imagem desaparecer no topo */
+.symposium-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to bottom,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.95) 12%,
+    rgba(255, 255, 255, 0.70) 25%,
+    rgba(255, 255, 255, 0.15) 45%,
+    rgba(255, 255, 255, 0) 65%
+  );
+}
+
+/* Ajuste para telas pequenas */
+@media (max-width: 700px) {
+  .symposium-footer {
+    height: 240px;
+    margin-top: 3rem;
+    background-position: center;
+  }
+}

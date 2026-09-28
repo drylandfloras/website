@@ -1,13 +1,30 @@
 ---
-title: "Mini symposium - November 2026"
+title: "Mini symposium - 16 November 2026"
 subtitle: "Online symposium to share current knowledge and collaborative efforts in global drylands"
 format:
   html:
     toc: false
     page-layout: full
+    css: symposium/styles.css
 execute:
   echo: false
   eval: false
 ---
 
-**Under construction.**
+# Join us for the first Dryland Floras Network online mini-symposium!
+
+**16 November**  
+**18:00 CET | 09:00 PST | 12:00 EST**
+
+**Duration:** 2 hours
+
+**Online via Zoom** — [Join the Zoom meeting](https://example.com)
+
+## Programme
+
+- Introduction to the Dryland Floras Network
+- Two scientific presentations
+- Interactive brainstorming session
+
+::: {.symposium-footer}
+:::
