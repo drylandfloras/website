@@ -11,9 +11,9 @@ execute:
   eval: false
 ---
 
-# Team
+This page presents the researchers, institutions and collaborators participating in the Dryland Floras Network. Please reach out via [email](drylandfloras@gmail.com) to sign up!
 
-This page presents the researchers, institutions and collaborators participating in the Dryland Floras Network. Please reach out via email to sign up!
+\
 
 ::: {.members-grid}
 
