@@ -12,7 +12,20 @@ execute:
 
 # About
 
-The Dryland Floras Network is a global community focused on understanding, documenting and conserving plant diversity across drylands worldwide.
+## Connect, collaborate and advance dryland flora research
+
+The Dryland Floras Network brings together botanists, ecologists and researchers from across disciplines who are working to understand, document and conserve the diversity and evolution of dryland floras worldwide.
+
+From arid deserts and semi-arid steppes to grasslands, savannas and woodlands, our network connects expertise across regions, disciplines and dryland systems, creating opportunities to share knowledge, build collaborations and develop new research.
+Through the network, you can:
+
+- Connect with researchers worldwide working on dryland floras and discover expertise across regions and disciplines.
+- Share knowledge and ideas across different dryland systems, helping bring together insights that might otherwise remain geographically or disciplinary isolated.
+- Find collaborators and new research opportunities through a dynamic directory of researchers, institutions and expertise.
+- Get involved in collaborative initiatives that support research, outreach, understanding and conservation of dryland floras.
+
+**Whether you are looking for collaborators, sharing your expertise, or simply want to connect with others working on dryland floras, the network is a place to start.**
+
 
 # Updates
 
