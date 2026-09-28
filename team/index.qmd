@@ -27,7 +27,7 @@ This page presents the researchers, institutions and collaborators participating
 ![He/him](images/marc.jpg)
 :::
 
-Postdoctoral researcher at Stockholm University (Sweden). Botanist working on plant diversity and evolution, with a strong focus on deserts and succulent floras. Previous work includes evolution o[...]
+Postdoctoral researcher at Stockholm University (Sweden). Botanist working on plant diversity and evolution, with a strong focus on deserts and succulent floras. Previous work includes evolution of genus Crassula (Crassulaceae) in southern Africa, and macroevolutionary patterns of drought–frost resistance in plant groups occurring in hot and cold deserts worldwide.
 
 **Email:** marc.fradera-soler@su.se
 
@@ -53,7 +53,7 @@ Postdoctoral researcher at Stockholm University (Sweden). Botanist working on pl
 ![She/her](images/debora.jpg)
 :::
 
-PhD candidate at the University of Edinburgh and the Royal Botanic Garden Edinburgh, interested in understanding large-scale patterns of plant diversity, distribution, and evolution. My previous r[...]
+PhD candidate at the University of Edinburgh and the Royal Botanic Garden Edinburgh, interested in understanding large-scale patterns of plant diversity, distribution, and evolution. My previous research focused on the Caatinga, a seasonally dry tropical forest (SDTF) domain in Brazil.
 
 **Email:** deborazuanny@gmail.com
 
@@ -79,7 +79,7 @@ PhD candidate at the University of Edinburgh and the Royal Botanic Garden Edinbu
 ![She/her](images/bharti.jpeg)
 :::
 
-PhD student at the University of Florida (U.S.) whose research integrates plant systematics, genomics, developmental biology, and ecophysiology to understand the evolution of specialized traits in[...]
+PhD student at the University of Florida (U.S.) whose research integrates plant systematics, genomics, developmental biology, and ecophysiology to understand the evolution of specialized traits in succulent and dryland plants. My work spans scales from gene expression and developmental morphology to genome evolution, phylogenomics, photosynthetic physiology, and macroevolutionary trait reconstruction.
 
 **Email:** bharti.parihar@ufl.edu
 
