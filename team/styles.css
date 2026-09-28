@@ -1,25 +1,26 @@
-/* Container para os 3 cards - grid de 3 colunas em desktop */
-main#quarto-document-content > section:nth-of-type(2) {
+/* Grid de 3 colunas em desktop */
+section#team {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   margin-top: 2rem;
 }
 
-/* Card individual - layout vertical (foto acima, texto abaixo) */
-.member-card {
+section#team > p {
+  grid-column: 1 / -1;
+}
+
+section#team > .member-card {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
   padding: 2rem;
   background: #f8f9fa;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin-bottom: 0;
 }
 
-.member-card:hover {
+section#team > .member-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
@@ -33,6 +34,7 @@ main#quarto-document-content > section:nth-of-type(2) {
   height: auto;
   min-height: 280px;
   order: -1;
+  margin-bottom: 1.5rem;
 }
 
 .member-photo p {
@@ -90,13 +92,13 @@ main#quarto-document-content > section:nth-of-type(2) {
 }
 
 /* Tablet: 2 colunas */
-@media (min-width: 768px) and (max-width: 991px) {
-  main#quarto-document-content > section:nth-of-type(2) {
+@media (max-width: 1200px) {
+  section#team {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
 
-  .member-card {
+  section#team > .member-card {
     padding: 1.8rem;
   }
 
@@ -110,20 +112,20 @@ main#quarto-document-content > section:nth-of-type(2) {
 }
 
 /* Mobile: 1 coluna */
-@media (max-width: 767px) {
-  main#quarto-document-content > section:nth-of-type(2) {
+@media (max-width: 768px) {
+  section#team {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
 
-  .member-card {
+  section#team > .member-card {
     padding: 1.5rem;
   }
 
   .member-photo {
     max-width: 250px;
     min-height: auto;
-    margin: 0 auto;
+    margin: 0 auto 1rem;
   }
 
   .member-photo img {
